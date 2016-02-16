@@ -10,7 +10,7 @@
       %tr
         - @columns_for_list.each do |column|
           %td
-            = entry[column.name]
+            = render "cms/resources/list/#{ column.type }", entry: entry[column.name]
         %td.text-nowrap
           = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry), class: 'label label-primary'
           = link_to 'Delete', send("#{ @resource.model_name.element }_path", entry), class: 'label label-danger', method: :delete
