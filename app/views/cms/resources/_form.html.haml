@@ -2,6 +2,6 @@
   - @columns_for_form.each do |column|
     %fieldset.form-group
       = f.label column.name
-      = f.text_field column.name, class: 'form-control'
+      = render "cms/resources/form/#{ column.type }", f: f, column: column
   %fieldset.form-group
     = f.submit 'Submit', class: 'btn btn-primary'
