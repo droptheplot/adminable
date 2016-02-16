@@ -6,4 +6,11 @@
     = javascript_include_tag 'cms/application'
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
+      .container
+        %ul.nav.navbar-nav
+          - Cms::Configuration.resources_names.each do |resource_name|
+            %li.nav-item
+              = link_to resource_name.capitalize, send("#{ resource_name }_path"), class: 'nav-link'
+    .container
+      = yield
