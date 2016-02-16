@@ -1,5 +1,5 @@
 = form_for @entry do |f|
-  - @resource.columns.each do |column|
+  - @columns_for_form.each do |column|
     %fieldset.form-group
       = f.label column.name
       = f.text_field column.name, class: 'form-control'

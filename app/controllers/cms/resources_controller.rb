@@ -2,6 +2,8 @@ module Cms
   class ResourcesController < ApplicationController
     before_filter :set_resource
     before_filter :set_entry, only: [:edit, :update, :destroy]
+    before_filter :columns_for_list, only: [:index]
+    before_filter :columns_for_form, except: [:index]
 
     def index
       @entries = @resource.all
@@ -48,8 +50,18 @@ module Cms
         @entry = @resource.find(params[:id])
       end
 
+      def columns_for_list
+        @columns_for_list = @resource.columns
+      end
+
+      def columns_for_form
+        @columns_for_form = @resource.columns.reject do |column|
+          %w(id created_at updated_at).include?(column.name)
+        end
+      end
+
       def resource_params
-        params.require(@resource.model_name.element).permit(*@resource.columns.map(&:name))
+        params.require(@resource.model_name.element).permit(*@columns_for_form.map(&:name))
       end
   end
 end

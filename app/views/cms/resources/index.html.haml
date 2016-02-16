@@ -1,16 +1,16 @@
 %table.table
   %thead
     %tr
-      - @resource.column_names.each do |column_name|
+      - @columns_for_list.each do |column|
         %th
-          = column_name
+          = column.name
       %th
   %tbody
     - @entries.each do |entry|
       %tr
-        - @resource.column_names.each do |column_name|
+        - @columns_for_list.each do |column|
           %td
-            = entry[column_name]
+            = entry[column.name]
         %td.text-nowrap
           = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry), class: 'label label-primary'
           = link_to 'Delete', send("#{ @resource.model_name.element }_path", entry), class: 'label label-danger', method: :delete
