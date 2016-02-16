@@ -1,4 +1,5 @@
 require 'cms/engine'
+require 'cms/configuration'
 
 require 'haml-rails'
 require 'sass-rails'
@@ -8,5 +9,4 @@ require 'bootstrap'
 require 'rails-assets-tether'
 
 module Cms
-  # Your code goes here...
 end
