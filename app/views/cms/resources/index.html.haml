@@ -1,4 +1,6 @@
-%table.table
+%h1.m-b-3
+  = @resource.model_name.human.pluralize
+%table.table.m-b-3.table-striped
   %thead
     %tr
       - @columns_for_list.each do |column|
@@ -11,7 +13,10 @@
         - @columns_for_list.each do |column|
           %td
             = render "cms/resources/list/#{ column.type }", entry: entry[column.name]
-        %td.text-nowrap
-          = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry), class: 'label label-primary'
-          = link_to 'Delete', send("#{ @resource.model_name.element }_path", entry), class: 'label label-danger', method: :delete
-= link_to 'New Entry', send("new_#{ @resource.model_name.element }_path"), class: 'btn btn-primary'
+        %td.text-nowrap.text-md-right
+          = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry),
+            class: 'label label-primary'
+          = link_to 'Delete', send("#{ @resource.model_name.element }_path", entry),
+            class: 'label label-danger', method: :delete, data: { confirm: 'Are you sure?' }
+= link_to "New #{ @resource.model_name.human }",
+  send("new_#{ @resource.model_name.element }_path"), class: 'btn btn-primary'
