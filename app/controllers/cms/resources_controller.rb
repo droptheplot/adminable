@@ -43,7 +43,7 @@ module Cms
     private
 
       def set_resource
-        @resource = params[:controller].classify.safe_constantize
+        @resource = resource_model
       end
 
       def set_entry
@@ -58,6 +58,10 @@ module Cms
         @columns_for_form = @resource.columns.reject do |column|
           %w(id created_at updated_at).include?(column.name)
         end
+      end
+
+      def resource_model
+        params[:controller].sub(/^cms\//, '').classify.safe_constantize
       end
 
       def resource_params
