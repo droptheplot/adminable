@@ -1,7 +1,7 @@
 module Cms
   class Page < ApplicationRecord
-    belongs_to :superpage, class_name: 'Cms::Page', foreign_key: :contents_page_id, required: false
-    has_many :subpages, class_name: 'Cms::Page', foreign_key: :contents_page_id
+    belongs_to :superpage, class_name: 'Cms::Page', foreign_key: :cms_page_id, required: false
+    has_many :subpages, class_name: 'Cms::Page', foreign_key: :cms_page_id
 
     before_save :set_slug
 
@@ -24,7 +24,7 @@ module Cms
     end
 
     def template
-      self[:template] || 'application/index' 
+      self[:template] || 'application/index'
     end
 
     private
