@@ -12,7 +12,7 @@
       %tr
         - @attributes_for_list.each do |attribute|
           %td
-            = render "cms/resources/list/#{ attribute.type }", entry: entry[attribute.key], attribute: attribute
+            = render "list/#{ attribute.type }", entry: entry[attribute.key], attribute: attribute
         %td.text-nowrap.text-md-right
           = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry),
             class: 'label label-primary'

@@ -5,6 +5,11 @@ module Cms
     before_filter :set_attributes_for_form, only: [:new, :edit, :create, :update]
     before_filter :set_entry, only: [:edit, :update, :destroy]
 
+    before_filter do
+      append_view_path File.join('app/views/cms', controller_name)
+      append_view_path Cms::Engine.root.join('app/views/cms/resources')
+    end
+
     def index
       @entries = @resource.all
     end
@@ -77,7 +82,7 @@ module Cms
       def resource_model
         self.class::RESOURCE_MODEL
       rescue NameError
-        params[:controller].sub(/^cms\//, '').classify.safe_constantize
+        controller_name.classify.safe_constantize
       end
 
       def attributes
