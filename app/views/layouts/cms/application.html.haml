@@ -11,6 +11,6 @@
         %ul.nav.navbar-nav
           - Cms::Configuration.resources_names.each do |resource_name|
             %li.nav-item
-              = link_to resource_name.capitalize, send("#{ resource_name }_path"), class: 'nav-link'
+              = link_to resource_name.capitalize, polymorphic_path(resource_name), class: 'nav-link'
     .container.p-b-3
       = yield

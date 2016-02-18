@@ -14,9 +14,9 @@
           %td
             = render "list/#{ attribute.type }", entry: entry[attribute.key], attribute: attribute
         %td.text-nowrap.text-md-right
-          = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry),
+          = link_to 'Edit', edit_polymorphic_path(entry),
             class: 'label label-primary'
-          = link_to 'Delete', send("#{ @resource.model_name.element }_path", entry),
+          = link_to 'Delete', polymorphic_path(entry),
             class: 'label label-danger', method: :delete, data: { confirm: 'Are you sure?' }
 = link_to "New #{ @resource.model_name.human }",
-  send("new_#{ @resource.model_name.element }_path"), class: 'btn btn-primary'
+  new_polymorphic_path(@resource), class: 'btn btn-primary'
