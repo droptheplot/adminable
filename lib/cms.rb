@@ -1,5 +1,6 @@
 require 'cms/engine'
 require 'cms/configuration'
+require 'cms/attribute'
 
 require 'haml-rails'
 require 'sass-rails'
