@@ -1,10 +1,10 @@
 .row
   .col-md-8
     = form_for @entry do |f|
-      - @columns_for_form.each do |column|
+      - @attributes_for_form.each do |attribute|
         %fieldset.form-group
-          = f.label column.name
-          = render "cms/resources/form/#{ column.type }", f: f, column: column
+          = f.label attribute.name
+          = render "cms/resources/form/#{ attribute.type }", f: f, attribute: attribute
       %fieldset.form-group
         = f.submit 'Submit', class: 'btn btn-primary'
         = link_to 'Back', send("#{ @resource.model_name.route_key }_path"),

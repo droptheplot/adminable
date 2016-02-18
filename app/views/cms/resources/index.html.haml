@@ -3,16 +3,16 @@
 %table.table.m-b-3.table-striped
   %thead
     %tr
-      - @columns_for_list.each do |column|
+      - @attributes_for_list.each do |attribute|
         %th
-          = column.name
+          = attribute.name
       %th
   %tbody
     - @entries.each do |entry|
       %tr
-        - @columns_for_list.each do |column|
+        - @attributes_for_list.each do |attribute|
           %td
-            = render "cms/resources/list/#{ column.type }", entry: entry[column.name]
+            = render "cms/resources/list/#{ attribute.type }", entry: entry[attribute.key], attribute: attribute
         %td.text-nowrap.text-md-right
           = link_to 'Edit', send("edit_#{ @resource.model_name.element }_path", entry),
             class: 'label label-primary'
