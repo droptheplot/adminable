@@ -1,9 +1,9 @@
 module Cms
   class ResourcesController < ApplicationController
     before_filter :set_resource
+    before_filter :set_attributes_for_list, only: :index
+    before_filter :set_attributes_for_form, only: [:new, :edit, :create, :update]
     before_filter :set_entry, only: [:edit, :update, :destroy]
-    before_filter :columns_for_list, only: [:index]
-    before_filter :columns_for_form, except: [:index]
 
     def index
       @entries = @resource.all
@@ -46,26 +46,63 @@ module Cms
         @resource = resource_model
       end
 
+      def set_attributes_for_list
+        @attributes_for_list = attributes_for_list
+      end
+
+      def set_attributes_for_form
+        @attributes_for_form = attributes_for_form
+      end
+
       def set_entry
         @entry = @resource.find(params[:id])
       end
 
-      def columns_for_list
-        @columns_for_list = @resource.columns
+      def attributes_for_list
+        self.class::ATTRIBUTES_FOR_LIST
+      rescue NameError
+        attributes.reject do |attribute|
+          %w(created_at updated_at).include?(attribute.name)
+        end
       end
 
-      def columns_for_form
-        @columns_for_form = @resource.columns.reject do |column|
-          %w(id created_at updated_at).include?(column.name)
+      def attributes_for_form
+        self.class::ATTRIBUTES_FOR_FORM
+      rescue NameError
+        attributes.reject do |attribute|
+          %w(id created_at updated_at).include?(attribute.name)
         end
       end
 
       def resource_model
+        self.class::RESOURCE_MODEL
+      rescue NameError
         params[:controller].sub(/^cms\//, '').classify.safe_constantize
       end
 
+      def attributes
+        @attributes = []
+
+        @attributes += @resource.columns.reject do |attribute|
+          attribute.name.match(/_id$/)
+        end.map do |column|
+          Cms::Attribute.new(column.name, column.type)
+        end
+
+        @attributes += @resource.reflect_on_all_associations(:belongs_to).map do |association|
+          Cms::Attribute.new(
+            association.name,
+            :belongs_to,
+            key: association.foreign_key,
+            class: association.klass
+          )
+        end
+
+        @attributes
+      end
+
       def resource_params
-        params.require(@resource.model_name.element).permit(*@columns_for_form.map(&:name))
+        params.require(@resource.model_name.element).permit(*attributes_for_form.map(&:key))
       end
   end
 end
