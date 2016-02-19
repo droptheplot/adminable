@@ -1,5 +1,5 @@
 - if entry.present?
-  - if attribute.class.exists?(entry)
-    = link_to "##{ entry }", edit_polymorphic_path(attribute.class.find_by(id: entry))
+  - if attribute.klass.exists?(entry)
+    = link_to "##{ entry }", edit_polymorphic_path(attribute.klass.find_by(id: entry))
   - else
     = "##{ entry }"

@@ -1,2 +1,2 @@
-= f.select attribute.key, attribute.class.all.collect{ |u| [u.id, u.id] },
+= f.select attribute.key, attribute.klass.all.collect{ |u| [u.id, u.id] },
   { include_blank: 'Not selected'}, { class: 'form-control c-select' }
