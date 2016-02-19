@@ -25,7 +25,7 @@ module Cms
       @entry = @resource.new(resource_params)
 
       if @entry.save
-        redirect_to send("#{ @resource.model_name.route_key }_path")
+        redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Created.'
       else
         render :new
       end
@@ -33,7 +33,7 @@ module Cms
 
     def update
       if @entry.update(resource_params)
-        redirect_to send("#{ @resource.model_name.route_key }_path")
+        redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Updated.'
       else
         render :edit
       end
@@ -42,7 +42,7 @@ module Cms
     def destroy
       @entry.destroy
 
-      redirect_to send("#{ @resource.model_name.route_key }_path")
+      redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Destroyed.'
     end
 
     private

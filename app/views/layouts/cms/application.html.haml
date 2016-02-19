@@ -13,4 +13,9 @@
             %li.nav-item
               = link_to resource_name.capitalize, polymorphic_path(resource_name), class: 'nav-link'
     .container.p-b-3
+      - if notice.present?
+        .alert.alert-success.alert-dismissible.fade.in.m-b-3
+          %button.close{ 'aria-label' => 'Close', 'data-dismiss' => :alert, :type => :button }
+            %span{ 'aria-hidden' => true } &#215;
+          = notice
       = yield
