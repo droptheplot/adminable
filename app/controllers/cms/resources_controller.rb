@@ -1,11 +1,11 @@
 module Cms
   class ResourcesController < ApplicationController
-    before_filter :set_resource
-    before_filter :set_attributes_for_list, only: :index
-    before_filter :set_attributes_for_form, only: [:new, :edit, :create, :update]
-    before_filter :set_entry, only: [:edit, :update, :destroy]
+    before_action :set_resource
+    before_action :set_attributes_for_list, only: :index
+    before_action :set_attributes_for_form, only: [:new, :edit, :create, :update]
+    before_action :set_entry, only: [:edit, :update, :destroy]
 
-    before_filter do
+    before_action do
       append_view_path File.join('app/views/cms', controller_name)
       append_view_path Cms::Engine.root.join('app/views/cms/resources')
     end
