@@ -1,7 +1,7 @@
 = form_for @entry do |f|
   - @attributes_for_form.each do |attribute|
     %fieldset.form-group
-      = f.label @resource.human_attribute_name(attribute.key)
+      = f.label @resource.human_attribute_name(attribute.name)
       = render "cms/resources/form/#{ attribute.type }", f: f, attribute: attribute
   %fieldset.form-group
     = f.submit 'Submit', class: 'btn btn-primary'
