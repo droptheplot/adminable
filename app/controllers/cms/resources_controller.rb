@@ -75,7 +75,7 @@ module Cms
         self.class::ATTRIBUTES_FOR_FORM
       rescue NameError
         attributes.reject do |attribute|
-          %w(id created_at updated_at).include?(attribute.name)
+          %w(id created_at updated_at).include?(attribute.name) || attribute.type == :has_many
         end
       end
 
@@ -99,7 +99,16 @@ module Cms
             association.name,
             :belongs_to,
             key: association.foreign_key,
-            class: association.klass
+            klass: association.klass
+          )
+        end
+
+        @attributes += @resource.reflect_on_all_associations(:has_many).map do |association|
+          Cms::Attribute.new(
+            association.name,
+            :has_many,
+            key: association.foreign_key,
+            klass: association.klass
           )
         end
 

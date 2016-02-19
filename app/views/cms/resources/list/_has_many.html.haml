@@ -1,0 +1,3 @@
+- if entry
+  - attribute.klass.find_by(id: entry).send(attribute.name).each do |resource|
+    = link_to "##{ resource.id }", edit_polymorphic_path(resource)
