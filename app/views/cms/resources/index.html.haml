@@ -5,7 +5,7 @@
     %tr
       - @attributes_for_list.each do |attribute|
         %th
-          = attribute.name
+          = @resource.human_attribute_name(attribute.key)
       %th
   %tbody
     - @entries.each do |entry|
