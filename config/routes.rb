@@ -3,5 +3,5 @@ Cms::Engine.routes.draw do
     resources resource_name.split('/').last, except: :show, path: resource_name, controller: resource_name
   end
 
-  root 'application#boards'
+  root 'dashboard#index'
 end
