@@ -1,15 +1,13 @@
-.row
-  .col-md-8
-    = form_for @entry do |f|
-      - @attributes_for_form.each do |attribute|
-        %fieldset.form-group
-          = f.label attribute.name
-          = render "cms/resources/form/#{ attribute.type }", f: f, attribute: attribute
-      %fieldset.form-group
-        = f.submit 'Submit', class: 'btn btn-primary'
-        = link_to 'Back', send("#{ @resource.model_name.route_key }_path"),
-          class: 'btn btn-secondary-outline'
-        - if @entry.persisted?
-          = link_to 'Delete', send("#{ @resource.model_name.element }_path", @entry),
-            class: 'btn btn-danger-outline pull-md-right', method: :delete,
-            data: { confirm: 'Are you sure?' }
+= form_for @entry do |f|
+  - @attributes_for_form.each do |attribute|
+    %fieldset.form-group
+      = f.label attribute.name
+      = render "cms/resources/form/#{ attribute.type }", f: f, attribute: attribute
+  %fieldset.form-group
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', send("#{ @resource.model_name.route_key }_path"),
+      class: 'btn btn-secondary-outline'
+    - if @entry.persisted?
+      = link_to 'Delete', send("#{ @resource.model_name.element }_path", @entry),
+        class: 'btn btn-danger-outline pull-md-right', method: :delete,
+        data: { confirm: 'Are you sure?' }
