@@ -12,7 +12,7 @@
       %tr
         - @attributes_for_list.each do |attribute|
           %td
-            = render "list/#{ attribute.type }", entry: entry, attribute: attribute, value: entry[attribute.key]
+            = render "index/#{ attribute.type }", entry: entry, attribute: attribute, value: entry[attribute.key]
         %td.text-nowrap.text-md-right
           = link_to 'Edit', edit_polymorphic_path(entry),
             class: 'label label-primary'
