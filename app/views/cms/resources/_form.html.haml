@@ -2,7 +2,7 @@
   - @attributes_for_form.each do |attribute|
     %fieldset.form-group
       = f.label @resource.human_attribute_name(attribute.name)
-      = render "cms/resources/form/#{ attribute.type }", f: f, attribute: attribute
+      = render "cms/resources/form/#{ attribute.type }", f: f, entry: @entry, attribute: attribute
   %fieldset.form-group
     = f.submit 'Submit', class: 'btn btn-primary'
     = link_to 'Back', send("#{ @resource.model_name.route_key }_path"),
