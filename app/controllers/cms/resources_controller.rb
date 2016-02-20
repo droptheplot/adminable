@@ -75,7 +75,7 @@ module Cms
         self.class::ATTRIBUTES_FOR_FORM
       rescue NameError
         attributes.reject do |attribute|
-          %w(id created_at updated_at).include?(attribute.name) || attribute.type == :has_many
+          %w(id created_at updated_at).include?(attribute.name)
         end
       end
 
