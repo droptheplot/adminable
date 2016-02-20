@@ -116,7 +116,7 @@ module Cms
       end
 
       def resource_params
-        params.require(@resource.model_name.element).permit(*attributes_for_form.map(&:key))
+        params.require(@resource.model_name.element).permit(*attributes_for_form.map(&:strong_parameter))
       end
   end
 end
