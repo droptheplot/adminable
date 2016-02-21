@@ -3,14 +3,14 @@
 %table.table.m-b-3.table-striped
   %thead
     %tr
-      - @attributes_for_list.each do |attribute|
+      - @attributes_for_index.each do |attribute|
         %th
           = @resource.human_attribute_name(attribute.name)
       %th
   %tbody
     - @entries.each do |entry|
       %tr
-        - @attributes_for_list.each do |attribute|
+        - @attributes_for_index.each do |attribute|
           %td
             = render "index/#{ attribute.type }", entry: entry, attribute: attribute, value: entry[attribute.key]
         %td.text-nowrap.text-md-right

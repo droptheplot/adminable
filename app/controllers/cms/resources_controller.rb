@@ -1,7 +1,7 @@
 module Cms
   class ResourcesController < ApplicationController
     before_action :set_resource
-    before_action :set_attributes_for_list, only: :index
+    before_action :set_attributes_for_index, only: :index
     before_action :set_attributes_for_form, only: [:new, :edit, :create, :update]
     before_action :set_entry, only: [:edit, :update, :destroy]
 
@@ -53,8 +53,8 @@ module Cms
         @resource = resource_model
       end
 
-      def set_attributes_for_list
-        @attributes_for_list = attributes_for_list
+      def set_attributes_for_index
+        @attributes_for_index = attributes_for_index
       end
 
       def set_attributes_for_form
@@ -65,8 +65,8 @@ module Cms
         @entry = @resource.find(params[:id])
       end
 
-      def attributes_for_list
-        self.class::ATTRIBUTES_FOR_LIST
+      def attributes_for_index
+        self.class::attributes_for_index
       rescue NameError
         attributes.reject do |attribute|
           %w(created_at updated_at).include?(attribute.name)
