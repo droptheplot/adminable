@@ -91,22 +91,20 @@ module Cms
         @attributes += @resource.columns.reject do |attribute|
           attribute.name.match(/_id$/)
         end.map do |column|
-          Cms::Attribute.new(column.name, column.type)
+          "cms/attribute/#{ column.type }".classify.constantize.new(column.name)
         end
 
         @attributes += @resource.reflect_on_all_associations(:belongs_to).map do |association|
-          Cms::Attribute.new(
+          Cms::Attribute::BelongsTo.new(
             association.name,
-            :belongs_to,
             key: association.foreign_key,
             klass: association.klass
           )
         end
 
         @attributes += @resource.reflect_on_all_associations(:has_many).map do |association|
-          Cms::Attribute.new(
+          Cms::Attribute::HasMany.new(
             association.name,
-            :has_many,
             key: association.foreign_key,
             klass: association.klass
           )

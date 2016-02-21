@@ -1,6 +1,13 @@
 require 'cms/engine'
 require 'cms/configuration'
-require 'cms/attribute'
+
+require 'cms/attribute/base'
+require 'cms/attribute/belongs_to'
+require 'cms/attribute/datetime'
+require 'cms/attribute/has_many'
+require 'cms/attribute/integer'
+require 'cms/attribute/string'
+require 'cms/attribute/text'
 
 require 'haml-rails'
 require 'sass-rails'
