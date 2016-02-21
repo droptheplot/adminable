@@ -27,6 +27,7 @@ module Cms
       if @entry.save
         redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Created.'
       else
+        flash.now[:alert] = @entry.errors.full_messages
         render :new
       end
     end
@@ -35,6 +36,7 @@ module Cms
       if @entry.update(resource_params)
         redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Updated.'
       else
+        flash.now[:alert] = @entry.errors.full_messages
         render :edit
       end
     end
