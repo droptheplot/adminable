@@ -1,3 +1,3 @@
 = f.select attribute.key,
-  attribute.klass.all.reject{ |e| e == entry }.collect{ |u| [u.id, u.id] },
+  attribute.klass.all.reject{ |e| e == entry }.collect{ |u| [u.try(:name) || u.try(:title) || u.id, u.id] },
   { include_blank: 'Not selected'}, { class: 'form-control c-select' }
