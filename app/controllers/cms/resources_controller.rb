@@ -25,7 +25,7 @@ module Cms
       @entry = @resource.new(resource_params)
 
       if @entry.save
-        redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Created.'
+        redirect_to polymorphic_path(@resource), notice: 'Successfully Created.'
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :new
@@ -34,7 +34,7 @@ module Cms
 
     def update
       if @entry.update(resource_params)
-        redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Updated.'
+        redirect_to polymorphic_path(@resource), notice: 'Successfully Updated.'
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :edit
@@ -44,7 +44,7 @@ module Cms
     def destroy
       @entry.destroy
 
-      redirect_to send("#{ @resource.model_name.route_key }_path"), notice: 'Successfully Destroyed.'
+      redirect_to polymorphic_path(@resource), notice: 'Successfully Destroyed.'
     end
 
     private
