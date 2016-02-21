@@ -1,5 +1,6 @@
 require 'cms/engine'
 require 'cms/configuration'
+require 'cms/resource'
 
 require 'cms/attribute/base'
 require 'cms/attribute/belongs_to'
