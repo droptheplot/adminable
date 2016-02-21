@@ -1,6 +1,13 @@
 module Cms
   module Attribute
     class BelongsTo < Base
+      attr_reader :options_for_select
+
+      def options_for_select(entry)
+        self.klass.all.reject{ |e| e == entry }.collect do |e|
+          [e.try(:name) || e.try(:title) || e.id, e.id]
+        end
+      end
     end
   end
 end

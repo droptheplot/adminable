@@ -1,3 +1,2 @@
-= f.select attribute.key,
-  attribute.klass.all.reject{ |e| e == entry }.collect{ |u| [u.try(:name) || u.try(:title) || u.id, u.id] }, {},
+= f.select attribute.key, attribute.options_for_select(entry), {},
   { class: 'form-control', multiple: true }
