@@ -4,6 +4,7 @@ require 'cms/resource'
 
 require 'cms/attribute/base'
 require 'cms/attribute/belongs_to'
+require 'cms/attribute/boolean'
 require 'cms/attribute/datetime'
 require 'cms/attribute/has_many'
 require 'cms/attribute/integer'
