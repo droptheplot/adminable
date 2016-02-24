@@ -68,27 +68,23 @@ module Cms
       def attributes_for_index
         self.class::ATTRIBUTES_FOR_INDEX
       rescue NameError
-        attributes.reject do |attribute|
-          %w(created_at updated_at).include?(attribute.name)
-        end
+        attributes.reject{ |a| %w(created_at updated_at).include?(a.name) }
       end
 
       def attributes_for_form
         self.class::ATTRIBUTES_FOR_FORM
       rescue NameError
-        attributes.reject do |attribute|
-          %w(id created_at updated_at).include?(attribute.name)
-        end
+        attributes.reject{ |a| %w(id created_at updated_at).include?(a.name) }
       end
 
       def resource_model
         self.class::RESOURCE_MODEL
       rescue NameError
-        controller_name.classify.safe_constantize
+        controller_name.classify.constantize
       end
 
       def attributes
-        @attributes = Cms::Resource.collect_attributes(@resource)
+        Cms::Resource.collect_attributes(@resource)
       end
 
       def resource_params
