@@ -66,7 +66,7 @@ module Cms
       end
 
       def attributes_for_index
-        self.class::attributes_for_index
+        self.class::ATTRIBUTES_FOR_INDEX
       rescue NameError
         attributes.reject do |attribute|
           %w(created_at updated_at).include?(attribute.name)
