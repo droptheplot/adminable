@@ -18,6 +18,7 @@ require 'jquery-rails'
 require 'bootstrap'
 require 'rails-assets-tether'
 require 'babosa'
+require 'kaminari'
 
 module Cms
 end

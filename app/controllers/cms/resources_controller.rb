@@ -11,7 +11,7 @@ module Cms
     end
 
     def index
-      @entries = @resource.all
+      @entries = @resource.all.page(params[:page]).per(20)
     end
 
     def new

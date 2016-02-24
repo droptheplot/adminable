@@ -18,5 +18,6 @@
             class: 'label label-primary'
           = link_to 'Delete', polymorphic_path(entry),
             class: 'label label-danger', method: :delete, data: { confirm: 'Are you sure?' }
+= paginate @entries, views_prefix: 'cms'
 = link_to "New #{ @resource.model_name.human }",
   new_polymorphic_path(@resource), class: 'btn btn-primary'

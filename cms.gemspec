@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faker', '>= 1.6.1'
   s.add_dependency 'coffee-rails', '>= 4.1.1'
   s.add_dependency 'babosa', '~> 1.0.2'
+  s.add_dependency 'kaminari'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
