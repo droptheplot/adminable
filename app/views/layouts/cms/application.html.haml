@@ -12,7 +12,7 @@
         %ul.nav.navbar-nav
           - Cms::Configuration.resources.each do |resource|
             %li.nav-item
-              = link_to resource[:name].capitalize, polymorphic_path(resource[:name]), class: 'nav-link'
+              = link_to resource[:name].titleize, polymorphic_path(resource[:name]), class: 'nav-link'
     .container.p-b-3
       - if flash[:alert] || notice.present?
         .p-b-2
