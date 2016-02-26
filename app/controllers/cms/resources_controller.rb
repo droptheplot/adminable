@@ -50,7 +50,7 @@ module Cms
     private
 
       def set_resource
-        @resource = resource_model
+        @resource = resource_model.extend(Cms::Resource)
       end
 
       def set_attributes_for_index
@@ -68,23 +68,23 @@ module Cms
       def attributes_for_index
         self.class::ATTRIBUTES_FOR_INDEX
       rescue NameError
-        attributes.reject{ |a| %w(created_at updated_at).include?(a.name) }
+        @resource.collect_attributes.reject do |a|
+          %w(created_at updated_at).include?(a.name)
+        end
       end
 
       def attributes_for_form
         self.class::ATTRIBUTES_FOR_FORM
       rescue NameError
-        attributes.reject{ |a| %w(id created_at updated_at).include?(a.name) }
+        @resource.collect_attributes.reject do |a|
+          %w(id created_at updated_at).include?(a.name)
+        end
       end
 
       def resource_model
         self.class::RESOURCE_MODEL
       rescue NameError
         controller_name.classify.constantize
-      end
-
-      def attributes
-        Cms::Resource.collect_attributes(@resource)
       end
 
       def resource_params
