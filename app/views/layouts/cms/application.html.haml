@@ -10,9 +10,9 @@
     .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
       .container
         %ul.nav.navbar-nav
-          - Cms::Configuration.resources_names.each do |resource_name|
+          - Cms::Configuration.resources.each do |resource|
             %li.nav-item
-              = link_to resource_name.capitalize, polymorphic_path(resource_name), class: 'nav-link'
+              = link_to resource[:name].capitalize, polymorphic_path(resource[:name]), class: 'nav-link'
     .container.p-b-3
       - if flash[:alert] || notice.present?
         .p-b-2
