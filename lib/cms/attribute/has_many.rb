@@ -1,7 +1,7 @@
 module Cms
   module Attribute
     class HasMany < Base
-      attr_reader :options_for_select
+      include Cms::Attribute::Association
 
       def key
         "#{ @name.to_s.singularize }_ids"
@@ -9,12 +9,6 @@ module Cms
 
       def strong_parameter
         { self.key => [] }
-      end
-
-      def options_for_select(entry)
-        self.klass.all.reject{ |e| e == entry }.collect do |e|
-          [e.try(:name) || e.try(:title) || e.id, e.id]
-        end
       end
     end
   end

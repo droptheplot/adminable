@@ -2,6 +2,7 @@ require 'cms/engine'
 require 'cms/configuration'
 require 'cms/resource'
 
+require 'cms/attribute/association'
 require 'cms/attribute/base'
 require 'cms/attribute/belongs_to'
 require 'cms/attribute/boolean'
