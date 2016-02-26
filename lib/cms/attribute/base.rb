@@ -1,13 +1,12 @@
 module Cms
   module Attribute
     class Base
-      attr_accessor :name
-      attr_reader :type, :key, :klass, :strong_parameter, :index_partial_path, :form_partial_path
+      attr_accessor :name, :klass
 
       def initialize(name, options = {})
         @name = name
-        @key = options[:key]
         @klass = options[:klass]
+        @key = options[:key]
       end
 
       def type
