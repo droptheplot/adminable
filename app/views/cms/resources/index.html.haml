@@ -4,14 +4,14 @@
   %thead
     %tr
       - @attributes_for_index.each do |attribute|
-        %th
+        %th{ :class => ('text-md-center' if attribute.center?) }
           = @resource.human_attribute_name(attribute.name)
       %th
   %tbody
     - @entries.each do |entry|
       %tr
         - @attributes_for_index.each do |attribute|
-          %td
+          %td{ :class => ('text-md-center' if attribute.center?) }
             = render attribute.index_partial_path, entry: entry, attribute: attribute, value: entry[attribute.key]
         %td.text-nowrap.text-md-right
           = link_to 'Edit', edit_polymorphic_path(entry),

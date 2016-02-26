@@ -29,6 +29,10 @@ module Cms
       def form_partial_path
         "cms/resources/form/#{ self.type }"
       end
+
+      def center?
+        %w(integer boolean).include?(self.type)
+      end
     end
   end
 end
