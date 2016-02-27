@@ -9,5 +9,5 @@
       class: 'btn btn-secondary-outline'
     - if @entry.persisted?
       = link_to 'Delete', polymorphic_path(@entry),
-        class: 'btn btn-danger-outline pull-md-right', method: :delete,
+        class: 'btn btn-danger-outline pull-xs-right', method: :delete,
         data: { confirm: 'Are you sure?' }

@@ -6,9 +6,17 @@
     = javascript_include_tag 'cms/application'
     = csrf_meta_tags
     %link{ :href => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', :rel => 'stylesheet' }/
+    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }/
+    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }/
   %body
+    #collapsing-nav.collapse.p-y-1
+      - Cms::Configuration.resources.each do |resource|
+        = link_to resource[:name].titleize, polymorphic_path(resource[:name]), class: 'btn btn-link btn-block'
     .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
-      .container
+      .hidden-md-up
+        %button.navbar-toggler{ 'data-target' => '#collapsing-nav', 'data-toggle' => :collapse, :type => :button }
+          \&#9776;
+      .container.hidden-sm-down
         %ul.nav.navbar-nav
           - Cms::Configuration.resources.each do |resource|
             %li.nav-item
