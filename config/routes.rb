@@ -3,5 +3,5 @@ Cms::Engine.routes.draw do
     resources resources[:name], except: :show, path: resources[:path], controller: resources[:path]
   end
 
-  root 'dashboard#index'
+  root 'application#dashboard'
 end
