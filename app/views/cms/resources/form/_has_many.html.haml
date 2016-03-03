@@ -1,2 +1,3 @@
+= render 'cms/shared/label', f: f, attribute: attribute
 = f.select attribute.key, attribute.options_for_select(entry), {},
   { class: 'form-control', multiple: true }
