@@ -1,12 +1,12 @@
 module Cms
   module Attribute
     class Base
-      attr_accessor :name, :klass
+      attr_accessor :name
 
       def initialize(name, options = {})
         @name = name
-        @klass = options[:klass]
         @key = options[:key]
+        @association = options[:association]
       end
 
       def type

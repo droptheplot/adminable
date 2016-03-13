@@ -1,8 +1,6 @@
 module Cms
   class ResourcesController < ApplicationController
     before_action :set_resource
-    before_action :set_attributes_for_index, only: :index
-    before_action :set_attributes_for_form, only: [:new, :edit, :create, :update]
     before_action :set_entry, only: [:edit, :update, :destroy]
 
     before_action do
@@ -51,30 +49,25 @@ module Cms
 
       def set_resource
         @resource = resource_model.extend(Cms::Resource)
-      end
 
-      def set_attributes_for_index
-        if defined?(self.class::ATTRIBUTES_FOR_INDEX)
-          @resource.attributes_for_index = self.class::ATTRIBUTES_FOR_INDEX
-        end
-      end
-
-      def set_attributes_for_form
-        if defined?(self.class::ATTRIBUTES_FOR_FORM)
-          @resource.attributes_for_form = self.class::ATTRIBUTES_FOR_FORM
-        end
+        @resource.attributes_for_index = attributes_for_index
+        @resource.attributes_for_form = attributes_for_form
       end
 
       def set_entry
         @entry = @resource.find(params[:id])
       end
 
+      def attributes_for_index
+        @resource.attributes_for_index
+      end
+
+      def attributes_for_form
+        @resource.attributes_for_form
+      end
+
       def resource_model
-        if defined?(self.class::RESOURCE_MODEL)
-          self.class::RESOURCE_MODEL
-        else
-          controller_name.classify.constantize
-        end
+        controller_name.classify.constantize
       end
 
       def resource_params

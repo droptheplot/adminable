@@ -1,5 +1,7 @@
 module Cms
   class PagesController < ResourcesController
-    RESOURCE_MODEL = Cms::Page
+    def resource_model
+      Cms::Page
+    end
   end
 end
