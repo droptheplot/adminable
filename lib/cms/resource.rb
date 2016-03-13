@@ -1,5 +1,17 @@
 module Cms
   module Resource
+    def attributes_for_index
+      self.collect_attributes.reject do |a|
+        %w(created_at updated_at).include?(a.name)
+      end
+    end
+    
+    def attributes_for_form
+      self.collect_attributes.reject do |a|
+        %w(id created_at updated_at).include?(a.name)
+      end
+    end
+
     def collect_attributes
       attributes = []
 

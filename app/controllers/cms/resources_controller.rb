@@ -54,41 +54,33 @@ module Cms
       end
 
       def set_attributes_for_index
-        @attributes_for_index = attributes_for_index
+        if defined?(self.class::ATTRIBUTES_FOR_INDEX)
+          @resource.attributes_for_index = self.class::ATTRIBUTES_FOR_INDEX
+        end
       end
 
       def set_attributes_for_form
-        @attributes_for_form = attributes_for_form
+        if defined?(self.class::ATTRIBUTES_FOR_FORM)
+          @resource.attributes_for_form = self.class::ATTRIBUTES_FOR_FORM
+        end
       end
 
       def set_entry
         @entry = @resource.find(params[:id])
       end
 
-      def attributes_for_index
-        self.class::ATTRIBUTES_FOR_INDEX
-      rescue NameError
-        @resource.collect_attributes.reject do |a|
-          %w(created_at updated_at).include?(a.name)
-        end
-      end
-
-      def attributes_for_form
-        self.class::ATTRIBUTES_FOR_FORM
-      rescue NameError
-        @resource.collect_attributes.reject do |a|
-          %w(id created_at updated_at).include?(a.name)
-        end
-      end
-
       def resource_model
-        self.class::RESOURCE_MODEL
-      rescue NameError
-        controller_name.classify.constantize
+        if defined?(self.class::RESOURCE_MODEL)
+          self.class::RESOURCE_MODEL
+        else
+          controller_name.classify.constantize
+        end
       end
 
       def resource_params
-        params.require(@resource.model_name.param_key).permit(*attributes_for_form.map(&:strong_parameter))
+        params.require(@resource.model_name.param_key).permit(
+          *@resource.attributes_for_form.map(&:strong_parameter)
+        )
       end
   end
 end

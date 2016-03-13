@@ -1,5 +1,5 @@
 = form_for @entry do |f|
-  - @attributes_for_form.each do |attribute|
+  - @resource.attributes_for_form.each do |attribute|
     %fieldset.form-group
       = render attribute.form_partial_path, f: f, entry: @entry, attribute: attribute
   %fieldset.form-group
