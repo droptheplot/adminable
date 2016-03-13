@@ -5,15 +5,13 @@ module Cms
         attr_accessor :attributes_for_index, :attributes_for_form
 
         def attributes_for_index
-          @attributes_for_index ||= self.collect_attributes.reject do |a|
-            %w(created_at updated_at).include?(a)
-          end
+          @attributes_for_index ||= self.collect_attributes
+            .except(:created_at, :updated_at)
         end
 
         def attributes_for_form
-          @attributes_for_form ||= self.collect_attributes.reject do |a|
-            %w(id created_at updated_at).include?(a)
-          end
+          @attributes_for_form ||= self.collect_attributes
+            .except(:id, :created_at, :updated_at)
         end
 
         def collect_attributes
