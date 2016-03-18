@@ -1,3 +1,9 @@
 = render 'cms/shared/label', f: f, attribute: attribute
-= f.select attribute.key, attribute.options_for_select(entry), {},
-  { class: 'form-control', multiple: true }
+= hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]", nil
+#clusterizeScrollArea.clusterize-scroll
+  #clusterizeContentArea.clusterize-content.list-group
+    - attribute.options_for_select(entry).each do |value, key|
+      .list-group-item.bg-faded.toggleCheckbox{ :class => ('active' if f.object.send(attribute.key).include?(key)) }
+        = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]",
+          key, f.object.send(attribute.key).include?(key), hidden: true
+        = value

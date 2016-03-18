@@ -2,12 +2,14 @@
 %html
   %head
     %title CMS
+    %link{ :href => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', :rel => 'stylesheet' }/
+    %link{ :href => '//oss.maxcdn.com/clusterize.js/0.16.0/clusterize.css', :rel => 'stylesheet' }/
+    %script{ :src => '//oss.maxcdn.com/clusterize.js/0.16.0/clusterize.min.js' }
+    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }/
+    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }/
     = stylesheet_link_tag 'cms/application', media: 'all'
     = javascript_include_tag 'cms/application'
     = csrf_meta_tags
-    %link{ :href => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', :rel => 'stylesheet' }/
-    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }/
-    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }/
   %body
     #collapsing-nav.collapse.p-y-1
       - Cms::Configuration.resources.each do |resource|
