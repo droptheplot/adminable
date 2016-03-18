@@ -6,10 +6,6 @@ module Cms
       @model = model
     end
 
-    def title
-      @model.model_name.human.pluralize
-    end
-
     def index_attributes
       @index_attributes ||= self.attributes
         .except(:created_at, :updated_at)

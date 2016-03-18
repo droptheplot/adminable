@@ -1,0 +1,13 @@
+---
+en:
+  cms:
+    ui:
+      confirm: Are you sure?
+    buttons:
+      submit: Submit
+      back: Back
+      edit: Edit
+      new: New %{resource}
+    titles:
+      edit: Edit %{resource}
+      new: New %{resource}

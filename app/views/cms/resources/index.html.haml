@@ -1,5 +1,5 @@
 %h1.m-b-3
-  = @resource.title
+  = @resource.model.model_name.human.pluralize
 .table-responsive.m-b-3
   %table.table.table-striped
     %thead
@@ -16,15 +16,15 @@
               = render attribute.index_partial_path, entry: entry,
                 attribute: attribute, value: entry[attribute.key]
           %td.text-nowrap.text-md-right
-            = link_to 'Edit', edit_polymorphic_path(entry),
+            = link_to t('cms.buttons.edit'), edit_polymorphic_path(entry),
               class: 'label label-primary'
-            = link_to 'Delete', polymorphic_path(entry),
+            = link_to t('cms.buttons.delete'), polymorphic_path(entry),
               class: 'label label-danger', method: :delete,
-              data: { confirm: 'Are you sure?' }
+              data: { confirm: t('cms.ui.confirm') }
       - if @entries.empty?
         %tr
           %td.text-md-center.text-muted{ :colspan => @resource.index_attributes.size + 1 }
             No data available
 = paginate @entries, views_prefix: 'cms'
-= link_to "New #{ @resource.model.model_name.human }",
+= link_to t('cms.buttons.new', resource: @resource.model.model_name.human),
   new_polymorphic_path(@resource.model), class: 'btn btn-primary'

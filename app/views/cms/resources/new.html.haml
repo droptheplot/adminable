@@ -1,5 +1,5 @@
 .row
   .col-md-8.col-md-offset-2
     %h1.m-b-3
-      New
+      = t('cms.titles.new', resource: @resource.model.model_name.human)
     = render 'form'

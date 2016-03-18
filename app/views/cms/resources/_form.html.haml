@@ -4,10 +4,10 @@
       = render attribute.form_partial_path, f: f, entry: @entry,
         attribute: attribute
   %fieldset.form-group
-    = f.submit 'Submit', class: 'btn btn-primary'
-    = link_to 'Back', polymorphic_path(@resource.model),
+    = f.submit t('cms.buttons.submit'), class: 'btn btn-primary'
+    = link_to t('cms.buttons.back'), polymorphic_path(@resource.model),
       class: 'btn btn-secondary-outline'
     - if @entry.persisted?
-      = link_to 'Delete', polymorphic_path(@entry),
+      = link_to t('cms.buttons.delete'), polymorphic_path(@entry),
         class: 'btn btn-danger-outline pull-xs-right', method: :delete,
-        data: { confirm: 'Are you sure?' }
+        data: { confirm: t('cms.ui.confirm') }
