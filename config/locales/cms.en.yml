@@ -11,3 +11,7 @@ en:
     titles:
       edit: Edit %{resource}
       new: New %{resource}
+    resources:
+      created: "%{resource} has been successfully created."
+      updated: "%{resource} has been successfully updated."
+      deleted: "%{resource} has been successfully deleted."

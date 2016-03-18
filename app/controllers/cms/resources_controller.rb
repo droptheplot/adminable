@@ -24,7 +24,8 @@ module Cms
       @entry = @resource.model.new(resource_params)
 
       if @entry.save
-        redirect_to polymorphic_path(@resource.model), notice: 'Successfully Created.'
+        redirect_to polymorphic_path(@resource.model),
+          notice: t('cms.resources.created', resource: @resource.model.model_name.human)
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :new
@@ -33,7 +34,8 @@ module Cms
 
     def update
       if @entry.update(resource_params)
-        redirect_to polymorphic_path(@resource.model), notice: 'Successfully Updated.'
+        redirect_to polymorphic_path(@resource.model),
+          notice: t('cms.resources.updated', resource: @resource.model.model_name.human)
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :edit
@@ -43,7 +45,8 @@ module Cms
     def destroy
       @entry.destroy
 
-      redirect_to polymorphic_path(@resource.model), notice: 'Successfully Destroyed.'
+      redirect_to polymorphic_path(@resource.model),
+        notice: t('cms.resources.deleted', resource: @resource.model.model_name.human)
     end
 
     private
