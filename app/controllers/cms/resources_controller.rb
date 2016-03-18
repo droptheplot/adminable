@@ -9,7 +9,8 @@ module Cms
     end
 
     def index
-      @entries = @resource.model.all.page(params[:page]).per(20)
+      @entries = @resource.model.includes(*@resource.includes).all
+        .page(params[:page]).per(20)
     end
 
     def new

@@ -6,6 +6,14 @@ module Cms
       @model = model
     end
 
+    def includes
+      @includes ||= if association_attributes.present?
+        association_attributes.map(&:name)
+      else
+        false
+      end
+    end
+
     def index_attributes
       @index_attributes ||= self.attributes
         .except(:created_at, :updated_at)
@@ -18,19 +26,19 @@ module Cms
 
     def attributes
       @attributes ||= Hash.new.tap do |attribute|
-        @model.columns.reject{ |a| a.name.match(/_id$/) }.each do |column|
+        columns_attributes.each do |column|
           attribute[column.name] = "cms/attribute/#{ column.type }"
             .classify.constantize.new(column.name)
         end
 
-        @model.reflect_on_all_associations(:belongs_to).map do |association|
+        belongs_to_attributes.each do |association|
           attribute[association.name] = Cms::Attribute::BelongsTo.new(
             association.name,
             association: association
           )
         end
 
-        @model.reflect_on_all_associations(:has_many).map do |association|
+        has_many_attributes.each do |association|
           attribute[association.name] = Cms::Attribute::HasMany.new(
             association.name,
             association: association
@@ -38,5 +46,23 @@ module Cms
         end
       end.symbolize_keys
     end
+
+    private
+
+      def columns_attributes
+        @model.columns.reject{ |a| a.name.match(/_id$/) }
+      end
+
+      def belongs_to_attributes
+        @model.reflect_on_all_associations(:belongs_to)
+      end
+
+      def has_many_attributes
+        @model.reflect_on_all_associations(:has_many)
+      end
+
+      def association_attributes
+        belongs_to_attributes.concat(has_many_attributes)
+      end
   end
 end
