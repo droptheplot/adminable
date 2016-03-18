@@ -1,10 +1,11 @@
 = form_for @entry do |f|
-  - @resource.attributes_for_form.each_value do |attribute|
+  - @resource.form_attributes.each_value do |attribute|
     %fieldset.form-group
-      = render attribute.form_partial_path, f: f, entry: @entry, attribute: attribute
+      = render attribute.form_partial_path, f: f, entry: @entry,
+        attribute: attribute
   %fieldset.form-group
     = f.submit 'Submit', class: 'btn btn-primary'
-    = link_to 'Back', polymorphic_path(@resource),
+    = link_to 'Back', polymorphic_path(@resource.model),
       class: 'btn btn-secondary-outline'
     - if @entry.persisted?
       = link_to 'Delete', polymorphic_path(@entry),

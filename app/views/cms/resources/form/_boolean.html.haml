@@ -1,3 +1,3 @@
 = f.label attribute.name do
   = f.check_box attribute.name
-  = @resource.human_attribute_name(attribute.name)
+  = @resource.model.human_attribute_name(attribute.name)

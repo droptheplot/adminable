@@ -1,28 +1,30 @@
 %h1.m-b-3
-  = @resource.model_name.human.pluralize
+  = @resource.title
 .table-responsive.m-b-3
   %table.table.table-striped
     %thead
       %tr
-        - @resource.attributes_for_index.each_value do |attribute|
+        - @resource.index_attributes.each_value do |attribute|
           %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
-            = @resource.human_attribute_name(attribute.name)
+            = @resource.model.human_attribute_name(attribute.name)
         %th
     %tbody
       - @entries.each do |entry|
         %tr
-          - @resource.attributes_for_index.each_value do |attribute|
+          - @resource.index_attributes.each_value do |attribute|
             %td{ :class => ('text-md-center' if attribute.center?) }
-              = render attribute.index_partial_path, entry: entry, attribute: attribute, value: entry[attribute.key]
+              = render attribute.index_partial_path, entry: entry,
+                attribute: attribute, value: entry[attribute.key]
           %td.text-nowrap.text-md-right
             = link_to 'Edit', edit_polymorphic_path(entry),
               class: 'label label-primary'
             = link_to 'Delete', polymorphic_path(entry),
-              class: 'label label-danger', method: :delete, data: { confirm: 'Are you sure?' }
+              class: 'label label-danger', method: :delete,
+              data: { confirm: 'Are you sure?' }
       - if @entries.empty?
         %tr
-          %td.text-md-center.text-muted{ :colspan => @resource.attributes_for_index.size + 1 }
+          %td.text-md-center.text-muted{ :colspan => @resource.index_attributes.size + 1 }
             No data available
 = paginate @entries, views_prefix: 'cms'
-= link_to "New #{ @resource.model_name.human }",
-  new_polymorphic_path(@resource), class: 'btn btn-primary'
+= link_to "New #{ @resource.model.model_name.human }",
+  new_polymorphic_path(@resource.model), class: 'btn btn-primary'
