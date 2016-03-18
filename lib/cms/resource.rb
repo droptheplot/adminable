@@ -3,7 +3,19 @@ module Cms
     attr_accessor :model, :attributes, :index_attributes, :form_attributes
 
     def initialize(model)
-      @model = model
+      @model = if model.kind_of?(String)
+        model.classify.constantize
+      else
+        model
+      end
+    end
+
+    def route_name
+      @route_name ||= @model.name.underscore.pluralize.tr('/', '_')
+    end
+
+    def route_path
+      @route_path ||= @model.name.underscore.pluralize
     end
 
     def includes

@@ -1,6 +1,6 @@
 Cms::Engine.routes.draw do
-  Cms::Configuration.resources.each do |resources|
-    resources resources[:name], except: :show, path: resources[:path], controller: resources[:path]
+  Cms::Configuration.resources.each do |r|
+    resources r.route_name, except: :show, path: r.route_path, controller: r.route_path
   end
 
   root 'application#dashboard'

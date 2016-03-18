@@ -13,7 +13,7 @@
   %body
     #collapsing-nav.collapse.p-y-1
       - Cms::Configuration.resources.each do |resource|
-        = link_to resource[:name].titleize, polymorphic_path(resource[:name]), class: 'btn btn-link btn-block'
+        = link_to resource.route_name.titleize, polymorphic_path(resource.route_name), class: 'btn btn-link btn-block'
     .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
       .hidden-md-up
         %button.navbar-toggler{ 'data-target' => '#collapsing-nav', 'data-toggle' => :collapse, :type => :button }
@@ -22,7 +22,7 @@
         %ul.nav.navbar-nav
           - Cms::Configuration.resources.each do |resource|
             %li.nav-item
-              = link_to resource[:name].titleize, polymorphic_path(resource[:name]), class: 'nav-link'
+              = link_to resource.route_name.titleize, polymorphic_path(resource.route_name), class: 'nav-link'
     .container.p-b-3
       - if flash[:alert] || notice.present?
         .p-b-2
