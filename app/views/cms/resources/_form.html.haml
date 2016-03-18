@@ -1,8 +1,9 @@
 = form_for @entry do |f|
   - @resource.form_attributes.each_value do |attribute|
-    %fieldset.form-group
-      = render attribute.form_partial_path, f: f, entry: @entry,
-        attribute: attribute
+    - if attribute.show?
+      %fieldset.form-group
+        = render attribute.form_partial_path, f: f, entry: @entry,
+          attribute: attribute
   %fieldset.form-group
     = f.submit t('cms.buttons.submit'), class: 'btn btn-primary'
     = link_to t('cms.buttons.back'), polymorphic_path(@resource.model),

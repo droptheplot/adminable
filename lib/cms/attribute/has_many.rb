@@ -10,6 +10,10 @@ module Cms
       def strong_parameter
         { self.key => [] }
       end
+
+      def show?
+        @association.klass.any?
+      end
     end
   end
 end

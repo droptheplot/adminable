@@ -21,6 +21,10 @@ module Cms
         self.key
       end
 
+      def show?
+        true
+      end
+
       def index_partial_path
         "index/#{ self.type }"
       end
