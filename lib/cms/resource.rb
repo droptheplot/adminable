@@ -59,6 +59,10 @@ module Cms
       end.symbolize_keys
     end
 
+    def self.find_instance(klass)
+      ObjectSpace.each_object(self).find{ |obj| obj.model == klass }
+    end
+
     private
 
       def columns_attributes

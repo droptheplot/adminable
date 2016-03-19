@@ -52,9 +52,7 @@ module Cms
     private
 
       def set_resource
-        @resource = ObjectSpace.each_object(Cms::Resource).find do |obj|
-          obj.model == resource_model
-        end
+        @resource = Cms::Resource.find_instance(resource_model)
 
         @resource.index_attributes = index_attributes
         @resource.form_attributes = form_attributes
