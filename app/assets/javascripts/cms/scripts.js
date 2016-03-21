@@ -12,5 +12,8 @@ $(document).ready(function() {
     $(this).toggleClass('active');
   });
 
-  tinymce.init({ selector: 'textarea' });
+  tinymce.init({
+    selector: 'textarea',
+    menubar: false
+  });
 });
