@@ -11,4 +11,6 @@ $(document).ready(function() {
     checkbox.prop('checked', !checkbox.prop('checked'));
     $(this).toggleClass('active');
   });
+
+  tinymce.init({ selector: 'textarea' });
 });
