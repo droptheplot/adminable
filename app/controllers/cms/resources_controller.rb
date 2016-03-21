@@ -71,7 +71,7 @@ module Cms
       end
 
       def resource_model
-        controller_name.classify.constantize
+        controller_path.sub(/^cms\//, '').classify.constantize
       end
 
       def resource_params
