@@ -1,13 +1,10 @@
 module Cms
   class Resource
-    attr_accessor :model, :attributes, :index_attributes, :form_attributes
+    attr_accessor :name, :model, :attributes, :index_attributes, :form_attributes
 
-    def initialize(model)
-      @model = if model.kind_of?(String)
-        model.classify.constantize
-      else
-        model
-      end
+    def initialize(name)
+      @name = name
+      @model = name.classify.constantize
     end
 
     def route_name
