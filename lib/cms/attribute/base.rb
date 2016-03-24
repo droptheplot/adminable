@@ -1,7 +1,7 @@
 module Cms
   module Attribute
     class Base
-      attr_accessor :name
+      attr_accessor :name, :wysiwyg, :center, :show
 
       def initialize(name, options = {})
         @name = name
@@ -21,10 +21,6 @@ module Cms
         self.key
       end
 
-      def show?
-        true
-      end
-
       def index_partial_path
         "index/#{ self.type }"
       end
@@ -33,8 +29,16 @@ module Cms
         "cms/resources/form/#{ self.type }"
       end
 
-      def center?
-        %w(integer boolean).include?(self.type)
+      def show
+        @show.nil? ? true : @show
+      end
+
+      def center
+        @center.nil? ? %w(integer boolean).include?(self.type) : @center
+      end
+
+      def wysiwyg
+        @wysiwyg.nil? ? %w(text).include?(self.type) : @wysiwyg
       end
     end
   end

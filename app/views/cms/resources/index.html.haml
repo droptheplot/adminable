@@ -5,14 +5,14 @@
     %thead
       %tr
         - @resource.index_attributes.each_value do |attribute|
-          %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
+          %th.text-nowrap{ :class => ('text-md-center' if attribute.center) }
             = @resource.model.human_attribute_name(attribute.name)
         %th
     %tbody
       - @entries.each do |entry|
         %tr
           - @resource.index_attributes.each_value do |attribute|
-            %td{ :class => ('text-md-center' if attribute.center?) }
+            %td{ :class => ('text-md-center' if attribute.center) }
               = render attribute.index_partial_path, entry: entry,
                 attribute: attribute, value: entry[attribute.key]
           %td.text-nowrap.text-md-right
