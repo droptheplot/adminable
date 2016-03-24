@@ -13,7 +13,7 @@ $(document).ready(function() {
   });
 
   tinymce.init({
-    selector: 'textarea',
+    selector: '.wysiwyg',
     menubar: false
   });
 });
