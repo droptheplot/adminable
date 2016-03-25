@@ -1,6 +1,7 @@
 FactoryGirl.define do
-  factory :page, class: Cms::Page do
+  factory :blog_post, class: Blog::Post do
     title 'Title'
     body 'Body'
+    user
   end
 end
