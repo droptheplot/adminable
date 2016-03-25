@@ -1,6 +1,6 @@
 = form_for @entry do |f|
   - @resource.form_attributes.each_value do |attribute|
-    - if attribute.show
+    - if attribute.show?
       %fieldset.form-group
         = render attribute.form_partial_path, f: f, entry: @entry,
           attribute: attribute

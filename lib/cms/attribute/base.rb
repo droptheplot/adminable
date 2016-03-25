@@ -2,23 +2,27 @@ module Cms
   module Attribute
     class Base
       attr_accessor :name, :wysiwyg, :center, :show
+      attr_reader :key
+
+      alias_method :show?, :show
+      alias_method :center?, :center
+      alias_method :wysiwyg?, :wysiwyg
 
       def initialize(name, options = {})
         @name = name
-        @key = options[:key]
+        @key = options[:key] || @name
         @association = options[:association]
+        @show = true
+        @center = %w(integer boolean).include?(self.type)
+        @wysiwyg = %w(text).include?(self.type)
       end
 
       def type
         self.class.name.demodulize.underscore
       end
 
-      def key
-        @key || @name
-      end
-
       def strong_parameter
-        self.key
+        @key
       end
 
       def index_partial_path
@@ -27,18 +31,6 @@ module Cms
 
       def form_partial_path
         "cms/resources/form/#{ self.type }"
-      end
-
-      def show
-        @show.nil? ? true : @show
-      end
-
-      def center
-        @center.nil? ? %w(integer boolean).include?(self.type) : @center
-      end
-
-      def wysiwyg
-        @wysiwyg.nil? ? %w(text).include?(self.type) : @wysiwyg
       end
     end
   end
