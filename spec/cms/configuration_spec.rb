@@ -1,16 +1,19 @@
 describe Cms::Configuration do
-  before do
-    allow(Cms::Configuration).to receive(:resources_paths).and_return(
-      %w(/app/controllers/cms/tests_controller.rb /app/controllers/cms/test/tests_controller.rb)
-    )
+  describe '#resources' do
+    it 'return array of resources' do
+      resources = Cms::Configuration.resources
+
+      expect(resources).to all(be_a(Cms::Resource))
+      expect(resources.map(&:name)).to eq(%w(blog/posts comments users))
+    end
   end
 
-  describe '#resources' do
-    it 'return correct resources' do
-      expect(Cms::Configuration.resources).to eq([
-        { name: 'tests', path: 'tests' },
-        { name: 'test_tests', path: 'test/tests' }
-      ])
+  describe '#find_resource' do
+    it 'return certain resource' do
+      blog_posts_resource = Cms::Configuration.find_resource('blog/posts')
+
+      expect(blog_posts_resource).to be_a(Cms::Resource)
+      expect(blog_posts_resource.model).to eq(Blog::Post)
     end
   end
 end
