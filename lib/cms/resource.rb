@@ -1,6 +1,7 @@
 module Cms
   class Resource
-    attr_accessor :name, :model, :attributes, :index_attributes, :form_attributes
+    attr_reader :name, :model
+    attr_writer :index_attributes, :form_attributes
 
     def initialize(name)
       @name = name
