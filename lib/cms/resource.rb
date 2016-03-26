@@ -32,12 +32,16 @@ module Cms
       @attributes ||= {}.tap do |attribute|
         columns_attributes.each do |column|
           attribute[column.name] = "cms/attributes/types/#{column.type}"
-            .classify.constantize.new(column.name)
+            .classify.constantize.new(
+              column.name,
+              required: attribute_required?(column.name)
+            )
         end
 
         belongs_to_attributes.each do |association|
           attribute[association.name] = Cms::Attributes::Types::BelongsTo.new(
             association.name,
+            required: attribute_required?(association.name),
             association: association
           )
         end
@@ -45,6 +49,7 @@ module Cms
         has_many_attributes.each do |association|
           attribute[association.name] = Cms::Attributes::Types::HasMany.new(
             association.name,
+            required: attribute_required?(association.name),
             association: association
           )
         end
@@ -67,6 +72,12 @@ module Cms
 
       def association_attributes
         belongs_to_attributes.concat(has_many_attributes)
+      end
+
+      def attribute_required?(name)
+        @model.validators_on(name).any? do |validator|
+          validator.class == ActiveRecord::Validations::PresenceValidator
+        end
       end
   end
 end

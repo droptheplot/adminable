@@ -1,7 +1,7 @@
 module Cms
   module Attributes
     class Base
-      attr_accessor :name, :wysiwyg, :center, :show
+      attr_accessor :name, :required, :show, :center, :wysiwyg
       attr_reader :key
 
       def initialize(name, options = {})
@@ -10,11 +10,13 @@ module Cms
         @name = name
         @key = options[:key] || @name
         @association = options[:association]
+        @required = options[:required] || false
         @show = true
         @center = %w(integer boolean).include?(type)
         @wysiwyg = %w(text).include?(type)
       end
 
+      alias required? required
       alias show? show
       alias center? center
       alias wysiwyg? wysiwyg

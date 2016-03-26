@@ -1,1 +1,5 @@
-= f.label @resource.model.human_attribute_name(attribute.name)
+= label_tag attribute.name do
+  = @resource.model.human_attribute_name(attribute.name)
+  - if attribute.required?
+    %i.text-muted
+      (required)
