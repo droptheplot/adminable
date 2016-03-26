@@ -1,5 +1,5 @@
 module Cms
-  module Attribute
+  module Attributes
     module Association
       attr_reader :options_for_select, :association
 

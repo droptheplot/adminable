@@ -37,19 +37,19 @@ module Cms
     def attributes
       @attributes ||= Hash.new.tap do |attribute|
         columns_attributes.each do |column|
-          attribute[column.name] = "cms/attribute/#{ column.type }"
+          attribute[column.name] = "cms/attributes/types/#{ column.type }"
             .classify.constantize.new(column.name)
         end
 
         belongs_to_attributes.each do |association|
-          attribute[association.name] = Cms::Attribute::BelongsTo.new(
+          attribute[association.name] = Cms::Attributes::Types::BelongsTo.new(
             association.name,
             association: association
           )
         end
 
         has_many_attributes.each do |association|
-          attribute[association.name] = Cms::Attribute::HasMany.new(
+          attribute[association.name] = Cms::Attributes::Types::HasMany.new(
             association.name,
             association: association
           )

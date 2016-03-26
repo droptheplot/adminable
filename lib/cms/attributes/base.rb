@@ -1,5 +1,5 @@
 module Cms
-  module Attribute
+  module Attributes
     class Base
       attr_accessor :name, :wysiwyg, :center, :show
       attr_reader :key
