@@ -24,7 +24,7 @@ module Cms
       end
 
       def strong_parameter
-        @key
+        key
       end
 
       def index_partial_path
