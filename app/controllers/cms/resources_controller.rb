@@ -61,7 +61,7 @@ module Cms
     private
 
       def set_resource
-        @resource = Cms::Configuration.find_resource(resource_model)
+        @resource = Cms::Configuration.find_resource(resource_model).clone
 
         @resource.index_attributes = index_attributes
         @resource.form_attributes = form_attributes

@@ -1,7 +1,7 @@
 module Cms
   module Configuration
     def self.resources
-      resources_paths.map do |resource_path|
+      @resources ||= resources_paths.map do |resource_path|
         Cms::Resource.new(
           resource_path.to_s.split('cms/').last.sub(/_controller\.rb$/, '')
         )
