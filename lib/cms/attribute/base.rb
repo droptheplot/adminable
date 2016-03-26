@@ -4,10 +4,6 @@ module Cms
       attr_accessor :name, :wysiwyg, :center, :show
       attr_reader :key
 
-      alias_method :show?, :show
-      alias_method :center?, :center
-      alias_method :wysiwyg?, :wysiwyg
-
       def initialize(name, options = {})
         @name = name
         @key = options[:key] || @name
@@ -16,6 +12,10 @@ module Cms
         @center = %w(integer boolean).include?(self.type)
         @wysiwyg = %w(text).include?(self.type)
       end
+
+      alias_method :show?, :show
+      alias_method :center?, :center
+      alias_method :wysiwyg?, :wysiwyg
 
       def type
         self.class.name.demodulize.underscore
