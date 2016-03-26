@@ -5,6 +5,8 @@ module Cms
       attr_reader :key
 
       def initialize(name, options = {})
+        raise 'Base class cannot be initialized' if self.class == Base
+
         @name = name
         @key = options[:key] || @name
         @association = options[:association]
