@@ -8,12 +8,8 @@ module Cms
       @model = name.classify.constantize
     end
 
-    def route_name
-      @route_name ||= @model.name.underscore.pluralize.tr('/', '_')
-    end
-
-    def route_path
-      @route_path ||= @model.name.underscore.pluralize
+    def route
+      @route ||= @model.name.underscore.pluralize.tr('/', '_')
     end
 
     def includes

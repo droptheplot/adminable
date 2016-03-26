@@ -15,7 +15,7 @@
     #collapsing-nav.collapse.p-y-1
       - Cms::Configuration.resources.each do |resource|
         = link_to resource.model.model_name.human.pluralize,
-          polymorphic_path(resource.route_name), class: 'btn btn-link btn-block'
+          polymorphic_path(resource.route), class: 'btn btn-link btn-block'
     .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
       .hidden-md-up
         %button.navbar-toggler{ 'data-target' => '#collapsing-nav', 'data-toggle' => :collapse, :type => :button }
@@ -23,9 +23,9 @@
       .container.hidden-sm-down
         %ul.nav.navbar-nav
           - Cms::Configuration.resources.each do |resource|
-            %li.nav-item{ :class => ('active' if current_page?(File.join('/cms/', resource.route_path))) }
+            %li.nav-item{ :class => ('active' if current_page?(File.join('/cms/', resource.name))) }
               = link_to resource.model.model_name.human.pluralize,
-                polymorphic_path(resource.route_name), class: 'nav-link'
+                polymorphic_path(resource.route), class: 'nav-link'
     .container.p-b-3
       - if flash[:alert] || notice.present?
         .p-b-2
