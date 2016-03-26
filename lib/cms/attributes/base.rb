@@ -11,13 +11,13 @@ module Cms
         @key = options[:key] || @name
         @association = options[:association]
         @show = true
-        @center = %w(integer boolean).include?(self.type)
-        @wysiwyg = %w(text).include?(self.type)
+        @center = %w(integer boolean).include?(type)
+        @wysiwyg = %w(text).include?(type)
       end
 
-      alias_method :show?, :show
-      alias_method :center?, :center
-      alias_method :wysiwyg?, :wysiwyg
+      alias show? show
+      alias center? center
+      alias wysiwyg? wysiwyg
 
       def type
         self.class.name.demodulize.underscore
@@ -28,11 +28,11 @@ module Cms
       end
 
       def index_partial_path
-        "index/#{ self.type }"
+        "index/#{type}"
       end
 
       def form_partial_path
-        "cms/resources/form/#{ self.type }"
+        "cms/resources/form/#{type}"
       end
     end
   end

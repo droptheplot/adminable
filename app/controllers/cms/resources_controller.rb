@@ -10,7 +10,7 @@ module Cms
 
     def index
       @entries = @resource.model.includes(*@resource.includes).all
-        .page(params[:page]).per(25)
+                          .page(params[:page]).per(25)
     end
 
     def new
@@ -25,7 +25,10 @@ module Cms
 
       if @entry.save
         redirect_to polymorphic_path(@resource.model),
-          notice: t('cms.resources.created', resource: @resource.model.model_name.human)
+                    notice: t(
+                      'cms.resources.created',
+                      resource: @resource.model.model_name.human
+                    )
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :new
@@ -35,7 +38,10 @@ module Cms
     def update
       if @entry.update(resource_params)
         redirect_to polymorphic_path(@resource.model),
-          notice: t('cms.resources.updated', resource: @resource.model.model_name.human)
+                    notice: t(
+                      'cms.resources.updated',
+                      resource: @resource.model.model_name.human
+                    )
       else
         flash.now[:alert] = @entry.errors.full_messages
         render :edit
@@ -46,7 +52,10 @@ module Cms
       @entry.destroy
 
       redirect_to polymorphic_path(@resource.model),
-        notice: t('cms.resources.deleted', resource: @resource.model.model_name.human)
+                  notice: t(
+                    'cms.resources.deleted',
+                    resource: @resource.model.model_name.human
+                  )
     end
 
     private
@@ -71,7 +80,7 @@ module Cms
       end
 
       def resource_model
-        controller_path.sub(/^cms\//, '')
+        controller_path.sub(%r{^cms/}, '')
       end
 
       def resource_params

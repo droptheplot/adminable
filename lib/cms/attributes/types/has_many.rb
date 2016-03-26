@@ -5,11 +5,11 @@ module Cms
         include Cms::Attributes::Association
 
         def key
-          "#{ @name.to_s.singularize }_ids"
+          "#{@name.to_s.singularize}_ids"
         end
 
         def strong_parameter
-          { self.key => [] }
+          { @key => [] }
         end
 
         def show?

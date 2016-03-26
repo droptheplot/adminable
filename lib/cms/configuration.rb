@@ -9,7 +9,7 @@ module Cms
     end
 
     def self.find_resource(name)
-      self.resources.find{ |resource| resource.name == name }
+      resources.find { |resource| resource.name == name }
     end
 
     def self.resources_paths

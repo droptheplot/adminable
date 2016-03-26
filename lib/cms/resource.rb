@@ -25,19 +25,17 @@ module Cms
     end
 
     def index_attributes
-      @index_attributes ||= self.attributes
-        .except(:created_at, :updated_at)
+      @index_attributes ||= attributes.except(:created_at, :updated_at)
     end
 
     def form_attributes
-      @form_attributes ||= self.attributes
-        .except(:id, :created_at, :updated_at)
+      @form_attributes ||= attributes.except(:id, :created_at, :updated_at)
     end
 
     def attributes
-      @attributes ||= Hash.new.tap do |attribute|
+      @attributes ||= {}.tap do |attribute|
         columns_attributes.each do |column|
-          attribute[column.name] = "cms/attributes/types/#{ column.type }"
+          attribute[column.name] = "cms/attributes/types/#{column.type}"
             .classify.constantize.new(column.name)
         end
 
@@ -60,7 +58,7 @@ module Cms
     private
 
       def columns_attributes
-        @model.columns.reject{ |a| a.name.match(/_id$/) }
+        @model.columns.reject { |a| a.name.match(/_id$/) }
       end
 
       def belongs_to_attributes
