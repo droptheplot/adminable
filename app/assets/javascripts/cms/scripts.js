@@ -14,6 +14,7 @@ $(document).ready(function() {
 
   tinymce.init({
     selector: '.wysiwyg',
-    menubar: false
+    menubar: false,
+    statusbar: false
   });
 });
