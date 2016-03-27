@@ -1,5 +1,8 @@
-%h1.m-b-3
-  = @resource.model.model_name.human.pluralize
+.m-b-1.clearfix
+  %h1.pull-md-left.m-b-2
+    = @resource.model.model_name.human.pluralize
+  = link_to t('cms.buttons.new', resource: @resource.model.model_name.human),
+    new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
 .table-responsive.m-b-3
   %table.table.table-striped
     %thead
@@ -26,5 +29,3 @@
           %td.text-md-center.text-muted{ :colspan => @resource.index_attributes.size + 1 }
             No data available
 = paginate @entries, views_prefix: 'cms'
-= link_to t('cms.buttons.new', resource: @resource.model.model_name.human),
-  new_polymorphic_path(@resource.model), class: 'btn btn-primary'
