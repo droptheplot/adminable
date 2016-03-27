@@ -5,9 +5,17 @@ module Cms
 
       def options_for_select(entry)
         @association.klass.all.reject { |e| e == entry }.collect do |e|
-          [e.try(:email) || e.try(:login) || e.try(:name) || e.try(:title) || e.id, e.id]
+          [association_option_name(e), e.id]
         end
       end
+
+      private
+
+        def association_option_name(entry)
+          %i(email login name title id).each do |a|
+            return entry.try(a) unless entry.try(a).nil?
+          end
+        end
     end
   end
 end
