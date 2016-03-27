@@ -22,6 +22,9 @@
           \&#9776;
       .container.hidden-sm-down
         %ul.nav.navbar-nav
+          %li.nav-item
+            = link_to main_app.root_path, class: 'nav-link' do
+              %i.fa.fa-home
           - Cms::Configuration.resources.each do |resource|
             %li.nav-item{ :class => ('active' if current_page?(File.join('/cms/', resource.name))) }
               = link_to resource.model.model_name.human.pluralize,
