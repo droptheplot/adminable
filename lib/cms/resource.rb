@@ -6,6 +6,8 @@ module Cms
     def initialize(name)
       @name = name
       @model = name.classify.constantize
+
+      load_extensions
     end
 
     def route
@@ -77,6 +79,12 @@ module Cms
       def attribute_required?(name)
         @model.validators_on(name).any? do |validator|
           validator.class == ActiveRecord::Validations::PresenceValidator
+        end
+      end
+
+      def load_extensions
+        if @model.method_defined?(:devise_modules)
+          extend Cms::Extensions::Devise
         end
       end
   end

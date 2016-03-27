@@ -1,5 +1,8 @@
 require 'cms/engine'
 require 'cms/configuration'
+
+require 'cms/extensions/devise'
+
 require 'cms/resource'
 
 require 'cms/attributes/association'
