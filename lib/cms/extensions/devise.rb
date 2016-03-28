@@ -1,15 +1,17 @@
 module Cms
   module Extensions
     module Devise
-      def index_attributes
+      def index
         super.except!(:encrypted_password)
-        super
+
+        @index ||= super
       end
 
-      def form_attributes
+      def form
         super.except!(:encrypted_password)
         super[:password] = Cms::Attributes::Types::String.new(:password)
-        super
+
+        @form ||= super
       end
     end
   end
