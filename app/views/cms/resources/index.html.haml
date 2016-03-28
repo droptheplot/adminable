@@ -7,14 +7,14 @@
   %table.table.table-striped
     %thead
       %tr
-        - @resource.index_attributes.each_value do |attribute|
+        - @resource.attributes.index.each_value do |attribute|
           %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
             = @resource.model.human_attribute_name(attribute.name)
         %th
     %tbody
       - @entries.each do |entry|
         %tr
-          - @resource.index_attributes.each_value do |attribute|
+          - @resource.attributes.index.each_value do |attribute|
             %td{ :class => ('text-md-center' if attribute.center?) }
               = render attribute.index_partial_path, entry: entry,
                 attribute: attribute, value: entry[attribute.key]
@@ -26,6 +26,6 @@
               data: { confirm: t('cms.ui.confirm') }
       - if @entries.empty?
         %tr
-          %td.text-md-center.text-muted{ :colspan => @resource.index_attributes.size + 1 }
+          %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
             No data available
 = paginate @entries, views_prefix: 'cms'

@@ -21,7 +21,7 @@ describe Cms::Resource do
     resource = Cms::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
-      expect(resource.index_attributes).not_to include(:created_at, :updated_at)
+      expect(resource.attributes.index).not_to include(:created_at, :updated_at)
     end
   end
 
@@ -29,7 +29,7 @@ describe Cms::Resource do
     resource = Cms::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
-      expect(resource.form_attributes).not_to include(:id, :created_at, :updated_at)
+      expect(resource.attributes.form).not_to include(:id, :created_at, :updated_at)
     end
   end
 end

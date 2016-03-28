@@ -9,8 +9,9 @@ module Cms
     end
 
     def index
-      @entries = @resource.model.includes(*@resource.includes).all
-                          .page(params[:page]).per(25)
+      @q = @resource.model.ransack(params[:q])
+      @entries = @q.result.includes(*@resource.includes).all
+                   .page(params[:page]).per(25)
     end
 
     def new
@@ -63,8 +64,8 @@ module Cms
       def set_resource
         @resource = Cms::Configuration.find_resource(resource_model).clone
 
-        @resource.index_attributes = index_attributes
-        @resource.form_attributes = form_attributes
+        @resource.attributes.index = index_attributes
+        @resource.attributes.form = form_attributes
       end
 
       def set_entry
@@ -72,11 +73,11 @@ module Cms
       end
 
       def index_attributes
-        @resource.index_attributes
+        @resource.attributes.index
       end
 
       def form_attributes
-        @resource.form_attributes
+        @resource.attributes.form
       end
 
       def resource_model
@@ -85,7 +86,7 @@ module Cms
 
       def resource_params
         params.require(@resource.model.model_name.param_key).permit(
-          *@resource.form_attributes.values.map(&:strong_parameter)
+          *@resource.attributes.form.values.map(&:strong_parameter)
         )
       end
   end

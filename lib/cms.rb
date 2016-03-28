@@ -5,7 +5,9 @@ require 'cms/extensions/devise'
 
 require 'cms/resource'
 
+require 'cms/attributes/collection'
 require 'cms/attributes/association'
+
 require 'cms/attributes/base'
 
 require 'cms/attributes/types/belongs_to'
