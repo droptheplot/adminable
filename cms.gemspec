@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '>= 4.1.1'
   s.add_dependency 'babosa', '~> 1.0.2'
   s.add_dependency 'kaminari'
+  s.add_dependency 'ransack', '>=1.7.0'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'

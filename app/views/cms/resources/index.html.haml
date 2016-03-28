@@ -3,29 +3,33 @@
     = @resource.model.model_name.human.pluralize
   = link_to t('cms.buttons.new', resource: @resource.model.model_name.human),
     new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
-.table-responsive.m-b-3
-  %table.table.table-striped
-    %thead
-      %tr
-        - @resource.attributes.index.each_value do |attribute|
-          %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
-            = @resource.model.human_attribute_name(attribute.name)
-        %th
-    %tbody
-      - @entries.each do |entry|
-        %tr
-          - @resource.attributes.index.each_value do |attribute|
-            %td{ :class => ('text-md-center' if attribute.center?) }
-              = render attribute.index_partial_path, entry: entry,
-                attribute: attribute, value: entry[attribute.key]
-          %td.text-nowrap.text-md-right
-            = link_to t('cms.buttons.edit'), edit_polymorphic_path(entry),
-              class: 'label label-primary'
-            = link_to t('cms.buttons.delete'), polymorphic_path(entry),
-              class: 'label label-danger', method: :delete,
-              data: { confirm: t('cms.ui.confirm') }
-      - if @entries.empty?
-        %tr
-          %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
-            No data available
+.row
+  .col-md-9
+    .table-responsive.m-b-3
+      %table.table.table-striped
+        %thead
+          %tr
+            - @resource.attributes.index.each_value do |attribute|
+              %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
+                = @resource.model.human_attribute_name(attribute.name)
+            %th
+        %tbody
+          - @entries.each do |entry|
+            %tr
+              - @resource.attributes.index.each_value do |attribute|
+                %td{ :class => ('text-md-center' if attribute.center?) }
+                  = render attribute.index_partial_path, entry: entry,
+                    attribute: attribute, value: entry[attribute.key]
+              %td.text-nowrap.text-md-right
+                = link_to t('cms.buttons.edit'), edit_polymorphic_path(entry),
+                  class: 'label label-primary'
+                = link_to t('cms.buttons.delete'), polymorphic_path(entry),
+                  class: 'label label-danger', method: :delete,
+                  data: { confirm: t('cms.ui.confirm') }
+          - if @entries.empty?
+            %tr
+              %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
+                No data available
+  .col-md-3.hidden-sm-down
+    = render 'search'
 = paginate @entries, views_prefix: 'cms'

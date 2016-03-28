@@ -2,13 +2,14 @@ module Cms
   module Attributes
     class Base
       attr_accessor :name, :required, :show, :center, :wysiwyg
-      attr_reader :key
+      attr_reader :key, :ransack_name
 
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
 
         @name = name
         @key = options[:key] || @name
+        @ransack_name = "#{@name}_cont"
         @association = options[:association]
         @required = options[:required] || false
         @show = true
