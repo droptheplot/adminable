@@ -16,6 +16,10 @@ module Cms
         @form ||= all.except(:id, :created_at, :updated_at)
       end
 
+      def ransack
+        @ransack ||= columns.except(:id, :created_at, :updated_at)
+      end
+
       def all
         [columns, belongs_to, has_many].inject(&:merge)
       end

@@ -1,7 +1,7 @@
 .card.bg-faded
   .card-block
     = search_form_for @q do |f|
-      - @resource.attributes.columns.each_value do |attribute|
+      - @resource.attributes.ransack.each_value do |attribute|
         %fieldset.form-group
           = f.label attribute.ransack_name, @resource.model.human_attribute_name(attribute.name),
             class: 'text-muted'
