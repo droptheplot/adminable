@@ -13,6 +13,12 @@ module Cms
 
         @form ||= super
       end
+
+      def ransack
+        super.except!(:encrypted_password)
+
+        @ransack ||= super
+      end
     end
   end
 end
