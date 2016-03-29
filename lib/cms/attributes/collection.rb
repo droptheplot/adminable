@@ -18,6 +18,7 @@ module Cms
 
       def ransack
         @ransack ||= columns.except(:id, :created_at, :updated_at)
+                            .select { |k, v| %w(string text).include?(v.type) }
       end
 
       def all
