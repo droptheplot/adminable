@@ -13,7 +13,7 @@ module Cms
         @association = options[:association]
         @required = options[:required] || false
         @show = true
-        @center = %w(integer boolean).include?(type)
+        @center = %w(integer boolean float decimal).include?(type)
         @wysiwyg = %w(text).include?(type)
       end
 
