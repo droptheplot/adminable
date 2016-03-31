@@ -1,6 +1,6 @@
 require 'rails/generators/base'
 
-module Cms
+module Adminable
   module Generators
     class ResourceGenerator < Rails::Generators::Base
       source_root File.expand_path('../resource/templates', __FILE__)
@@ -13,7 +13,7 @@ module Cms
       private
 
         def resource_file
-          "app/controllers/cms/#{resource_name}_controller.rb"
+          "app/controllers/adminable/#{resource_name}_controller.rb"
         end
 
         def resource_name
@@ -21,7 +21,7 @@ module Cms
         end
 
         def resource_class
-          "cms/#{resource_name}".classify.pluralize
+          "adminable/#{resource_name}".classify.pluralize
         end
     end
   end

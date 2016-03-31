@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %title Adminable
+    %link{ :href => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', :rel => 'stylesheet' }/
+    %link{ :href => '//oss.maxcdn.com/clusterize.js/0.16.0/clusterize.css', :rel => 'stylesheet' }/
+    %script{ :src => '//oss.maxcdn.com/clusterize.js/0.16.0/clusterize.min.js' }
+    %script{ :src => '//cdn.tinymce.com/4/tinymce.min.js' }
+    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }/
+    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }/
+    = stylesheet_link_tag 'adminable/application', media: 'all'
+    = javascript_include_tag 'adminable/application'
+    = csrf_meta_tags
+  %body
+    #collapsing-nav.collapse.p-y-1
+      - Adminable::Configuration.resources.each do |resource|
+        = link_to resource.model.model_name.human.pluralize,
+          polymorphic_path(resource.route), class: 'btn btn-link btn-block'
+    .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
+      .hidden-md-up
+        %button.navbar-toggler{ 'data-target' => '#collapsing-nav', 'data-toggle' => :collapse, :type => :button }
+          \&#9776;
+      .container.hidden-sm-down
+        %ul.nav.navbar-nav
+          %li.nav-item
+            = link_to main_app.root_path, class: 'nav-link' do
+              %i.fa.fa-home
+          - Adminable::Configuration.resources.each do |resource|
+            %li.nav-item{ :class => ('active' if current_page?(File.join('/adminable/', resource.name))) }
+              = link_to resource.model.model_name.human.pluralize,
+                polymorphic_path(resource.route), class: 'nav-link'
+    .container.p-b-3
+      - if flash[:alert] || notice.present?
+        .p-b-2
+          - if flash[:alert]
+            - flash[:alert].each do |alert|
+              = render 'adminable/shared/alert', message: alert, type: 'danger'
+          - if notice.present?
+            = render 'adminable/shared/alert', message: notice, type: 'success'
+      = yield

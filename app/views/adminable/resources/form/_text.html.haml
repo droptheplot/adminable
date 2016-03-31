@@ -1,0 +1,2 @@
+= render 'adminable/shared/label', f: f, attribute: attribute
+= f.text_area attribute.name, class: "form-control #{ 'wysiwyg' if attribute.wysiwyg? }", rows: 5

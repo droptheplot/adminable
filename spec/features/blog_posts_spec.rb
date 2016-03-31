@@ -16,7 +16,7 @@ feature 'Blog Posts' do
     expect(page).to have_content('New Post Title')
     expect(page).to have_content('New Post Body')
     expect(page).to have_content(
-      I18n.t('cms.resources.created', resource: 'Post')
+      I18n.t('adminable.resources.created', resource: 'Post')
     )
   end
 
@@ -36,7 +36,7 @@ feature 'Blog Posts' do
     expect(page).to have_content('Another Post Title')
     expect(page).to have_content('Another Post Body')
     expect(page).to have_content(
-      I18n.t('cms.resources.updated', resource: 'Post')
+      I18n.t('adminable.resources.updated', resource: 'Post')
     )
   end
 
@@ -51,7 +51,7 @@ feature 'Blog Posts' do
 
     expect(page.current_path).to eq(blog_posts_path)
     expect(page).to have_content(
-      I18n.t('cms.resources.deleted', resource: 'Post')
+      I18n.t('adminable.resources.deleted', resource: 'Post')
     )
   end
 end

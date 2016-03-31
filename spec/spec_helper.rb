@@ -14,7 +14,7 @@ end
 
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
-  config.include Cms::Engine.routes.url_helpers
+  config.include Adminable::Engine.routes.url_helpers
 
   config.before :suite do
     DatabaseCleaner.strategy = :transaction

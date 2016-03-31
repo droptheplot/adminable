@@ -1,0 +1,3 @@
+= render 'adminable/shared/label', f: f, attribute: attribute
+= f.select attribute.key, attribute.options_for_select(entry),
+  { include_blank: I18n.t('adminable.ui.not_selected') }, { class: 'form-control c-select' }

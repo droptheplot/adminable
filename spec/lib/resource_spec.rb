@@ -1,7 +1,7 @@
-describe Cms::Resource do
+describe Adminable::Resource do
   describe '#includes' do
     context 'with association attributes' do
-      resource = Cms::Resource.new('blog/posts')
+      resource = Adminable::Resource.new('blog/posts')
 
       it 'returns array of the associations' do
         expect(resource.includes).to eq(%i(user blog_comments))
@@ -9,7 +9,7 @@ describe Cms::Resource do
     end
 
     context 'without association attributes' do
-      resource = Cms::Resource.new('user')
+      resource = Adminable::Resource.new('user')
 
       xit 'returns false' do
         expect(resource.includes).to be false
@@ -18,7 +18,7 @@ describe Cms::Resource do
   end
 
   describe '#index_attributes' do
-    resource = Cms::Resource.new('user')
+    resource = Adminable::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
       expect(resource.attributes.index).not_to include(:created_at, :updated_at)
@@ -26,7 +26,7 @@ describe Cms::Resource do
   end
 
   describe '#form_attributes' do
-    resource = Cms::Resource.new('user')
+    resource = Adminable::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
       expect(resource.attributes.form).not_to include(:id, :created_at, :updated_at)

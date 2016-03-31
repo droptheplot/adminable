@@ -1,5 +1,5 @@
-Cms::Engine.routes.draw do
-  Cms::Configuration.resources.each do |r|
+Adminable::Engine.routes.draw do
+  Adminable::Configuration.resources.each do |r|
     resources r.route, except: :show, path: r.name, controller: r.name
   end
 
