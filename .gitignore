@@ -2,4 +2,12 @@
 log/*.log
 pkg/
 spec/dummy
+spec/dummy/tmp
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/config/database.yml
+spec/dummy/config/secrets.yml
 Gemfile.lock
+.byebug_history
+dump.rdb
+*.gem
