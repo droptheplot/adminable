@@ -1,14 +1,21 @@
-# Cms
-Short description and motivation.
+# Adminable
 
-## Usage
-How to use my plugin.
+Simple admin interface for Ruby on Rails applications.
+
+## Features
+
+* Built with common Rails controllers without DSL.
+* Supports namespaced models.
+* Has simple search with Ransack.
+* Uses Bootstrap 4.0.
+* Mobile friendly.
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cms'
+gem 'adminable'
 ```
 
 And then execute:
@@ -18,11 +25,67 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install cms
+$ gem install adminable
 ```
 
+## Built-in Attributes
+
+List of attributes with default modifiable parameters.
+
+##### String
+
+* show: `true`
+* center: `false`
+
+##### Text
+
+* show: `true`
+* center: `false`
+* wysiwyg: `true`
+
+##### Integer
+
+* show: `true`
+* center: `true`
+
+##### Float
+
+* show: `true`
+* center: `true`
+
+##### Decimal
+
+* show: `true`
+* center: `true`
+
+##### DateTime
+
+* show: `true`
+* center: `false`
+
+##### Boolean
+
+* show: `true`
+* center: `true`
+
+##### Belongs To
+
+* show: `true`
+* center: `false`
+
+##### Has Many
+
+* show: `true`
+* center: `false`
+
 ## Contributing
-Contribution directions go here.
+
+1. Fork it (https://github.com/droptheplot/adminable/fork)
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
