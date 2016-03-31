@@ -3,7 +3,11 @@ module Adminable
     isolate_namespace Adminable
 
     ActionDispatch::Reloader.to_prepare do
-      require_dependency Adminable::Engine.root.join('app/controllers/adminable/resources_controller.rb')
+      require_dependency(
+        Adminable::Engine.root.join(
+          'app/controllers/adminable/resources_controller.rb'
+        )
+      )
     end
   end
 end

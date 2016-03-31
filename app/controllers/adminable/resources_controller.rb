@@ -4,8 +4,12 @@ module Adminable
     before_action :set_entry, only: [:edit, :update, :destroy]
 
     before_action do
-      append_view_path Adminable::Engine.root.join('app/views/adminable', controller_name)
-      append_view_path Adminable::Engine.root.join('app/views/adminable/resources')
+      append_view_path(
+        [
+          Adminable::Engine.root.join('app/views/adminable', controller_name),
+          Adminable::Engine.root.join('app/views/adminable/resources')
+        ]
+      )
     end
 
     def index
