@@ -1,6 +1,2 @@
-module Cms<%- resource_modules.each_with_index do |mod, index| %>
-  module <%= mod %><% end %>
-    class <%= resource_class %>Controller < ResourcesController
-    end<%- resource_modules.each_with_index do |mod, index| %>
-  end<% end %>
+class <%= resource_class %>Controller < Cms::ResourcesController
 end
