@@ -4,7 +4,7 @@ describe Cms::Configuration do
       resources = Cms::Configuration.resources
 
       expect(resources).to all(be_a(Cms::Resource))
-      expect(resources.map(&:name)).to eq(%w(blog/posts comments users))
+      expect(resources.map(&:name)).to eq(%w(blog/comments blog/posts users))
     end
   end
 
