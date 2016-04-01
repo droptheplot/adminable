@@ -4,7 +4,7 @@ $(document).ready(function() {
       scrollId: 'clusterizeScrollArea',
       contentId: 'clusterizeContentArea'
     });
-  };
+  }
 
   $('.toggleCheckbox').click(function() {
     var checkbox = $(this).children('input[type=checkbox]');
