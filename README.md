@@ -32,6 +32,42 @@ Or install it yourself as:
 $ gem install adminable
 ```
 
+## Getting Started
+
+#### Generating Resources
+
+For example you have model `User`, then run:
+
+```bash
+rails g adminable:resource user
+# => create  app/controllers/adminable/users_controller.rb
+```
+
+For namespaced models, like `Blog::Post`, use:
+
+```bash
+rails g adminable:resource blog/post
+# => create  app/controllers/adminable/blog/posts_controller.rb
+```
+
+#### Customizing Attributes
+
+You can update attributes with simple snippet inside adminable controllers:
+
+```ruby
+class Adminable::Blog::PostsController < Adminable::ResourcesController
+  # For index action and search
+  attributes_for :index do |attributes|
+    attributes[:title].show = false
+  end
+
+  # For new and edit forms
+  attributes_for :form do |attributes|
+    attributes[:body].wysiwyg = false
+  end
+end
+```
+
 ## Built-in Attributes
 
 List of attributes with default modifiable parameters.
