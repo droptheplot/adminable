@@ -2,8 +2,9 @@
   .card-block
     = search_form_for @q do |f|
       - @resource.attributes.ransack.each_value do |attribute|
-        %fieldset.form-group
-          = f.label attribute.ransack_name, @resource.model.human_attribute_name(attribute.name),
-            class: 'text-muted'
-          = f.search_field attribute.ransack_name, class: 'form-control'
+        - if attribute.show?
+          %fieldset.form-group
+            = f.label attribute.ransack_name, @resource.model.human_attribute_name(attribute.name),
+              class: 'text-muted'
+            = f.search_field attribute.ransack_name, class: 'form-control'
       = f.submit class: 'btn btn-primary-outline'

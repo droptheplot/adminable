@@ -10,16 +10,18 @@
         %thead
           %tr
             - @resource.attributes.index.each_value do |attribute|
-              %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
-                = @resource.model.human_attribute_name(attribute.name)
+              - if attribute.show?
+                %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
+                  = @resource.model.human_attribute_name(attribute.name)
             %th
         %tbody
           - @entries.each do |entry|
             %tr
               - @resource.attributes.index.each_value do |attribute|
-                %td{ :class => ('text-md-center' if attribute.center?) }
-                  = render attribute.index_partial_path, entry: entry,
-                    attribute: attribute, value: entry[attribute.key]
+                - if attribute.show?
+                  %td{ :class => ('text-md-center' if attribute.center?) }
+                    = render attribute.index_partial_path, entry: entry,
+                      attribute: attribute, value: entry[attribute.key]
               %td.text-nowrap.text-md-right
                 = link_to t('adminable.buttons.edit'), edit_polymorphic_path(entry),
                   class: 'label label-primary'
