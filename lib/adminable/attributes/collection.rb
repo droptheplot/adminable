@@ -22,43 +22,28 @@ module Adminable
       end
 
       def all
-        [columns, belongs_to, has_many].inject(&:merge)
-      end
-
-      def association
-        [belongs_to, has_many].inject(&:merge)
+        [columns, association].inject(&:merge)
       end
 
       def columns
         @columns ||= {}.tap do |attribute|
           @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|
-            attribute[column.name] = "adminable/attributes/types/#{column.type}"
-              .classify.constantize.new(
-                column.name,
-                required: attribute_required?(column.name)
-              )
-          end
-        end.symbolize_keys
-      end
-
-      def belongs_to
-        @belongs_to ||= {}.tap do |attribute|
-          @model.reflect_on_all_associations(:belongs_to).each do |association|
-            attribute[association.name] = Adminable::Attributes::Types::BelongsTo.new(
-              association.name,
-              required: attribute_required?(association.name),
-              association: association
+            attribute[column.name] = resolve(
+              column.type,
+              column.name,
+              required: required?(column.name)
             )
           end
         end.symbolize_keys
       end
 
-      def has_many
-        @has_many ||= {}.tap do |attribute|
-          @model.reflect_on_all_associations(:has_many).each do |association|
-            attribute[association.name] = Adminable::Attributes::Types::HasMany.new(
+      def association
+        @association ||= {}.tap do |attribute|
+          @model.reflect_on_all_associations.each do |association|
+            attribute[association.name] = resolve(
+              association.macro,
               association.name,
-              required: attribute_required?(association.name),
+              required: required?(association.name),
               association: association
             )
           end
@@ -67,7 +52,11 @@ module Adminable
 
       private
 
-        def attribute_required?(name)
+        def resolve(type, *args)
+          "adminable/attributes/types/#{type}".classify.constantize.new(*args)
+        end
+
+        def required?(name)
           @model.validators_on(name).any? do |validator|
             validator.class == ActiveRecord::Validations::PresenceValidator
           end
