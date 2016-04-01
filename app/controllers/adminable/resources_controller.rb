@@ -63,25 +63,22 @@ module Adminable
                   )
     end
 
+    def self.attributes_for(type)
+      return unless %i(index form).include?(type)
+
+      before_action do
+        yield(@resource.attributes.send(type))
+      end
+    end
+
     private
 
       def set_resource
         @resource = Adminable::Configuration.find_resource(resource_model).clone
-
-        @resource.attributes.index = index_attributes
-        @resource.attributes.form = form_attributes
       end
 
       def set_entry
         @entry = @resource.model.find(params[:id])
-      end
-
-      def index_attributes
-        @resource.attributes.index
-      end
-
-      def form_attributes
-        @resource.attributes.form
       end
 
       def resource_model
