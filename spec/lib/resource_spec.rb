@@ -21,7 +21,9 @@ describe Adminable::Resource do
     resource = Adminable::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
-      expect(resource.attributes.index).not_to include(:created_at, :updated_at)
+      expect(resource.attributes.index).not_to include(
+        :created_at, :updated_at
+      )
     end
   end
 
@@ -29,7 +31,9 @@ describe Adminable::Resource do
     resource = Adminable::Resource.new('user')
 
     it 'returns correct hash of the resource attributes' do
-      expect(resource.attributes.form).not_to include(:id, :created_at, :updated_at)
+      expect(resource.attributes.form).not_to include(
+        :id, :created_at, :updated_at
+      )
     end
   end
 end

@@ -3,7 +3,9 @@ module Adminable
     def self.resources
       @resources ||= resources_paths.map do |resource_path|
         Adminable::Resource.new(
-          resource_path.to_s.split('adminable/').last.sub(/_controller\.rb$/, '')
+          resource_path.to_s.split('adminable/').last.sub(
+            /_controller\.rb$/, ''
+          )
         )
       end
     end
