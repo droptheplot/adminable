@@ -16,10 +16,10 @@ module Adminable
 
     def includes
       @includes ||= if attributes.association.present?
-        attributes.association.map { |_, v| v.name }
-      else
-        false
-      end
+                      attributes.association.map { |_, v| v.name }
+                    else
+                      false
+                    end
     end
 
     def attributes
