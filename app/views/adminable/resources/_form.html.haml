@@ -2,7 +2,7 @@
   - @resource.attributes.form.each_value do |attribute|
     - if attribute.show?
       %fieldset.form-group
-        = render attribute.form_partial_path, f: f, entry: @entry,
+        = render attribute.form_partial_path, entry: @entry,
           attribute: attribute
   %fieldset.form-group
     = f.submit t('adminable.buttons.submit'), class: 'btn btn-primary'

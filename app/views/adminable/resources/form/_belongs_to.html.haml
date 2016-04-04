@@ -1,3 +1,5 @@
-= render 'adminable/shared/label', f: f, attribute: attribute
-= f.select attribute.key, attribute.options_for_select(entry),
-  { include_blank: I18n.t('adminable.ui.not_selected') }, { class: 'form-control c-select' }
+= render 'adminable/shared/label', attribute: attribute
+= select_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]",
+  options_for_select(attribute.options_for_select(entry), entry[attribute.key]),
+  include_blank: I18n.t('adminable.ui.not_selected'),
+  class: 'form-control c-select'
