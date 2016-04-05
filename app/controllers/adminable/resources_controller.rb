@@ -31,6 +31,7 @@ module Adminable
     def edit
     end
 
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def create
       @entry = @resource.model.new(resource_params)
 

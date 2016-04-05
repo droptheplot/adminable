@@ -1,6 +1,7 @@
 module Adminable
   module Extensions
     module Devise
+      # rubocop:disable Metrics/MethodLength
       def self.included(mod)
         mod.attributes_for :index do |attributes|
           attributes.except!(:encrypted_password)

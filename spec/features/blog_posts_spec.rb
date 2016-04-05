@@ -41,7 +41,7 @@ feature 'Blog Posts' do
   end
 
   scenario 'user delete blog post' do
-    blog_post = FactoryGirl.create(:blog_post)
+    FactoryGirl.create(:blog_post)
 
     visit(blog_posts_path)
 
