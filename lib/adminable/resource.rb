@@ -6,8 +6,6 @@ module Adminable
     def initialize(name)
       @name = name
       @model = name.classify.constantize
-
-      load_extensions
     end
 
     def route
@@ -25,13 +23,5 @@ module Adminable
     def attributes
       @attributes ||= Adminable::Attributes::Collection.new(@model)
     end
-
-    private
-
-      def load_extensions
-        if @model.method_defined?(:devise_modules)
-          attributes.extend(Adminable::Extensions::Devise)
-        end
-      end
   end
 end

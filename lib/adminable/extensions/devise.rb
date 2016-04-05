@@ -1,23 +1,21 @@
 module Adminable
   module Extensions
     module Devise
-      def index
-        super.except!(:encrypted_password)
+      def self.included(mod)
+        mod.attributes_for :index do |attributes|
+          attributes.except!(:encrypted_password)
+        end
 
-        @index ||= super
-      end
+        mod.attributes_for :form do |attributes|
+          attributes.except!(:encrypted_password)
+          attributes[:password] = Adminable::Attributes::Types::String.new(
+            :password
+          )
+        end
 
-      def form
-        super.except!(:encrypted_password)
-        super[:password] = Adminable::Attributes::Types::String.new(:password)
-
-        @form ||= super
-      end
-
-      def ransack
-        super.except!(:encrypted_password)
-
-        @ransack ||= super
+        mod.attributes_for :ransack do |attributes|
+          attributes.except!(:encrypted_password)
+        end
       end
     end
   end

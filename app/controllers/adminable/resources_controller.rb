@@ -1,6 +1,12 @@
 module Adminable
   class ResourcesController < ApplicationController
-    before_action :set_resource
+    def initialize(*)
+      set_resource
+      load_extensions
+
+      super
+    end
+
     before_action :set_entry, only: [:edit, :update, :destroy]
 
     before_action do
@@ -64,7 +70,7 @@ module Adminable
     end
 
     def self.attributes_for(type)
-      return unless %i(index form).include?(type)
+      return unless %i(index form ransack).include?(type)
 
       before_action do
         yield(@resource.attributes.send(type))
@@ -89,6 +95,12 @@ module Adminable
         params.require(@resource.model.model_name.param_key).permit(
           *@resource.attributes.form.values.map(&:strong_parameter)
         )
+      end
+
+      def load_extensions
+        if @resource.model.method_defined?(:devise_modules)
+          self.class.send(:include, Adminable::Extensions::Devise)
+        end
       end
   end
 end
