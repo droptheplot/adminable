@@ -23,9 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap', '~> 4.0.0.alpha3'
   s.add_dependency 'rails-assets-tether', '>= 1.1.0'
   s.add_dependency 'faker', '>= 1.6.1'
-  s.add_dependency 'coffee-rails', '>= 4.1.1'
-  s.add_dependency 'babosa', '~> 1.0.2'
-  s.add_dependency 'kaminari'
+  s.add_dependency 'kaminari', '>= 0.16.2'
   s.add_dependency 'ransack', '>=1.7.0'
 
   s.add_development_dependency 'sqlite3'

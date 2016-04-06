@@ -26,7 +26,6 @@ require 'coffee-rails'
 require 'jquery-rails'
 require 'bootstrap'
 require 'rails-assets-tether'
-require 'babosa'
 require 'kaminari'
 require 'ransack'
 
