@@ -1,5 +1,8 @@
 = label_tag attribute.name do
   = @resource.model.human_attribute_name(attribute.name)
   - if attribute.required?
-    %i.text-muted
-      (required)
+    %i.text-muted.m-l-1
+      %i.fa.fa-exclamation-circle
+  - if %w(belongs_to has_many).include?(attribute.type)
+    %span.text-muted.m-l-1.uncheck-associations
+      %i.fa.fa-remove

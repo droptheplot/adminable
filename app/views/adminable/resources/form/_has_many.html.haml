@@ -1,9 +1,11 @@
 = render 'adminable/shared/label', attribute: attribute
 = hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]", nil
-#clusterizeScrollArea.clusterize-scroll
-  #clusterizeContentArea.clusterize-content.list-group
+#clusterizeScrollArea.clusterize-scroll.associations
+  #clusterizeContentArea.clusterize-content
     - attribute.options_for_select(entry).each do |value, key|
-      .list-group-item.bg-faded.toggleCheckbox{ :class => ('active' if entry.send(attribute.key).include?(key)) }
-        = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]",
-          key, entry.send(attribute.key).include?(key), hidden: true
-        = value
+      .association
+        %label.c-input.c-checkbox.m-a-0
+          = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]",
+            key, entry.send(attribute.key).include?(key)
+          %span.c-indicator
+          = value

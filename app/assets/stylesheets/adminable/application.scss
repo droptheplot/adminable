@@ -1,3 +1,16 @@
 $font-size-root: 14px !default;
 
 @import 'bootstrap';
+
+.associations {
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius;
+  .association {
+    padding: .75rem;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+.uncheck-associations {
+  cursor: pointer;
+}

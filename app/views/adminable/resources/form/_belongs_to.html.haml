@@ -1,5 +1,11 @@
 = render 'adminable/shared/label', attribute: attribute
-= select_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]",
-  options_for_select(attribute.options_for_select(entry), entry[attribute.key]),
-  include_blank: I18n.t('adminable.ui.not_selected'),
-  class: 'form-control c-select'
+= hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]", nil
+#clusterizeScrollArea.clusterize-scroll.associations
+  #clusterizeContentArea.clusterize-content
+    - attribute.options_for_select(entry).each do |value, key|
+      .association
+        %label.c-input.c-radio.m-a-0
+          = radio_button_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]",
+            key, entry.send(attribute.key) == key
+          %span.c-indicator
+          = value

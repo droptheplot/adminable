@@ -6,10 +6,11 @@ $(document).ready(function() {
     });
   }
 
-  $('.toggleCheckbox').click(function() {
-    var checkbox = $(this).children('input[type=checkbox]');
-    checkbox.prop('checked', !checkbox.prop('checked'));
-    $(this).toggleClass('active');
+  $('.uncheck-associations').click(function() {
+    var inputs = $(this).parent().next().next('.associations').find('input[type=radio], input[type=checkbox]');
+    inputs.each(function(index, value) {
+      value.checked = false;
+    });
   });
 
   tinymce.init({
