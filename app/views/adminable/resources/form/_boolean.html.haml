@@ -1,3 +1,4 @@
-= label_tag attribute.name do
+%label.c-input.c-checkbox
   = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.name}]"
+  %span.c-indicator
   = @resource.model.human_attribute_name(attribute.name)
