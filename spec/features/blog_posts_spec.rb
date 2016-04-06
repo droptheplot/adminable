@@ -15,7 +15,6 @@ feature 'Blog Posts' do
     expect(page.current_path).to eq(blog_posts_path)
     expect(page).to have_content('New Post Title')
     expect(page).to have_content('New Post Body')
-    expect(page).to have_content('#1')
     expect(page).to have_content(
       I18n.t('adminable.resources.created', resource: 'Post')
     )

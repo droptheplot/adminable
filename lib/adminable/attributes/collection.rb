@@ -9,20 +9,17 @@ module Adminable
       end
 
       def index
-        @index ||= all.except(:created_at, :updated_at)
+        @index ||= columns.except(:created_at, :updated_at)
       end
 
       def form
-        @form ||= all.except(:id, :created_at, :updated_at)
+        @form ||= [columns, associations].inject(&:merge)
+                                        .except(:id, :created_at, :updated_at)
       end
 
       def ransack
         @ransack ||= columns.except(:id, :created_at, :updated_at)
                             .select { |_, v| %w(string text).include?(v.type) }
-      end
-
-      def all
-        [columns, association].inject(&:merge)
       end
 
       def columns
@@ -37,8 +34,8 @@ module Adminable
         end.symbolize_keys
       end
 
-      def association
-        @association ||= {}.tap do |attribute|
+      def associations
+        @associations ||= {}.tap do |attribute|
           @model.reflect_on_all_associations.each do |association|
             attribute[association.name] = resolve(
               association.macro,
