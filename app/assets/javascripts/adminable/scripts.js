@@ -18,4 +18,6 @@ $(document).ready(function() {
     menubar: false,
     statusbar: false
   });
+
+  $('[data-toggle="tooltip"]').tooltip();
 });
