@@ -14,7 +14,7 @@ module Adminable
 
       def form
         @form ||= [columns, associations].inject(&:merge)
-                                        .except(:id, :created_at, :updated_at)
+                                         .except(:id, :created_at, :updated_at)
       end
 
       def ransack

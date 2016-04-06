@@ -1,6 +1,6 @@
 feature 'Blog Posts' do
   scenario 'user create blog post' do
-    user = FactoryGirl.create(:user)
+    FactoryGirl.create(:user)
 
     visit(new_blog_post_path)
 
