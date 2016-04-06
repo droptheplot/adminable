@@ -28,6 +28,7 @@ require 'bootstrap'
 require 'rails-assets-tether'
 require 'babosa'
 require 'kaminari'
+require 'ransack'
 
 module Adminable
 end
