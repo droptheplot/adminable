@@ -2,7 +2,7 @@ module Adminable
   module Attributes
     class Base
       attr_accessor :name, :required, :show, :center, :wysiwyg
-      attr_reader :key, :ransack_name
+      attr_reader :key, :ransack_name, :association
 
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
@@ -10,11 +10,16 @@ module Adminable
         @name = name
         @key = options[:key] || @name
         @ransack_name = "#{@name}_cont"
-        @association = options[:association]
         @required = options[:required] || false
         @show = true
         @center = %w(integer boolean float decimal).include?(type)
         @wysiwyg = %w(text).include?(type)
+
+        if options[:association]
+          @association = Adminable::Attributes::Association.new(
+            options[:association]
+          )
+        end
       end
 
       alias required? required

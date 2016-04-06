@@ -1,21 +1,16 @@
 module Adminable
   module Attributes
-    module Association
-      attr_reader :options_for_select, :association
+    class Association
+      attr_reader :reflection, :model
 
-      def options_for_select(entry)
-        @association.klass.all.reject { |e| e == entry }.collect do |e|
-          [association_option_name(e), e.id]
-        end
+      def initialize(reflection)
+        @reflection = reflection
+        @model = @reflection.klass.include(Adminable::ResourceConcern)
       end
 
-      private
-
-        def association_option_name(entry)
-          %i(email login name title id).each do |a|
-            return entry.try(a) unless entry.try(a).nil?
-          end
-        end
+      def options_for_select
+        @model.all
+      end
     end
   end
 end
