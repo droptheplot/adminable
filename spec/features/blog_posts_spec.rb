@@ -8,13 +8,14 @@ feature 'Blog Posts' do
 
     fill_in(:blog_post_title, with: 'New Post Title')
     fill_in(:blog_post_body, with: 'New Post Body')
-    select(user.email, from: :blog_post_user_id)
+    choose('blog_post_user_id_1')
 
     click_button('Submit')
 
     expect(page.current_path).to eq(blog_posts_path)
     expect(page).to have_content('New Post Title')
     expect(page).to have_content('New Post Body')
+    expect(page).to have_content('#1')
     expect(page).to have_content(
       I18n.t('adminable.resources.created', resource: 'Post')
     )
