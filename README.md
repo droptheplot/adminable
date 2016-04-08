@@ -14,6 +14,10 @@ Simple admin interface for Ruby on Rails applications.
 * Uses Bootstrap 4.0.
 * Mobile friendly.
 
+![Example1](https://raw.githubusercontent.com/droptheplot/adminable/master/screenshots/1.png)
+
+![Example2](https://raw.githubusercontent.com/droptheplot/adminable/master/screenshots/2.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
