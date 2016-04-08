@@ -7,7 +7,9 @@ $font-size-root: 14px !default;
   border-radius: $border-radius;
   .association {
     padding: .75rem;
-    border-bottom: 1px solid $gray-lighter;
+    &:not(:last-child) {
+      border-bottom: 1px solid $gray-lighter;
+    }
   }
 }
 
