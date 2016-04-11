@@ -1,56 +1,72 @@
 module Adminable
   module Attributes
     class Collection
-      attr_reader :model
-      attr_writer :index, :form
+      attr_reader :model, :all
 
       def initialize(model)
         @model = model
+        @all ||= columns + associations
       end
 
       def index
-        @index ||= columns.except(:created_at, :updated_at)
+        columns.select(&:index?)
       end
 
       def form
-        @form ||= [columns, associations].inject(&:merge)
-                                         .except(:id, :created_at, :updated_at)
+        all.select(&:form?)
       end
 
       def ransack
-        @ransack ||= columns.except(:id, :created_at, :updated_at)
-                            .select { |_, v| %w(string text).include?(v.type) }
+        all.select(&:ransack?)
       end
 
       def columns
-        @columns ||= {}.tap do |attribute|
+        @columns ||= [].tap do |attributes|
           @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|
-            attribute[column.name] = resolve(
-              column.type,
+            attributes << resolve(column.type).new(
               column.name,
               required: required?(column.name)
             )
           end
-        end.symbolize_keys
+        end
       end
 
       def associations
-        @associations ||= {}.tap do |attribute|
+        @associations ||= [].tap do |attributes|
           @model.reflect_on_all_associations.each do |association|
-            attribute[association.name] = resolve(
-              association.macro,
+            attributes << resolve(association.macro).new(
               association.name,
               required: required?(association.name),
               association: association
             )
           end
-        end.symbolize_keys
+        end
+      end
+
+      def configure
+        yield
+      end
+
+      def set(name, options = {})
+        options.each do |key, value|
+          get(name).send("#{key}=", value)
+        end
+      end
+
+      def get(name)
+        @all.find { |attribute| attribute.name == name }
+      end
+
+      def add(name, type, options = {})
+        return if get(name)
+
+        @all << resolve(type).new(name, **options)
       end
 
       private
 
-        def resolve(type, *args)
-          "adminable/attributes/types/#{type}".classify.constantize.new(*args)
+        def resolve(type)
+          "adminable/attributes/types/#{type}".classify.constantize
         end
 
         def required?(name)

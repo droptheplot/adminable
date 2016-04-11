@@ -1,5 +1,6 @@
 class Adminable::Blog::PostsController < Adminable::ResourcesController
-  # attributes_for :form do |attributes|
-  #   attributes[:qwe] = Adminable::Attributes::Types::String.new(:qwe)
-  # end
+  set_attributes do |attributes|
+    attributes.set :created_at, index: false, form: false
+    attributes.set :updated_at, index: false, form: false
+  end
 end

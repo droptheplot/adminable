@@ -70,18 +70,16 @@ module Adminable
                   )
     end
 
-    def self.attributes_for(type)
-      return unless %i(index form ransack).include?(type)
-
+    def self.set_attributes
       before_action do
-        yield(@resource.attributes.send(type))
+        @resource.attributes.configure { yield(@resource.attributes) }
       end
     end
 
     private
 
       def set_resource
-        @resource = Adminable::Configuration.find_resource(resource_model).clone
+        @resource = Adminable::Configuration.find_resource(resource_model)
       end
 
       def set_entry
@@ -94,14 +92,14 @@ module Adminable
 
       def resource_params
         params.require(@resource.model.model_name.param_key).permit(
-          *@resource.attributes.form.values.map(&:strong_parameter)
+          *@resource.attributes.form.map(&:strong_parameter)
         )
       end
 
       def load_extensions
-        if @resource.model.method_defined?(:devise_modules)
-          self.class.send(:include, Adminable::Extensions::Devise)
-        end
+        return unless @resource.model.method_defined?(:devise_modules)
+
+        self.class.send(:include, Adminable::Extensions::Devise)
       end
   end
 end

@@ -4,21 +4,21 @@
   = link_to t('adminable.buttons.new', resource: @resource.model.model_name.human),
     new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
 .row
-  .col-md-9
+  %div{ :class => (@resource.attributes.ransack.any? ? 'col-md-9' : 'col-md-12') }
     .table-responsive.m-b-3
       %table.table.table-striped
         %thead
           %tr
-            - @resource.attributes.index.each_value do |attribute|
-              - if attribute.show?
+            - @resource.attributes.index.each do |attribute|
+              - if attribute.index?
                 %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
                   = @resource.model.human_attribute_name(attribute.name)
             %th
         %tbody
           - @entries.each do |entry|
             %tr
-              - @resource.attributes.index.each_value do |attribute|
-                - if attribute.show?
+              - @resource.attributes.index.each do |attribute|
+                - if attribute.index?
                   %td{ :class => ('text-md-center' if attribute.center?) }
                     = render attribute.index_partial_path, entry: entry,
                       attribute: attribute, value: entry[attribute.key]
@@ -32,6 +32,7 @@
             %tr
               %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
                 No data available
-  .col-md-3.hidden-sm-down
-    = render 'search'
+  - if @resource.attributes.ransack.any?
+    .col-md-3.hidden-sm-down
+      = render 'search'
 = paginate @entries, views_prefix: 'adminable'

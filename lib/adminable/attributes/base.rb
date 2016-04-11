@@ -1,20 +1,41 @@
 module Adminable
   module Attributes
     class Base
-      attr_accessor :name, :required, :show, :center, :wysiwyg
+      attr_accessor(
+        *%i(
+          name
+          index
+          ransack
+          ransack_name
+          form
+          required
+          center
+          wysiwyg
+        )
+      )
       attr_reader :key, :association
 
-      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
 
-        @name = name
-        @key = options.fetch(:key, @name)
+        @name = name.to_sym
+        @key = options.fetch(:key, nil)
+        @ransack_name = "#{@name}_cont"
+
+        @index = options.fetch(:index, true)
+        @ransack = options.fetch(:ransack, false)
+        @form = options.fetch(
+          :form,
+          %w(id created_at updated_at).exclude?(name)
+        )
 
         @required = options.fetch(:required, false)
-        @show = true
-        @center = %w(integer boolean float decimal).include?(type)
-        @wysiwyg = %w(text).include?(type)
+        @wysiwyg = options.fetch(:wysiwyg, (type == 'text'))
+        @center = options.fetch(
+          :center,
+          %w(integer boolean float decimal).include?(type)
+        )
 
         if options[:association]
           @association = Adminable::Attributes::Association.new(
@@ -23,13 +44,15 @@ module Adminable
         end
       end
 
+      alias index? index
+      alias form? form
+      alias ransack? ransack
       alias required? required
-      alias show? show
-      alias center? center
       alias wysiwyg? wysiwyg
+      alias center? center
 
-      def ransack_name
-        "#{@name}_cont"
+      def key
+        @key ||= name
       end
 
       def type

@@ -1,21 +1,22 @@
 module Adminable
   module Extensions
     module Devise
-      # rubocop:disable Metrics/MethodLength
-      def self.included(mod)
-        mod.attributes_for :index do |attributes|
-          attributes.except!(:encrypted_password)
-        end
+      extend ActiveSupport::Concern
 
-        mod.attributes_for :form do |attributes|
-          attributes.except!(:encrypted_password)
-          attributes[:password] = Adminable::Attributes::Types::String.new(
-            :password
-          )
-        end
+      included do
+        set_attributes do |attributes|
+          attributes.set :encrypted_password, index: false, form: false
+          attributes.set :reset_password_token, index: false
+          attributes.set :reset_password_sent_at, index: false
+          attributes.set :remember_created_at, index: false
+          attributes.set :sign_in_count, index: false
+          attributes.set :current_sign_in_at, index: false
+          attributes.set :last_sign_in_at, index: false
+          attributes.set :current_sign_in_ip, index: false
+          attributes.set :last_sign_in_ip, index: false
+          attributes.set :email, ransack: true
 
-        mod.attributes_for :ransack do |attributes|
-          attributes.except!(:encrypted_password)
+          attributes.add :password, :string, index: false
         end
       end
     end
