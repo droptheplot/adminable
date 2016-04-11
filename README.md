@@ -8,7 +8,7 @@ Simple admin interface for Ruby on Rails applications.
 
 ## Features
 
-* Built with common Rails controllers without DSL.
+* Built with common Rails controllers with a small DSL.
 * Supports namespaced models.
 * Has simple search with Ransack.
 * Uses Bootstrap 4.0.
@@ -56,71 +56,55 @@ rails g adminable:resource blog/post
 
 #### Customizing Attributes
 
-You can update attributes with simple snippet inside adminable controllers:
+You can update attributes with simple DSL inside `set_attributes` block:
+
+##### For existing attributes
+
+```ruby
+  set(name, options = {})
+```
+
+##### For new attributes
+
+```ruby
+  add(name, type, options = {})
+```
+
+##### Examples
 
 ```ruby
 class Adminable::Blog::PostsController < Adminable::ResourcesController
-  # For index action and search
-  attributes_for :index do |attributes|
-    attributes[:title].show = false
-  end
+  set_attributes do |attributes|
+    # Enables search for title column
+    attributes.set :title, ransack: true
 
-  # For new and edit forms
-  attributes_for :form do |attributes|
-    attributes[:body].wysiwyg = false
+    # Hides title from new and edit pages
+    attributes.set :title, form: true
+
+    # Adds wysiwyg plugin and hides from index table
+    attributes.set :text, wysiwyg: true, index: false
+
+    # Adds new attribute `password` with type `string` and some default options
+    attributes.add :password, :string, :wysiwyg: true, index: false
   end
 end
 ```
 
 ## Built-in Attributes
 
-List of attributes with default modifiable parameters.
+List of attributes with default parameters.
 
-##### String
-
-* show: `true`
-* center: `false`
-
-##### Text
-
-* show: `true`
-* center: `false`
-* wysiwyg: `true`
-
-##### Integer
-
-* show: `true`
-* center: `true`
-
-##### Float
-
-* show: `true`
-* center: `true`
-
-##### Decimal
-
-* show: `true`
-* center: `true`
-
-##### DateTime
-
-* show: `true`
-* center: `false`
-
-##### Boolean
-
-* show: `true`
-* center: `true`
-
-##### Belongs To
-
-* show: `true`
-* center: `false`
-
-##### Has Many
-
-* show: `true`
-* center: `false`
+|            | index? | form? | center? | wysiwyg? |
+|------------|--------|-------|---------|----------|
+| String     |    +   |   +   |         |          |
+| Text       |    +   |   +   |         |     +    |
+| Integer    |    +   |   +   |    +    |          |
+| Float      |    +   |   +   |    +    |          |
+| Decimal    |    +   |   +   |    +    |          |
+| DateTime   |    +   |   +   |         |          |
+| Boolean    |    +   |   +   |    +    |          |
+| Belongs To |        |   +   |         |          |
+| Has Many   |        |   +   |         |          |
 
 ## Contributing
 
