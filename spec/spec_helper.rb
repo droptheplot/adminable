@@ -5,6 +5,9 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
+require 'codeclimate-test-reporter'
+
+CodeClimate::TestReporter.start
 
 ActiveRecord::Migration.maintain_test_schema!
 

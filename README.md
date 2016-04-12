@@ -3,6 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/adminable.svg)](https://badge.fury.io/rb/adminable)
 [![Build Status](https://travis-ci.org/droptheplot/adminable.svg?branch=master)](https://travis-ci.org/droptheplot/adminable)
 [![Code Climate](https://codeclimate.com/github/droptheplot/adminable/badges/gpa.svg)](https://codeclimate.com/github/droptheplot/adminable)
+[![Test Coverage](https://codeclimate.com/github/droptheplot/adminable/badges/coverage.svg)](https://codeclimate.com/github/droptheplot/adminable/coverage)
 
 Simple admin interface for Ruby on Rails applications.
 

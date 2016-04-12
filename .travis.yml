@@ -3,3 +3,6 @@ rvm:
   - 2.2.2
 script:
   - rspec
+addons:
+  code_climate:
+    repo_token: f1e7fa3801a2f246eb13f8386a59c9d023684270b188c387193d5a4b793d8e28
