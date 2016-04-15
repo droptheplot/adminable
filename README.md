@@ -13,6 +13,8 @@ Simple admin interface for Ruby on Rails applications.
 * Supports namespaced models.
 * Has simple search with Ransack.
 * Uses Bootstrap 4.0.
+* Handles a lot of associations with [Clusterize.js](https://github.com/NeXTs/Clusterize.js).
+* Has built-in WYSIWYG editor [TinyMCE](https://github.com/tinymce/tinymce).
 * Mobile friendly.
 
 ![Example1](https://raw.githubusercontent.com/droptheplot/adminable/master/screenshots/1.png)
