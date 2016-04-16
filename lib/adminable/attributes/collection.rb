@@ -16,8 +16,8 @@ module Adminable
         all.select(&:form?)
       end
 
-      def ransack
-        all.select(&:ransack?)
+      def search
+        all.select(&:search?)
       end
 
       def columns

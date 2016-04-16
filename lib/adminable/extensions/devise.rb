@@ -14,7 +14,7 @@ module Adminable
           attributes.set :last_sign_in_at, index: false
           attributes.set :current_sign_in_ip, index: false
           attributes.set :last_sign_in_ip, index: false
-          attributes.set :email, ransack: true
+          attributes.set :email, search: true
 
           attributes.add :password, :string, index: false
         end

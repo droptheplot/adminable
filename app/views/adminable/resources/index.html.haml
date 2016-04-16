@@ -4,7 +4,7 @@
   = link_to t('adminable.buttons.new', resource: @resource.model.model_name.human),
     new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
 .row
-  %div{ :class => (@resource.attributes.ransack.any? ? 'col-md-9' : 'col-md-12') }
+  %div{ :class => (@resource.attributes.search.any? ? 'col-md-9' : 'col-md-12') }
     .table-responsive.m-b-3
       %table.table.table-striped
         %thead
@@ -32,7 +32,7 @@
             %tr
               %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
                 No data available
-  - if @resource.attributes.ransack.any?
+  - if @resource.attributes.search.any?
     .col-md-3.hidden-sm-down
       = render 'search'
 = paginate @entries, views_prefix: 'adminable'

@@ -5,7 +5,7 @@ module Adminable
         *%i(
           name
           index
-          ransack
+          search
           ransack_name
           form
           required
@@ -24,7 +24,7 @@ module Adminable
         @ransack_name = "#{@name}_cont"
 
         @index = options.fetch(:index, true)
-        @ransack = options.fetch(:ransack, false)
+        @search = options.fetch(:search, false)
         @form = options.fetch(
           :form,
           %i(id created_at updated_at).exclude?(@name)
@@ -46,7 +46,7 @@ module Adminable
 
       alias index? index
       alias form? form
-      alias ransack? ransack
+      alias search? search
       alias required? required
       alias wysiwyg? wysiwyg
       alias center? center
