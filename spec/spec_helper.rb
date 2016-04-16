@@ -1,13 +1,15 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+
+require 'codeclimate-test-reporter'
+
+SimpleCov.start
+CodeClimate::TestReporter.start
+
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
-require 'codeclimate-test-reporter'
-
-CodeClimate::TestReporter.start
 
 ActiveRecord::Migration.maintain_test_schema!
 
