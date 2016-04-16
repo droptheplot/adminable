@@ -67,6 +67,8 @@ module Adminable
 
         def resolve(type)
           "adminable/attributes/types/#{type}".classify.constantize
+        rescue NameError
+          Adminable::Attributes::Types::String
         end
 
         def required?(name)
