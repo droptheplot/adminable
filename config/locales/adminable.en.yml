@@ -9,6 +9,7 @@ en:
       back: Back
       edit: Edit
       new: New %{resource}
+      search: Search
     titles:
       edit: "Edit %{resource} #%{id}"
       new: New %{resource}

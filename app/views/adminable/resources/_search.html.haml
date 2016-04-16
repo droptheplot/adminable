@@ -6,4 +6,4 @@
           = f.label attribute.ransack_name, @resource.model.human_attribute_name(attribute.name),
             class: 'text-muted'
           = f.search_field attribute.ransack_name, class: 'form-control'
-      = f.submit class: 'btn btn-primary-outline'
+      = f.submit t('adminable.buttons.search'), class: 'btn btn-primary-outline'
