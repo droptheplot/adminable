@@ -11,8 +11,8 @@ Simple admin interface for Ruby on Rails applications.
 
 * Built with common Rails controllers with a small DSL.
 * Supports namespaced models.
-* Has simple search with Ransack.
-* Uses Bootstrap 4.0.
+* Has simple search with [Ransack](https://github.com/activerecord-hackery/ransack).
+* Uses [Bootstrap](https://github.com/twbs/bootstrap) 4.0.
 * Handles a lot of associations with [Clusterize.js](https://github.com/NeXTs/Clusterize.js).
 * Has built-in WYSIWYG editor [TinyMCE](https://github.com/tinymce/tinymce).
 * Mobile friendly.
@@ -79,7 +79,7 @@ You can update attributes with simple DSL inside `set_attributes` block:
 class Adminable::Blog::PostsController < Adminable::ResourcesController
   set_attributes do |attributes|
     # Enables search for title column
-    attributes.set :title, ransack: true
+    attributes.set :title, search: true
 
     # Hides title from new and edit pages
     attributes.set :title, form: true
