@@ -8,3 +8,4 @@ Gemfile.lock
 .byebug_history
 dump.rdb
 *.gem
+/coverage
