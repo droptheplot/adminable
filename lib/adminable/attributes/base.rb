@@ -27,7 +27,7 @@ module Adminable
         @ransack = options.fetch(:ransack, false)
         @form = options.fetch(
           :form,
-          %i(id created_at updated_at).exclude?(name)
+          %i(id created_at updated_at).exclude?(@name)
         )
 
         @required = options.fetch(:required, false)
