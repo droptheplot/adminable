@@ -10,7 +10,7 @@ en:
       edit: Edit
       new: New %{resource}
     titles:
-      edit: Edit %{resource}
+      edit: "Edit %{resource} #%{id}"
       new: New %{resource}
     resources:
       created: "%{resource} has been successfully created."
