@@ -1,0 +1,3 @@
+= render 'adminable/shared/label', attribute: attribute
+= date_field_tag "#{@resource.model.model_name.param_key}[#{attribute.name}]",
+  entry[attribute.name], class: 'form-control'
