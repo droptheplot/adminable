@@ -59,7 +59,7 @@ module Adminable
 
       def wysiwyg
         return @wysiwyg unless @wysiwyg.nil?
-        @wysiwyg = (type == 'text')
+        @wysiwyg = (type == :text)
       end
       alias wysiwyg? wysiwyg
 
