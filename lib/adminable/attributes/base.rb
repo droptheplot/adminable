@@ -1,5 +1,7 @@
 module Adminable
   module Attributes
+    # Base class for attributes types
+    # @note Cannot be initialized
     class Base
       OPTIONS_NAMES = %i(
         index
@@ -15,6 +17,9 @@ module Adminable
       attr_accessor :name, *OPTIONS_NAMES
       attr_reader :key, :association
 
+      # @param name [Symbol] attribute name e.g. `:id` or `:title`
+      # @param options [Hash] options, see {OPTIONS_NAMES}
+      #
       # rubocop:disable Metrics/MethodLength
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
@@ -92,6 +97,7 @@ module Adminable
         @key ||= name
       end
 
+      # @return [Symbol] class type e.g. `:text` for Adminable::Attributes::Text
       def type
         @type ||= self.class.name.demodulize.underscore.to_sym
       end

@@ -1,5 +1,7 @@
 module Adminable
   module Configuration
+    # Finds all controllers from `app/controllers/adminable` directory
+    # @return [Array] of {Adminable::Resource} objects
     def self.resources
       @resources ||= resources_paths.map do |resource_path|
         Adminable::Resource.new(

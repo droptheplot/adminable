@@ -9,3 +9,5 @@ Gemfile.lock
 dump.rdb
 *.gem
 /coverage
+/.yardoc
+/doc

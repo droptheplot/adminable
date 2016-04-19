@@ -70,6 +70,23 @@ module Adminable
                   )
     end
 
+    # Calls from children controller class to manage resource attributes
+    # @example Update attributes for Adminable::Blog::PostsController
+    #   # app/controllers/adminable/blog/posts_controller.rb
+    #
+    #   set_attributes do |attributes|
+    #     # Enables search for title column
+    #     attributes.set :title, search: true
+    #
+    #     # Hides title from new and edit pages
+    #     attributes.set :title, form: true
+    #
+    #     # Adds wysiwyg plugin and hides from index table
+    #     attributes.set :text, wysiwyg: true, index: false
+    #
+    #     # Adds new attribute `password` with type `string` and some default options
+    #     attributes.add :password, :string, wysiwyg: true, index: false
+    #   end
     def self.set_attributes
       before_action do
         @resource.attributes.configure { yield(@resource.attributes) }

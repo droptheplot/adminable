@@ -3,6 +3,7 @@ module Adminable
     class Collection
       attr_reader :model, :all
 
+      # @param model [Class] model from Rails application e.g. `User` or `Post`
       def initialize(model)
         @model = model
         @all ||= columns + associations
@@ -20,6 +21,8 @@ module Adminable
         all.select(&:search?)
       end
 
+      # Collects attributes from model columns
+      # @return [Array]
       def columns
         @columns ||= [].tap do |attributes|
           @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|
@@ -31,6 +34,8 @@ module Adminable
         end
       end
 
+      # Collects attributes from model associations
+      # @return [Array]
       def associations
         @associations ||= [].tap do |attributes|
           @model.reflect_on_all_associations.each do |association|
@@ -47,16 +52,25 @@ module Adminable
         yield
       end
 
+      # Changes options for given attribute
+      # @param name [Symbol] name of attribute e.g. `:title`
+      # @param options [Hash] options to update
       def set(name, options = {})
         options.each do |key, value|
           get(name).send("#{key}=", value)
         end
       end
 
+      # Finds attribute by name
+      # @param name [Symbol] name of attribute e.g. `:title`
+      # @return [Object] e.g. `Adminable::Attribute::Types::String` for `:title`
       def get(name)
         @all.find { |attribute| attribute.name == name }
       end
 
+      # Adds new attribute to collection
+      # @param name [Symbol] name of attribute e.g. `:title`
+      # @param type [Symbol] type of attribute e.g. `:string`
       def add(name, type, options = {})
         return if get(name)
 

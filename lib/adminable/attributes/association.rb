@@ -3,6 +3,7 @@ module Adminable
     class Association
       attr_reader :reflection, :model
 
+      # @param reflection [Object] ActiveRecord::Reflection::HasManyReflection
       def initialize(reflection)
         @reflection = reflection
         @model = @reflection.klass.include(Adminable::ResourceConcern)
