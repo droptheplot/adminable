@@ -88,7 +88,7 @@ class Adminable::Blog::PostsController < Adminable::ResourcesController
     attributes.set :text, wysiwyg: true, index: false
 
     # Adds new attribute `password` with type `string` and some default options
-    attributes.add :password, :string, :wysiwyg: true, index: false
+    attributes.add :password, :string, wysiwyg: true, index: false
   end
 end
 ```
