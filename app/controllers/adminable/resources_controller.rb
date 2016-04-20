@@ -84,7 +84,7 @@ module Adminable
     #     # Adds wysiwyg plugin and hides from index table
     #     attributes.set :text, wysiwyg: true, index: false
     #
-    #     # Adds new attribute `password` with type `string` and some default options
+    #     # Adds new attribute `password` with type `string` and some options
     #     attributes.add :password, :string, wysiwyg: true, index: false
     #   end
     def self.set_attributes
