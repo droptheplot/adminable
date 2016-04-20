@@ -18,6 +18,7 @@ module Adminable
 
     def self.resources_paths
       Dir[Rails.root.join('app/controllers/adminable/**/*_controller.rb')]
+        .reject { |f| f['app/controllers/adminable/application_controller.rb'] }
     end
   end
 end
