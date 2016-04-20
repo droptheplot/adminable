@@ -15,7 +15,7 @@ module Adminable
       ).freeze
 
       attr_accessor :name, *OPTIONS_NAMES
-      attr_reader :key, :association
+      attr_reader :key, :strong_parameter, :association
 
       # @param name [Symbol] attribute name e.g. `:id` or `:title`
       # @param options [Hash] options, see {OPTIONS_NAMES}
@@ -25,7 +25,7 @@ module Adminable
         raise 'Base class cannot be initialized' if self.class == Base
 
         @name = name.to_sym
-        @key = options.fetch(:key, nil)
+        @strong_parameter = @key = options.fetch(:key, @name)
 
         OPTIONS_NAMES.each do |option_name|
           instance_variable_set("@#{option_name}", options[option_name])
@@ -93,17 +93,9 @@ module Adminable
         @ransack_name ||= "#{name}_cont"
       end
 
-      def key
-        @key ||= name
-      end
-
       # @return [Symbol] class type e.g. `:text` for Adminable::Attributes::Text
       def type
         @type ||= self.class.name.demodulize.underscore.to_sym
-      end
-
-      def strong_parameter
-        key
       end
 
       def index_partial_path
