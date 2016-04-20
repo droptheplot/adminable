@@ -1,6 +1,11 @@
 module Adminable
   module Attributes
     class Collection
+      include Enumerable
+      extend Forwardable
+
+      def_delegators :@all, :[], :<<, :each, :first, :last, :push, :unshift
+
       attr_reader :model, :all
 
       # @param model [Class] model from Rails application e.g. `User` or `Post`
