@@ -5,7 +5,7 @@ class CreateBlogPosts < ActiveRecord::Migration
       t.text :body
       t.references :user, foreign_key: true
       t.boolean :published
-      t.integer :comments_count
+      t.float :rating
 
       t.timestamps
     end
