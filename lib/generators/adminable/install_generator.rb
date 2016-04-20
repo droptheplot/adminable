@@ -13,9 +13,13 @@ module Adminable
       end
 
       def mount_engine
-        insert_into_file "#{Rails.root}/config/routes.rb", :after => /routes.draw.do\n/ do
-          %Q{  mount Adminable::Engine, at: '/adminable'
-}
+        insert_into_file(
+          "#{Rails.root}/config/routes.rb",
+          after: /routes.draw.do\n/
+        ) do
+          %(  mount Adminable::Engine, at: '/adminable'
+
+)
         end
       end
     end
