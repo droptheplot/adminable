@@ -12,7 +12,7 @@
             - @resource.attributes.index.each do |attribute|
               - if attribute.index?
                 %th.text-nowrap{ :class => ('text-md-center' if attribute.center?) }
-                  = @resource.model.human_attribute_name(attribute.name)
+                  = sort_link(@q, attribute.name, hide_indicator: true)
             %th
         %tbody
           - @entries.each do |entry|
