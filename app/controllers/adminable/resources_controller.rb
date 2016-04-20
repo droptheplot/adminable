@@ -20,8 +20,8 @@ module Adminable
 
     def index
       @q = @resource.model.ransack(params[:q])
-      @entries = @q.result.includes(*@resource.includes).all
-                   .page(params[:page]).per(25)
+      @entries = @q.result.includes(*@resource.includes)
+                   .order(id: :desc).page(params[:page]).per(25)
     end
 
     def new
