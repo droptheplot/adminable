@@ -33,8 +33,7 @@
       - if flash[:alert] || notice.present?
         .p-b-2
           - if flash[:alert]
-            - flash[:alert].each do |alert|
-              = render 'adminable/shared/alert', message: alert, type: 'danger'
+            = render 'adminable/shared/alert', message: alert, type: 'danger'
           - if notice.present?
             = render 'adminable/shared/alert', message: notice, type: 'success'
       = yield

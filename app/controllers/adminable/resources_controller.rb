@@ -42,7 +42,7 @@ module Adminable
                       resource: @resource.model.model_name.human
                     )
       else
-        flash.now[:alert] = @entry.errors.full_messages
+        flash.now[:alert] = @entry.errors.full_messages.first
         render :new
       end
     end
@@ -55,7 +55,7 @@ module Adminable
                       resource: @resource.model.model_name.human
                     )
       else
-        flash.now[:alert] = @entry.errors.full_messages
+        flash.now[:alert] = @entry.errors.full_messages.first
         render :edit
       end
     end
