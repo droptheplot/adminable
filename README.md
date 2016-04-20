@@ -41,6 +41,12 @@ $ gem install adminable
 
 ## Getting Started
 
+First things first. Add routes and create `app/controllers/adminable/application_controller.rb` base class.
+
+```bash
+rails g adminable:install
+```
+
 #### Generating Resources
 
 For example you have model `User`, then run:
