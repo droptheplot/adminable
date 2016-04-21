@@ -98,6 +98,9 @@ class Adminable::Blog::PostsController < Adminable::ResourcesController
 
     # Adds new attribute `author`
     attributes << Adminable::Attributes::Types::String.new(:author)
+
+    # Allows search for multiple attributes
+    attributes.set :title, :body, search: true
   end
 end
 ```
