@@ -30,9 +30,5 @@ require 'rails-assets-tether'
 require 'kaminari'
 require 'ransack'
 
-if Rails.env.development?
-  require 'rack-mini-profiler'
-end
-
 module Adminable
 end
