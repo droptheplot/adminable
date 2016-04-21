@@ -1,0 +1,19 @@
+---
+ru:
+  adminable:
+    ui:
+      confirm: Вы уверены?
+      not_selected: Не выбрано
+    buttons:
+      submit: Сохранить
+      back: Назад
+      edit: Изменить
+      new: Создать %{resource}
+      search: Поиск
+    titles:
+      edit: "Редактирвоание %{resource} #%{id}"
+      new: Создание %{resource}
+    resources:
+      created: "%{resource} успешно создан."
+      updated: "%{resource} успешно обновлен."
+      deleted: "%{resource} успешно удален."
