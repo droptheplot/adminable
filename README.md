@@ -95,6 +95,9 @@ class Adminable::Blog::PostsController < Adminable::ResourcesController
 
     # Adds new attribute `password` with type `string` and some options
     attributes.add :password, :string, wysiwyg: true, index: false
+
+    # Adds new attribute `author`
+    attributes << Adminable::Attributes::Types::String.new(:author)
   end
 end
 ```
