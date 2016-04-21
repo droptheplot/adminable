@@ -60,9 +60,14 @@ module Adminable
       # Changes options for given attribute
       # @param name [Symbol] name of attribute e.g. `:title`
       # @param options [Hash] options to update
-      def set(name, options = {})
+      def set(*args)
+        options = args.extract_options!
+        names = args
+
         options.each do |key, value|
-          get(name).send("#{key}=", value)
+          names.each do |name|
+            get(name).send("#{key}=", value)
+          end
         end
       end
 
