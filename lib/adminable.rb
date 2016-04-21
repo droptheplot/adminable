@@ -2,8 +2,6 @@ require 'adminable/engine'
 require 'adminable/configuration'
 require 'adminable/errors'
 
-require 'adminable/extensions/devise'
-
 require 'adminable/resource'
 
 require 'adminable/attributes/collection'

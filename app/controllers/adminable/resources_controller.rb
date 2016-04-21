@@ -1,8 +1,7 @@
 module Adminable
   class ResourcesController < ApplicationController
     def initialize(*)
-      set_resource
-      load_extensions
+      @resource = Adminable::Configuration.find_resource(resource_model)
 
       super
     end
@@ -98,10 +97,6 @@ module Adminable
 
     private
 
-      def set_resource
-        @resource = Adminable::Configuration.find_resource(resource_model)
-      end
-
       def set_entry
         @entry = @resource.model.find(params[:id])
       end
@@ -114,12 +109,6 @@ module Adminable
         params.require(@resource.model.model_name.param_key).permit(
           *@resource.attributes.form.map(&:strong_parameter)
         )
-      end
-
-      def load_extensions
-        return unless @resource.model.method_defined?(:devise_modules)
-
-        self.class.send(:include, Adminable::Extensions::Devise)
       end
   end
 end
