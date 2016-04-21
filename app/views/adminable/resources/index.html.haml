@@ -1,6 +1,6 @@
 .m-b-1.clearfix
   %h1.pull-md-left.m-b-2
-    = @resource.model.model_name.human.pluralize
+    = @resource.model.model_name.human(count: 2)
   = link_to t('adminable.buttons.new', resource: @resource.model.model_name.human),
     new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
 .row
