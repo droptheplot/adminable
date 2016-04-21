@@ -70,15 +70,17 @@ module Adminable
       # @param name [Symbol] name of attribute e.g. `:title`
       # @return [Object] e.g. `Adminable::Attribute::Types::String` for `:title`
       def get(name)
-        @all.find { |attribute| attribute.name == name }
+        @all.find { |attribute| attribute.name == name } ||
+          raise(
+            Adminable::AttributeNotFound,
+            "couldn't find attribute with name `#{name}`"
+          )
       end
 
       # Adds new attribute to collection
       # @param name [Symbol] name of attribute e.g. `:title`
       # @param type [Symbol] type of attribute e.g. `:string`
       def add(name, type, options = {})
-        return if get(name)
-
         @all << resolve(type).new(name, **options)
       end
 
@@ -87,7 +89,10 @@ module Adminable
         def resolve(type)
           "adminable/attributes/types/#{type}".classify.constantize
         rescue NameError
-          Adminable::Attributes::Types::String
+          raise(
+            Adminable::AttributeNotImplemented,
+            "type `#{type}` is not supported yet."
+          )
         end
 
         def required?(name)

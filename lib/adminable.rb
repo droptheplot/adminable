@@ -1,5 +1,6 @@
 require 'adminable/engine'
 require 'adminable/configuration'
+require 'adminable/errors'
 
 require 'adminable/extensions/devise'
 
