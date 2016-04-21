@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'reek'
   s.add_development_dependency 'devise'
   s.add_development_dependency 'codeclimate-test-reporter'
   s.add_development_dependency 'yard'

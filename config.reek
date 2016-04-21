@@ -1,0 +1,8 @@
+IrresponsibleModule:
+  enabled: false
+DuplicateMethodCall:
+  enabled: false
+NilCheck:
+  enabled: false
+UncommunicativeVariableName:
+  enabled: false
