@@ -7,7 +7,7 @@ describe Adminable::Attributes::Association do
 
   describe '@model' do
     it 'has ResourceConcern included' do
-      expect(association.model.first).to respond_to(:adminable_name)
+      expect(association.model.first).to respond_to(:adminable)
     end
   end
 

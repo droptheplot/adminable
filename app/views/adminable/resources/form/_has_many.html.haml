@@ -8,6 +8,6 @@
           = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]",
             association_entry.id, entry.send(attribute.key).include?(association_entry.id)
           %span.c-indicator
-          = link_to association_entry.adminable_name,
+          = link_to association_entry.adminable.name,
             edit_polymorphic_path(association_entry),
             target: '_blank'

@@ -2,9 +2,9 @@ module Adminable
   module ResourceConcern
     extend ActiveSupport::Concern
 
-    def adminable_name
-      %i(title name email login id).each do |n|
-        return try(n) unless try(n).nil?
+    def adminable
+      %i(title name email login id).each do |name|
+        return OpenStruct.new(name: public_send(name)) unless try(name).nil?
       end
     end
   end
