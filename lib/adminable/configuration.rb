@@ -3,7 +3,7 @@ module Adminable
     # Finds all controllers from `app/controllers/adminable` directory
     # @return [Array] of {Adminable::Resource} objects
     def self.resources
-      @resources ||= resources_paths.map do |resource_path|
+      resources_paths.map do |resource_path|
         Adminable::Resource.new(
           resource_path.to_s.split('adminable/').last.sub(
             /_controller\.rb$/, ''
