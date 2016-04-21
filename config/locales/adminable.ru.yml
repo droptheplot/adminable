@@ -8,10 +8,11 @@ ru:
       submit: Сохранить
       back: Назад
       edit: Изменить
-      new: Создать %{resource}
+      delete: Удалить
+      new: Новый %{resource}
       search: Поиск
     titles:
-      edit: "Редактирвоание %{resource} #%{id}"
+      edit: "Редактирование %{resource} #%{id}"
       new: Создание %{resource}
     resources:
       created: "%{resource} успешно создан."
