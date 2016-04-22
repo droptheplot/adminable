@@ -11,7 +11,8 @@ describe Adminable::Resource do
     context 'without association attributes' do
       resource = Adminable::Resource.new('user')
 
-      xit 'returns false' do
+      it 'returns false' do
+        allow(resource.attributes).to receive(:associations).and_return([])
         expect(resource.includes).to be false
       end
     end
