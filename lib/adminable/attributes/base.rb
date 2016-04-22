@@ -27,15 +27,9 @@ module Adminable
         @name = name.to_sym
         @strong_parameter = @key = options.fetch(:key, @name)
 
-        OPTIONS_NAMES.each do |option_name|
-          instance_variable_set("@#{option_name}", options[option_name])
-        end
-
-        if options[:association]
-          @association = Adminable::Attributes::Association.new(
-            options[:association]
-          )
-        end
+        @association = Adminable::Attributes::Association.new(
+          options[:association]
+        ) if options[:association]
       end
 
       def index

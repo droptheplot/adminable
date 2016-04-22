@@ -1,6 +1,5 @@
 feature 'Blog Posts' do
   feature 'user creates blog post' do
-
     before do
       FactoryGirl.create(:user)
       visit(new_blog_post_path)
