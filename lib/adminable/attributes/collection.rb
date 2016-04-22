@@ -28,13 +28,19 @@ module Adminable
 
       # Collects attributes from model columns
       # @return [Array]
+      #
+      # rubocop:disable Metrics/MethodLength
       def columns
         @columns ||= [].tap do |attributes|
           @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|
-            attributes << resolve(column.type).new(
-              column.name,
-              required: required?(column.name)
-            )
+            begin
+              attributes << resolve(column.type).new(
+                column.name,
+                required: required?(column.name)
+              )
+            rescue Adminable::AttributeNotImplemented
+              next
+            end
           end
         end
       end
