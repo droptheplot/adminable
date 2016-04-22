@@ -48,10 +48,20 @@ describe Adminable::Attributes::Collection do
   end
 
   describe '#resolve' do
-    it 'returns attribute class from type string' do
-      expect(collection.instance_eval { resolve('string') }).to eq(
-        Adminable::Attributes::Types::String
-      )
+    describe 'for supported attribute' do
+      it 'returns attribute class from type string' do
+        expect(collection.instance_eval { resolve('string') }).to eq(
+          Adminable::Attributes::Types::String
+        )
+      end
+    end
+
+    describe 'for not supported attribute' do
+      it 'raises exception' do
+        expect {
+          collection.instance_eval { resolve('some_attribute_type') }
+        }.to raise_error(Adminable::AttributeNotImplemented)
+      end
     end
   end
 end
