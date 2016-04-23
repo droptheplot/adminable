@@ -1,6 +1,6 @@
 = label_tag attribute.name do
   = @resource.model.human_attribute_name(attribute.name)
-  - if attribute.required?
+  - if attribute.options[:required]
     %span.text-muted.m-l-1
       %i.fa.fa-exclamation-circle{ 'data-toggle' => :tooltip, 'data-placement' => :right, :title => 'Required' }
   - if %i(belongs_to has_many).include?(attribute.type)

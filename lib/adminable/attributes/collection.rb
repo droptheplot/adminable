@@ -15,15 +15,15 @@ module Adminable
       end
 
       def index
-        columns.select(&:index?)
+        columns.select { |attribute| attribute.options[:index] }
       end
 
       def form
-        all.select(&:form?)
+        all.select { |attribute| attribute.options[:form] }
       end
 
       def search
-        all.select(&:search?)
+        all.select { |attribute| attribute.options[:search] }
       end
 
       # Collects attributes from model columns
@@ -72,7 +72,7 @@ module Adminable
 
         options.each do |key, value|
           names.each do |name|
-            get(name).send("#{key}=", value)
+            get(name).options[key] = value
           end
         end
       end

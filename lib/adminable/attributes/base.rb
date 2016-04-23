@@ -3,85 +3,30 @@ module Adminable
     # Base class for attributes types
     # @note Cannot be initialized
     class Base
-      OPTIONS_NAMES = %i(
-        index
-        search
-        ransack_name
-        form
-        required
-        center
-        nowrap
-        wysiwyg
-      ).freeze
-
-      attr_accessor :name, *OPTIONS_NAMES
-      attr_reader :key, :strong_parameter, :association
+      attr_reader :name, :options, :key, :strong_parameter, :association
 
       # @param name [Symbol] attribute name e.g. `:id` or `:title`
-      # @param options [Hash] options, see {OPTIONS_NAMES}
+      # @param options [Hash] options, see {default_options}
       #
       # rubocop:disable Metrics/MethodLength
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
 
         @name = name.to_sym
-        @strong_parameter = @key = options.fetch(:key, @name)
+        @options = default_options.merge(options)
 
         @association = Adminable::Attributes::Association.new(
           options[:association]
         ) if options[:association]
       end
 
-      def index
-        return @index unless @index.nil?
-        @index = true
+      def key
+        @key ||= name
       end
-      alias index? index
 
-      def form
-        return @form unless @form.nil?
-        @form = %i(id created_at updated_at).exclude?(@name)
+      def strong_parameter
+        @strong_parameter ||= key
       end
-      alias form? form
-
-      def search
-        return @search unless @search.nil?
-        @search = false
-      end
-      alias search? search
-
-      def required
-        return @required unless @required.nil?
-        @required = false
-      end
-      alias required? required
-
-      def wysiwyg
-        return @wysiwyg unless @wysiwyg.nil?
-        @wysiwyg = (type == :text)
-      end
-      alias wysiwyg? wysiwyg
-
-      def center
-        return @center unless @center.nil?
-        @center = %i(integer boolean float decimal).include?(type)
-      end
-      alias center? center
-
-      def nowrap
-        return @nowrap unless @nowrap.nil?
-        @nowrap = %i(
-          integer
-          boolean
-          float
-          decimal
-          date
-          datetime
-          time
-          timestamp
-        ).include?(type)
-      end
-      alias nowrap? nowrap
 
       def ransack_name
         @ransack_name ||= "#{name}_cont"
@@ -99,6 +44,19 @@ module Adminable
       def form_partial_path
         "adminable/resources/form/#{type}"
       end
+
+      private
+
+        def default_options
+          {
+            index: true,
+            search: false,
+            form: %i(id created_at updated_at).exclude?(name),
+            required: false,
+            center: %i(integer boolean float decimal).include?(type),
+            wysiwyg: false
+          }
+        end
     end
   end
 end

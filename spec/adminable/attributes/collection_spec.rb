@@ -26,7 +26,7 @@ describe Adminable::Attributes::Collection do
     it 'updates attribute params' do
       collection.set(:id, required: true)
 
-      expect(collection.get(:id).required?).to be true
+      expect(collection.get(:id).options[:required]).to be true
     end
   end
 

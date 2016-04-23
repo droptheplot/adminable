@@ -1,6 +1,6 @@
 = form_for @entry do |f|
   - @resource.attributes.form.each do |attribute|
-    - if attribute.form?
+    - if attribute.options[:form]
       %fieldset.form-group
         = render attribute.form_partial_path, entry: @entry,
           attribute: attribute
