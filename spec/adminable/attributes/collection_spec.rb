@@ -58,9 +58,9 @@ describe Adminable::Attributes::Collection do
 
     describe 'for not supported attribute' do
       it 'raises exception' do
-        expect {
+        expect do
           collection.instance_eval { resolve('some_attribute_type') }
-        }.to raise_error(Adminable::AttributeNotImplemented)
+        end.to raise_error(Adminable::AttributeNotImplemented)
       end
     end
   end

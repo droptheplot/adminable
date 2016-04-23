@@ -7,8 +7,6 @@ module Adminable
 
       # @param name [Symbol] attribute name e.g. `:id` or `:title`
       # @param options [Hash] options, see {default_options}
-      #
-      # rubocop:disable Metrics/MethodLength
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
 
