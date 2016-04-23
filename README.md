@@ -105,6 +105,10 @@ class Adminable::Blog::PostsController < Adminable::ResourcesController
 end
 ```
 
+##### See Also
+
+* Configured controller for Devise model: [app/controllers/adminable/users_controller.rb](https://github.com/droptheplot/adminable/blob/master/spec/dummy/app/controllers/adminable/users_controller.rb)
+
 ## Built-in Attributes
 
 List of attributes with default parameters.
