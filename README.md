@@ -120,7 +120,10 @@ List of attributes with default parameters.
 | Integer    |    +   |   +   |    +    |          |
 | Float      |    +   |   +   |    +    |          |
 | Decimal    |    +   |   +   |    +    |          |
+| Date       |    +   |   +   |         |          |
 | DateTime   |    +   |   +   |         |          |
+| Time       |    +   |   +   |         |          |
+| Timestamp  |    +   |   +   |         |          |
 | Boolean    |    +   |   +   |    +    |          |
 | Belongs To |        |   +   |         |          |
 | Has Many   |        |   +   |         |          |
