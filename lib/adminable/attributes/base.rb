@@ -47,7 +47,7 @@ module Adminable
 
         def default_options
           {
-            index: true,
+            index: %i(belongs_to has_many).exclude?(type),
             search: false,
             form: %i(id created_at updated_at).exclude?(name),
             required: false,

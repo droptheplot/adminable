@@ -10,18 +10,16 @@
         %thead
           %tr
             - @resource.attributes.index.each do |attribute|
-              - if attribute.options[:index]
-                %th.text-nowrap{ :class => ('text-md-center' if attribute.options[:center]) }
-                  = sort_link(@q, attribute.name, hide_indicator: true)
+              %th.text-nowrap{ :class => ('text-md-center' if attribute.options[:center]) }
+                = sort_link(@q, attribute.name, hide_indicator: true)
             %th
         %tbody
           - @entries.each do |entry|
             %tr
               - @resource.attributes.index.each do |attribute|
-                - if attribute.options[:index]
-                  %td{ :class => ('text-md-center' if attribute.options[:center]) }
-                    = render attribute.index_partial_path, entry: entry,
-                      attribute: attribute, value: entry[attribute.key]
+                %td{ :class => ('text-md-center' if attribute.options[:center]) }
+                  = render attribute.index_partial_path, entry: entry,
+                    attribute: attribute, value: entry[attribute.key]
               %td.text-nowrap.text-md-right
                 = link_to t('adminable.buttons.edit'), edit_polymorphic_path(entry),
                   class: 'label label-primary'

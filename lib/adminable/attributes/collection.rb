@@ -15,7 +15,7 @@ module Adminable
       end
 
       def index
-        columns.select { |attribute| attribute.options[:index] }
+        all.select { |attribute| attribute.options[:index] }
       end
 
       def form
