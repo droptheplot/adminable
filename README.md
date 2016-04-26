@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/droptheplot/adminable.svg?branch=master)](https://travis-ci.org/droptheplot/adminable)
 [![Code Climate](https://codeclimate.com/github/droptheplot/adminable/badges/gpa.svg)](https://codeclimate.com/github/droptheplot/adminable)
 [![Test Coverage](https://codeclimate.com/github/droptheplot/adminable/badges/coverage.svg)](https://codeclimate.com/github/droptheplot/adminable/coverage)
+[![Dependency Status](https://gemnasium.com/badges/github.com/droptheplot/adminable.svg)](https://gemnasium.com/github.com/droptheplot/adminable)
+
 
 Simple admin interface for Ruby on Rails applications.
 
