@@ -43,10 +43,12 @@ $ gem install adminable
 
 ## Getting Started
 
-First things first. Add routes and create `app/controllers/adminable/application_controller.rb` base class.
+First things first. Add routes and create `application_controller.rb` class using generator:
 
 ```bash
 rails g adminable:install
+# => create app/controllers/adminable/application_controller.rb
+# => insert config/routes.rb
 ```
 
 #### Generating Resources
@@ -80,6 +82,13 @@ You can update attributes with simple DSL inside `set_attributes` block:
 ```ruby
   add(name, type, options = {})
 ```
+
+##### Attributes Parameters
+
+* `index` - *(true/false)* - Shows attribute on index page.
+* `form` - *(true/false)* - Shows attribute on new/edit page.
+* `center` - *(true/false)* - Adds `text-align: center` for attribute value on index page.
+* `search` - *(true/false)* - Enables search for this attribute.
 
 ##### Examples
 
@@ -115,20 +124,20 @@ end
 
 List of attributes with default parameters.
 
-|            | index? | form? | center? | wysiwyg? |
-|------------|--------|-------|---------|----------|
-| String     |    +   |   +   |         |          |
-| Text       |    +   |   +   |         |     +    |
-| Integer    |    +   |   +   |    +    |          |
-| Float      |    +   |   +   |    +    |          |
-| Decimal    |    +   |   +   |    +    |          |
-| Date       |    +   |   +   |         |          |
-| DateTime   |    +   |   +   |         |          |
-| Time       |    +   |   +   |         |          |
-| Timestamp  |    +   |   +   |         |          |
-| Boolean    |    +   |   +   |    +    |          |
-| Belongs To |        |   +   |         |          |
-| Has Many   |        |   +   |         |          |
+|            | index | form | center | wysiwyg |
+|------------|-------|------|--------|---------|
+| String     |   +   |   +  |        |         |
+| Text       |   +   |   +  |        |    +    |
+| Integer    |   +   |   +  |    +   |         |
+| Float      |   +   |   +  |    +   |         |
+| Decimal    |   +   |   +  |    +   |         |
+| Date       |   +   |   +  |        |         |
+| DateTime   |   +   |   +  |        |         |
+| Time       |   +   |   +  |        |         |
+| Timestamp  |   +   |   +  |        |         |
+| Boolean    |   +   |   +  |    +   |         |
+| Belongs To |       |   +  |        |         |
+| Has Many   |       |   +  |        |         |
 
 ## Contributing
 
