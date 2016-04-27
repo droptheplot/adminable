@@ -21,11 +21,8 @@
                   = render attribute.index_partial_path, entry: entry,
                     attribute: attribute, value: entry[attribute.key]
               %td.text-nowrap.text-md-right
-                = link_to t('adminable.buttons.edit'), edit_polymorphic_path(entry),
-                  class: 'label label-primary'
-                = link_to t('adminable.buttons.delete'), polymorphic_path(entry),
-                  class: 'label label-danger', method: :delete,
-                  data: { confirm: t('adminable.ui.confirm') }
+                = entry.link_to_edit_small
+                = entry.link_to_delete_small
           - if @entries.empty?
             %tr
               %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }

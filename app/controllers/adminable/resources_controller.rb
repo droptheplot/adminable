@@ -19,8 +19,11 @@ module Adminable
 
     def index
       @q = @resource.model.ransack(params[:q])
-      @entries = @q.result.includes(*@resource.includes)
-                   .order(id: :desc).page(params[:page]).per(25)
+      @entries = Adminable::EntriesPresenter.new(
+        @q.result.includes(*@resource.includes).order(id: :desc)
+                                              .page(params[:page]).per(25),
+        view_context
+      )
     end
 
     def new
@@ -98,7 +101,10 @@ module Adminable
     private
 
       def set_entry
-        @entry = @resource.model.find(params[:id])
+        @entry = Adminable::EntryPresenter.new(
+          @resource.model.find(params[:id]),
+          view_context
+        )
       end
 
       def resource_model
