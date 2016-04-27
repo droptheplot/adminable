@@ -1,3 +1,2 @@
 - if entry
-  - entry.send(attribute.name).each do |resource|
-    = link_to "##{ resource.id }", edit_polymorphic_path(resource)
+  = Adminable::EntriesPresenter.new(entry.public_send(attribute.name)).to_s
