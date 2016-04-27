@@ -1,5 +1,5 @@
 module Adminable
-  class EntriesPresenter
+  class EntriesPresenter < BasePresenter
     include Enumerable
     extend Forwardable
 
@@ -17,11 +17,21 @@ module Adminable
       )
     )
 
-    def initialize(relation, view)
+    def initialize(relation)
       @relation = relation
-      @collection = relation.map do |entry|
-        Adminable::EntryPresenter.new(entry, view)
+      @collection = relation.all.map do |entry|
+        Adminable::EntryPresenter.new(entry)
       end
     end
+
+    def to_s
+      collection.map do |entry|
+        view.link_to(entry.to_name, edit_polymorphic_path(entry))
+      end.to_sentence.html_safe
+    end
+
+    private
+
+      attr_accessor :relation, :collection
   end
 end

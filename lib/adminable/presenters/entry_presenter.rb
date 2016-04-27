@@ -1,10 +1,17 @@
 module Adminable
-  class EntryPresenter
-    include Adminable::Engine.routes.url_helpers
-
-    def initialize(entry, view)
+  class EntryPresenter < BasePresenter
+    def initialize(entry)
       @entry = entry
-      @view = view
+    end
+
+    def to_name
+      %i(name title email login id).each do |method_name|
+        begin
+          return entry.public_send(method_name)
+        rescue NoMethodError
+          next
+        end
+      end
     end
 
     def link_to_delete
@@ -45,6 +52,6 @@ module Adminable
 
     private
 
-      attr_accessor :entry, :view
+      attr_accessor :entry
   end
 end

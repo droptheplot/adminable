@@ -1,16 +1,13 @@
 module Adminable
   module Attributes
     class Association
-      attr_reader :reflection, :model
+      attr_reader :reflection, :model, :all
 
       # @param reflection [Object] ActiveRecord::Reflection::HasManyReflection
       def initialize(reflection)
         @reflection = reflection
-        @model = @reflection.klass.include(Adminable::ResourceConcern)
-      end
-
-      def options_for_select
-        @model.all
+        @model = @reflection.klass
+        @all = Adminable::EntriesPresenter.new(@model)
       end
     end
   end

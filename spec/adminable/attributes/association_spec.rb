@@ -5,15 +5,15 @@ describe Adminable::Attributes::Association do
   let!(:association) { Adminable::Attributes::Association.new(reflection) }
   let!(:blog_post) { FactoryGirl.create(:blog_post) }
 
-  describe '@model' do
-    it 'has ResourceConcern included' do
-      expect(association.model.first).to respond_to(:adminable)
+  describe '#model' do
+    it 'returns association model class' do
+      expect(association.model).to eq(Blog::Post)
     end
   end
 
-  describe '#options_for_select' do
-    it 'returns all entries for association model' do
-      expect(association.options_for_select).to match_array(blog_post)
+  describe '#all' do
+    it 'returns EntriesPresenter with all entries for association model' do
+      expect(association.all).to be_a(Adminable::EntriesPresenter)
     end
   end
 end
