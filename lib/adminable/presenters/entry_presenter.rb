@@ -57,6 +57,10 @@ module Adminable
       entry.public_send(method_name, *args) { block if block_given? }
     end
 
+    def respond_to_missing?(method_name, *)
+      entry.respond_to?(method_name)
+    end
+
     private
 
       attr_accessor :entry
