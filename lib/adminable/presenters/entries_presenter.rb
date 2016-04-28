@@ -31,9 +31,7 @@ module Adminable
         view.link_to(entry.to_name, edit_polymorphic_path(entry))
       end
 
-      if collection_size_residue > 0
-        string << I18n.t('adminable.ui.and_more', size: collection_size_residue)
-      end
+      string << and_more_tag if collection_size_residue > 0
 
       string.join(', ').html_safe
     end
@@ -44,6 +42,14 @@ module Adminable
 
       def collection_size_residue
         @collection_residue ||= collection.size - ENTRIES_LIMIT
+      end
+
+      def and_more_tag
+        view.content_tag(
+          :span,
+          I18n.t('adminable.ui.and_more', size: collection_size_residue),
+          class: 'text-muted'
+        )
       end
   end
 end
