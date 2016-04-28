@@ -14,6 +14,13 @@ module Adminable
       end
     end
 
+    def link_to_self
+      view.link_to(
+        to_name,
+        edit_polymorphic_path(entry)
+      )
+    end
+
     def link_to_delete
       view.link_to(
         I18n.t('adminable.buttons.delete'),
