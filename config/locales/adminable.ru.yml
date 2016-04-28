@@ -4,6 +4,7 @@ ru:
     ui:
       confirm: Вы уверены?
       not_selected: Не выбрано
+      and_more: и еще %{size}.
     buttons:
       submit: Сохранить
       back: Назад

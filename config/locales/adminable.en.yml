@@ -4,6 +4,7 @@ en:
     ui:
       confirm: Are you sure?
       not_selected: Not selected
+      and_more: and %{size} more.
     buttons:
       submit: Submit
       back: Back
