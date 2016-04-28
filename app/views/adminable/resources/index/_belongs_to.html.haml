@@ -1,5 +1,4 @@
-- if value.present?
-  - if attribute.association.model.exists?(value)
-    = link_to "##{ value }", edit_polymorphic_path(attribute.association.model.find_by(id: value))
-  - else
-    = "##{ value }"
+- if entry.public_send(attribute.name)
+  = Adminable::EntryPresenter.new(entry.public_send(attribute.name)).link_to_self
+- else
+  = "##{value}"
