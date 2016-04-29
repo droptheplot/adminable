@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Adminable::Engine => '/adminable'
+  mount Adminable::Engine => '/admin'
 
   devise_for :users
 

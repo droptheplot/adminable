@@ -17,7 +17,7 @@ module Adminable
           "#{Rails.root}/config/routes.rb",
           after: /routes.draw.do\n/
         ) do
-          %(  mount Adminable::Engine, at: '/adminable'
+          %(  mount Adminable::Engine, at: '/admin'
 
 )
         end
