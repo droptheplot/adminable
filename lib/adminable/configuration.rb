@@ -20,5 +20,13 @@ module Adminable
       Dir[Rails.root.join('app/controllers/adminable/**/*_controller.rb')]
         .reject { |f| f['app/controllers/adminable/application_controller.rb'] }
     end
+
+    def self.redirect_root_path
+      if resources.any?
+        resources.first.name
+      else
+        Rails.application.routes.url_helpers.root_path
+      end
+    end
   end
 end

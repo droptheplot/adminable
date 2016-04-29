@@ -3,5 +3,5 @@ Adminable::Engine.routes.draw do
     resources r.route, except: :show, path: r.name, controller: r.name
   end
 
-  root to: redirect(Adminable::Configuration.resources.first.name)
+  root to: redirect(Adminable::Configuration.redirect_root_path)
 end
