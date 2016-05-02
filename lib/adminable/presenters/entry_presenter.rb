@@ -15,9 +15,14 @@ module Adminable
     end
 
     def link_to_self
+      unless Adminable::Configuration.find_resource(resource_name)
+        return to_name
+      end
+
       view.link_to(
         to_name,
-        edit_polymorphic_path(entry)
+        edit_polymorphic_path(entry),
+        target: '_blank'
       )
     end
 
@@ -64,5 +69,9 @@ module Adminable
     private
 
       attr_accessor :entry
+
+      def resource_name
+        entry.class.name.pluralize.underscore
+      end
   end
 end
