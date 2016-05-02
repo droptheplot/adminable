@@ -4,9 +4,9 @@ require 'adminable/errors'
 
 require 'adminable/resource'
 
-require 'adminable/presenters/base_presenter'
-require 'adminable/presenters/entry_presenter'
-require 'adminable/presenters/entries_presenter'
+require 'adminable/presenters/base'
+require 'adminable/presenters/entry'
+require 'adminable/presenters/entries'
 
 require 'adminable/attributes/collection'
 require 'adminable/attributes/association'

@@ -7,7 +7,7 @@ module Adminable
       def initialize(reflection)
         @reflection = reflection
         @model = @reflection.klass
-        @all = Adminable::EntriesPresenter.new(@model)
+        @all = Adminable::Presenters::Entries.new(@model)
       end
     end
   end

@@ -19,7 +19,7 @@ module Adminable
 
     def index
       @q = @resource.model.ransack(params[:q])
-      @entries = Adminable::EntriesPresenter.new(
+      @entries = Adminable::Presenters::Entries.new(
         @q.result.includes(*@resource.includes).order(id: :desc)
                                               .page(params[:page]).per(25)
       )
@@ -100,7 +100,7 @@ module Adminable
     private
 
       def set_entry
-        @entry = Adminable::EntryPresenter.new(
+        @entry = Adminable::Presenters::Entry.new(
           @resource.model.find(params[:id])
         )
       end

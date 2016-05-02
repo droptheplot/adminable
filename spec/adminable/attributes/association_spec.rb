@@ -13,7 +13,7 @@ describe Adminable::Attributes::Association do
 
   describe '#all' do
     it 'returns EntriesPresenter with all entries for association model' do
-      expect(association.all).to be_a(Adminable::EntriesPresenter)
+      expect(association.all).to be_a(Adminable::Presenters::Entries)
     end
   end
 end
