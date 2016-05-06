@@ -12,10 +12,6 @@ module Adminable
       end
     end
 
-    def self.find_resource(name)
-      resources.find { |resource| resource.name == name }
-    end
-
     def self.resources_paths
       Dir[Rails.root.join('app/controllers/adminable/**/*_controller.rb')]
         .reject { |f| f['app/controllers/adminable/application_controller.rb'] }

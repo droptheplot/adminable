@@ -1,7 +1,9 @@
 module Adminable
   class ResourcesController < ApplicationController
     def initialize(*)
-      @resource = Adminable::Configuration.find_resource(resource_model)
+      @resource = Adminable::Configuration.resources.find do |resource|
+        resource == Adminable::Resource.new(resource_model_name)
+      end
 
       super
     end
@@ -105,7 +107,7 @@ module Adminable
         )
       end
 
-      def resource_model
+      def resource_model_name
         controller_path.sub(%r{^adminable/}, '')
       end
 

@@ -16,9 +16,7 @@ module Adminable
       end
 
       def link_to_self
-        unless Adminable::Configuration.find_resource(resource_name)
-          return to_name
-        end
+        return to_name unless resource
 
         view.link_to(
           to_name,
@@ -71,8 +69,12 @@ module Adminable
 
         attr_accessor :entry
 
-        def resource_name
-          entry.class.name.pluralize.underscore
+        def resource
+          Adminable::Configuration.resources.find do |resource|
+            resource == Adminable::Resource.new(
+              entry.class.name.pluralize.underscore
+            )
+          end
         end
     end
   end

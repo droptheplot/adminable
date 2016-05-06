@@ -27,5 +27,9 @@ module Adminable
     def attributes
       @attributes ||= Adminable::Attributes::Collection.new(@model)
     end
+
+    def ==(other)
+      name == other.name
+    end
   end
 end

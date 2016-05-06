@@ -37,4 +37,12 @@ describe Adminable::Resource do
       )
     end
   end
+
+  describe '#==' do
+    it 'returns true for resource with same name' do
+      expect(Adminable::Resource.new('users')).to eq(
+        Adminable::Resource.new('users')
+      )
+    end
+  end
 end
