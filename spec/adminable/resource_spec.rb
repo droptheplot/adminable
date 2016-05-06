@@ -18,26 +18,6 @@ describe Adminable::Resource do
     end
   end
 
-  describe '#index_attributes' do
-    resource = Adminable::Resource.new('user')
-
-    it 'returns correct hash of the resource attributes' do
-      expect(resource.attributes.index).not_to include(
-        :created_at, :updated_at
-      )
-    end
-  end
-
-  describe '#form_attributes' do
-    resource = Adminable::Resource.new('user')
-
-    it 'returns correct hash of the resource attributes' do
-      expect(resource.attributes.form).not_to include(
-        :id, :created_at, :updated_at
-      )
-    end
-  end
-
   describe '#==' do
     it 'returns true for resource with same name' do
       expect(Adminable::Resource.new('users')).to eq(

@@ -16,6 +16,26 @@ describe Adminable::Attributes::Collection do
     end
   end
 
+  describe '#index' do
+    resource = Adminable::Resource.new('user')
+
+    it 'returns correct hash of the resource attributes' do
+      expect(resource.attributes.index).not_to include(
+        :created_at, :updated_at
+      )
+    end
+  end
+
+  describe '#form' do
+    resource = Adminable::Resource.new('user')
+
+    it 'returns correct hash of the resource attributes' do
+      expect(resource.attributes.form).not_to include(
+        :id, :created_at, :updated_at
+      )
+    end
+  end
+
   describe '#configure' do
     it 'yields with no args' do
       expect { |block| collection.configure(&block) }.to yield_with_no_args
