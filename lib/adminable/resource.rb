@@ -1,7 +1,6 @@
 module Adminable
   class Resource
-    attr_reader :name, :model
-    attr_writer :attributes
+    attr_reader :name, :model, :attributes
 
     # @param name [String] resource name, usually same as the model name
     def initialize(name)
