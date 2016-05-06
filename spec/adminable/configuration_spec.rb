@@ -7,4 +7,22 @@ describe Adminable::Configuration do
       expect(resources.map(&:name)).to eq(%w(blog/comments blog/posts users))
     end
   end
+
+  describe '#redirect_root_path' do
+    describe 'if resources exists' do
+      it 'returns first resource url' do
+        expect(Adminable::Configuration.redirect_root_path).to eq(
+          'blog/comments'
+        )
+      end
+    end
+
+    describe 'if no resources exists' do
+      it 'returns main app root path' do
+        allow(Adminable::Configuration).to receive(:resources).and_return([])
+
+        expect(Adminable::Configuration.redirect_root_path).to eq('/')
+      end
+    end
+  end
 end
