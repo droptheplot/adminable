@@ -24,6 +24,14 @@ describe Adminable::Resource do
     end
   end
 
+  describe '#attributes' do
+    it 'returns attributes collection' do
+      expect(Adminable::Resource.new('users').attributes).to be_a(
+        Adminable::Attributes::Collection
+      )
+    end
+  end
+
   describe '#==' do
     it 'returns true for resource with same name' do
       expect(Adminable::Resource.new('users')).to eq(
