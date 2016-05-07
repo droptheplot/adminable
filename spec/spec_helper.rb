@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
+require 'faker'
 
 ActiveRecord::Migration.maintain_test_schema!
 
