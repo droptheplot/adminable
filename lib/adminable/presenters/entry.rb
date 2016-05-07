@@ -58,7 +58,7 @@ module Adminable
       end
 
       def method_missing(method_name, *args, &block)
-        entry.public_send(method_name, *args) { block if block_given? }
+        entry.public_send(method_name, *args, &block)
       end
 
       def respond_to_missing?(method_name, *)
