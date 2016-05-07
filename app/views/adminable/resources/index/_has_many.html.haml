@@ -1,2 +1,2 @@
 - if entry
-  = Adminable::EntriesPresenter.new(entry.public_send(attribute.name)).to_s
+  = Adminable::Presenters::Entries.new(entry.public_send(attribute.name)).to_s
