@@ -36,7 +36,7 @@ module Adminable
       end
 
       def index_partial_path
-        "index/#{type}"
+        "adminable/resources/index/#{type}"
       end
 
       def form_partial_path
