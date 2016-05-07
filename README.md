@@ -85,10 +85,10 @@ You can update attributes with simple DSL inside `set_attributes` block:
 
 ##### Attributes Parameters
 
-* `index` - *(true/false)* - Shows attribute on index page.
-* `form` - *(true/false)* - Shows attribute on new/edit page.
-* `center` - *(true/false)* - Adds `text-align: center` for attribute value on index page.
-* `search` - *(true/false)* - Enables search for this attribute.
+* `index` - (`true` or `false`) - Shows attribute on index page.
+* `form` - (`true` or `false`) - Shows attribute on new/edit page.
+* `center` - (`true` or `false`) - Adds `text-align: center` for attribute value on index page.
+* `search` - (`true` or `false`) - Enables search for this attribute.
 
 ##### Examples
 
