@@ -1,4 +1,2 @@
-- if entry.public_send(attribute.name)
-  = Adminable::Presenters::Entry.new(entry.public_send(attribute.name)).link_to_self
-- else
-  = "##{value}"
+- if value
+  = Adminable::Presenters::Entry.new(value).link_to_self
