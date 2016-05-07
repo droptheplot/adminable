@@ -13,7 +13,8 @@ module Adminable
     before_action do
       append_view_path(
         [
-          Adminable::Engine.root.join('app/views/adminable', controller_name),
+          Rails.root.join('app/views/adminable', controller_name),
+          Rails.root.join('app/views/adminable/resources'),
           Adminable::Engine.root.join('app/views/adminable/resources')
         ]
       )

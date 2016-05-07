@@ -28,7 +28,7 @@ describe Adminable::Attributes::Base do
 
     describe '#form_partial_path' do
       it 'returns correct path for form partial' do
-        expect(title.form_partial_path).to eq('adminable/resources/form/string')
+        expect(title.form_partial_path).to eq('form/string')
       end
     end
   end
