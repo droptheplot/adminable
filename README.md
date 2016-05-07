@@ -139,6 +139,16 @@ List of attributes with default parameters.
 | Belongs To |       |   +  |        |         |
 | Has Many   |       |   +  |        |         |
 
+## Generating Partials
+
+You can use generator to copy original partial to your application.
+
+`rails g adminable:partial [layout] [type] [resource]`
+
+* `layout` - `index` or `form`.
+* `type` - `string`, `text` etc. See [Built-in Attributes](#built-in-attributes).
+* `resource` - Use controller name (e.g. `users`) to replace partial only for single controller or leave blank to replace partials for all controllers.
+
 ## Contributing
 
 1. Fork it (https://github.com/droptheplot/adminable/fork)
