@@ -28,7 +28,7 @@ module Adminable
     end
 
     def ==(other)
-      name == other.name
+      other.is_a?(Adminable::Resource) && name == other.name
     end
   end
 end
