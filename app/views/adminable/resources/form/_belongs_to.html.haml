@@ -2,7 +2,7 @@
 = hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]", nil
 #clusterizeScrollArea.clusterize-scroll.associations
   #clusterizeContentArea.clusterize-content
-    - attribute.association.all.each do |association_entry|
+    - attribute.association.entries.each do |association_entry|
       .association
         %label.c-input.c-radio.m-a-0
           = radio_button_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]",
