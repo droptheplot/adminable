@@ -103,9 +103,8 @@ module Adminable
     private
 
       def set_entry
-        @entry = Adminable::Presenters::Entry.new(
-          @resource.model.find(params[:id])
-        )
+        entry ||= @resource.model.find(params[:id])
+        @entry = Adminable::Presenters::Entry.new(entry)
       end
 
       def resource_model_name

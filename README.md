@@ -149,6 +149,20 @@ You can use generator to copy original partial to your application.
 * `type` - `string`, `text` etc. See [Built-in Attributes](#built-in-attributes).
 * `resource` - Use controller name (e.g. `users`) to replace partial only for single controller or leave blank to replace partials for all controllers.
 
+## F.A.Q
+
+##### If model to_param method was overridden
+
+```ruby
+class Adminable::Blog::PostsController < Adminable::ResourcesController
+  def set_entry
+    entry = @resource.model.find_by(slug: params[:id])
+
+    super
+  end
+end
+```
+
 ## Contributing
 
 1. Fork it (https://github.com/droptheplot/adminable/fork)
