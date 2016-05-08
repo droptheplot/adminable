@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root 'application#welcome'
+  root to: redirect('/admin')
 end
