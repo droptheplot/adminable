@@ -1,5 +1,7 @@
 module Adminable
   class Resource
+    include Comparable
+
     attr_reader :name, :model, :attributes
 
     # @param name [String] resource name, usually same as the model name
@@ -27,8 +29,8 @@ module Adminable
       @attributes ||= Adminable::Attributes::Collection.new(@model)
     end
 
-    def ==(other)
-      other.is_a?(Adminable::Resource) && name == other.name
+    def <=>(other)
+      other.is_a?(Adminable::Resource) && name <=> other.name
     end
   end
 end
