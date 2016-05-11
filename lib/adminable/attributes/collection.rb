@@ -6,9 +6,16 @@ module Adminable
 
       def_delegators :@all, :[], :<<, :each, :first, :last, :push, :unshift
 
-      attr_reader :model, :all
+      # @return [ActiveRecord::Base] activerecord model class
+      # @example
+      #   Adminable::Attributes::Collection.new(User).model
+      #   # => User(id: integer, email: string, password_hash: string)
+      attr_reader :model
 
-      # @param model [Class] model from Rails application e.g. `User` or `Post`
+      # @return [Array] attributes from activerecord model
+      attr_reader :all
+
+      # @param model [ActiveRecord::Base] activerecord model class
       def initialize(model)
         @model = model
         @all ||= columns + associations
@@ -66,6 +73,10 @@ module Adminable
       # Changes options for given attribute
       # @param name [Symbol] name of attribute e.g. `:title`
       # @param options [Hash] options to update
+      # @example
+      #   set_attributes do |attributes|
+      #     attributes.set :title, search: true
+      #   end
       def set(*args)
         options = args.extract_options!
         names = args
@@ -79,7 +90,7 @@ module Adminable
 
       # Finds attribute by name
       # @param name [Symbol] name of attribute e.g. `:title`
-      # @return [Object] e.g. `Adminable::Attribute::Types::String` for `:title`
+      # @return [Adminable::Attribute::Types::String]
       def get(name)
         @all.find { |attribute| attribute.name == name } ||
           raise(
@@ -91,6 +102,10 @@ module Adminable
       # Adds new attribute to collection
       # @param name [Symbol] name of attribute e.g. `:title`
       # @param type [Symbol] type of attribute e.g. `:string`
+      # @example
+      #   set_attributes do |attributes|
+      #     attributes.add :password, :string, index: false
+      #   end
       def add(name, type, options = {})
         @all << resolve(type).new(name, **options)
       end
