@@ -52,7 +52,7 @@ module Adminable
             form: %i(id created_at updated_at).exclude?(name),
             required: false,
             center: %i(integer boolean float decimal).include?(type),
-            wysiwyg: false
+            wysiwyg: %i(text).include?(type)
           }
         end
     end
