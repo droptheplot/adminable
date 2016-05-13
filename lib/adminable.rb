@@ -9,6 +9,8 @@ require 'adminable/presenters/entry'
 require 'adminable/presenters/entries'
 require 'adminable/presenters/attributes'
 
+require 'adminable/attribute_collector'
+
 require 'adminable/attributes/base'
 
 require 'adminable/attributes/types/belongs_to'
