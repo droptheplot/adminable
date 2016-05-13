@@ -20,8 +20,16 @@ module Adminable
           name.underscore.pluralize
         end
 
-        def resource_class
+        def resource_class_name
           "adminable/#{resource_name}".classify.pluralize
+        end
+
+        def model_class
+          name.classify.constantize
+        end
+
+        def attributes
+          Adminable::AttributeCollector.new(model_class).all
         end
     end
   end
