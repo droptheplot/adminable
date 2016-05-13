@@ -9,9 +9,6 @@ module Adminable
       # @return [Hash] default options for attribute
       attr_reader :options
 
-      # @return [Adminable::Attributes::Association]
-      attr_reader :association
-
       # @param name [Symbol] attribute name e.g. `:id` or `:title`
       # @param options [Hash] options, see {default_options}
       def initialize(name, options = {})
@@ -19,10 +16,6 @@ module Adminable
 
         @name = name.to_sym
         @options = default_options.merge(options)
-
-        @association = Adminable::Attributes::Association.new(
-          options[:association]
-        ) if options[:association]
       end
 
       # @return [Symbol] attribute form key

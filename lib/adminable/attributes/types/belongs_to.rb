@@ -3,7 +3,7 @@ module Adminable
     module Types
       class BelongsTo < Base
         def key
-          @association.reflection.foreign_key
+          "#{name}_id"
         end
       end
     end

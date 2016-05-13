@@ -4,19 +4,19 @@
   = link_to t('adminable.buttons.new', resource: @resource.model.model_name.human),
     new_polymorphic_path(@resource.model), class: 'btn btn-primary pull-md-right m-b-2'
 .row
-  %div{ :class => (@resource.attributes.search.any? ? 'col-md-9' : 'col-md-12') }
+  %div{ :class => (@attributes.search.any? ? 'col-md-9' : 'col-md-12') }
     .table-responsive.m-b-3
       %table.table.table-striped
         %thead
           %tr
-            - @resource.attributes.index.each do |attribute|
+            - @attributes.index.each do |attribute|
               %th.text-nowrap{ :class => ('text-md-center' if attribute.options[:center]) }
                 = sort_link(@q, attribute.name, hide_indicator: true)
             %th
         %tbody
           - @entries.each do |entry|
             %tr
-              - @resource.attributes.index.each do |attribute|
+              - @attributes.index.each do |attribute|
                 %td{ :class => ('text-md-center' if attribute.options[:center]) }
                   = render attribute.index_partial_path, entry: entry,
                     attribute: attribute, value: entry.public_send(attribute.name)
@@ -25,9 +25,9 @@
                 = entry.link_to_delete_small
           - if @entries.empty?
             %tr
-              %td.text-md-center.text-muted{ :colspan => @resource.attributes.index.size + 1 }
+              %td.text-md-center.text-muted{ :colspan => @attributes.index.size + 1 }
                 No data available
-  - if @resource.attributes.search.any?
+  - if @attributes.search.any?
     .col-md-3.hidden-sm-down
       = render 'search'
 = paginate @entries, views_prefix: 'adminable'

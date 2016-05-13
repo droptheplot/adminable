@@ -3,7 +3,7 @@ module Adminable
     module Types
       class HasMany < Base
         def key
-          @key = "#{@name.to_s.singularize}_ids"
+          "#{@name.to_s.singularize}_ids"
         end
 
         def strong_parameter

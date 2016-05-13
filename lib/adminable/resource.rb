@@ -15,20 +15,6 @@ module Adminable
       @route ||= @model.name.underscore.pluralize.tr('/', '_')
     end
 
-    # @return [Array] of associations names for ActiveRecord queries
-    def includes
-      @includes ||= if attributes.associations.present?
-                      attributes.associations.map(&:name)
-                    else
-                      false
-                    end
-    end
-
-    # @return [Array] collection, see {Adminable::Attributes::Collection}
-    def attributes
-      @attributes ||= Adminable::Attributes::Collection.new(@model)
-    end
-
     def <=>(other)
       other.is_a?(Adminable::Resource) && name <=> other.name
     end

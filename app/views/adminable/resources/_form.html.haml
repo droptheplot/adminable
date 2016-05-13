@@ -1,5 +1,5 @@
 = form_for @entry, method: (@entry.persisted? ? :patch : :post) do |f|
-  - @resource.attributes.form.each do |attribute|
+  - @attributes.form.each do |attribute|
     %fieldset.form-group
       = render attribute.form_partial_path, entry: @entry, attribute: attribute
   %fieldset.form-group
