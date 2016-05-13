@@ -1,15 +1,15 @@
 module Adminable
-  module Attributes
-    # Base class for attributes types
+  module Fields
+    # Base class for fields
     # @note Cannot be initialized
     class Base
-      # @return [Symbol] attribute name
+      # @return [Symbol] field name
       attr_reader :name
 
-      # @return [Hash] default options for attribute
+      # @return [Hash] default options for field
       attr_reader :options
 
-      # @param name [Symbol] attribute name e.g. `:id` or `:title`
+      # @param name [Symbol] field name e.g. `:id` or `:title`
       # @param options [Hash] options, see {default_options}
       def initialize(name, options = {})
         raise 'Base class cannot be initialized' if self.class == Base
@@ -18,7 +18,7 @@ module Adminable
         @options = default_options.merge(options)
       end
 
-      # @return [Symbol] attribute form key
+      # @return [Symbol] field form key
       def key
         @key ||= name
       end
@@ -33,20 +33,20 @@ module Adminable
         @ransack_name ||= "#{name}_cont"
       end
 
-      # @return [Symbol] attribute type
+      # @return [Symbol] field type
       # @example
-      #   Adminable::Attributes::Types::String.new(:title).type
+      #   Adminable::Fields::String.new(:title).type
       #   # => :string
       def type
         @type ||= self.class.name.demodulize.underscore.to_sym
       end
 
-      # @return [String] path to attribute index partial
+      # @return [String] path to field index partial
       def index_partial_path
         "index/#{type}"
       end
 
-      # @return [String] path to attribute form partial
+      # @return [String] path to field form partial
       def form_partial_path
         "form/#{type}"
       end

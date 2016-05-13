@@ -1,10 +1,10 @@
 class Adminable::Blog::PostsController < Adminable::ResourcesController
-  def attributes
+  def fields
     [
-      Adminable::Attributes::Types::String.new(:title),
-      Adminable::Attributes::Types::Text.new(:body),
-      Adminable::Attributes::Types::HasMany.new(:blog_comments),
-      Adminable::Attributes::Types::BelongsTo.new(:user)
+      Adminable::Fields::String.new(:title),
+      Adminable::Fields::Text.new(:body),
+      Adminable::Fields::HasMany.new(:blog_comments),
+      Adminable::Fields::BelongsTo.new(:user)
     ]
   end
 end

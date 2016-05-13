@@ -2,7 +2,7 @@ module Adminable
   class Resource
     include Comparable
 
-    attr_reader :name, :model, :attributes
+    attr_reader :name, :model, :fields
 
     # @param name [String] resource name, usually same as the model name
     def initialize(name)

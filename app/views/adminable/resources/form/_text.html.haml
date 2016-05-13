@@ -1,4 +1,4 @@
-= render 'adminable/shared/label', attribute: attribute
-= text_area_tag "#{@resource.model.model_name.param_key}[#{attribute.name}]",
-  entry[attribute.name],
-  class: "form-control #{ 'wysiwyg' if attribute.options[:wysiwyg] }", rows: 5
+= render 'adminable/shared/label', field: field
+= text_area_tag "#{@resource.model.model_name.param_key}[#{field.name}]",
+  entry[field.name],
+  class: "form-control #{ 'wysiwyg' if field.options[:wysiwyg] }", rows: 5

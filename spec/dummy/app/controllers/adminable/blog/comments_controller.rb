@@ -1,9 +1,9 @@
 class Adminable::Blog::CommentsController < Adminable::ResourcesController
-  def attributes
+  def fields
     [
-      Adminable::Attributes::Types::Text.new(:body),
-      Adminable::Attributes::Types::BelongsTo.new(:blog_post),
-      Adminable::Attributes::Types::BelongsTo.new(:user)
+      Adminable::Fields::Text.new(:body),
+      Adminable::Fields::BelongsTo.new(:blog_post),
+      Adminable::Fields::BelongsTo.new(:user)
     ]
   end
 end

@@ -1,10 +1,10 @@
 module Adminable
-  class AttributesNotDefined < StandardError
+  class FieldsNotDefined < StandardError
   end
 
-  class AttributeNotImplemented < StandardError
+  class FieldNotImplemented < StandardError
   end
 
-  class AttributeNotFound < StandardError
+  class FieldNotFound < StandardError
   end
 end

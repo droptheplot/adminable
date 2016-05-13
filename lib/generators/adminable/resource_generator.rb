@@ -28,8 +28,8 @@ module Adminable
           name.classify.constantize
         end
 
-        def attributes
-          Adminable::AttributeCollector.new(model_class).all
+        def fields
+          Adminable::FieldCollector.new(model_class).all
         end
     end
   end

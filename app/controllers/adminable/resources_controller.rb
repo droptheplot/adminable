@@ -9,7 +9,7 @@ module Adminable
     end
 
     before_action :set_entry, only: [:edit, :update, :destroy]
-    before_action :set_attributes, only: [:index, :new, :edit, :create, :update]
+    before_action :set_fields, only: [:index, :new, :edit, :create, :update]
 
     before_action do
       append_view_path(
@@ -82,8 +82,8 @@ module Adminable
         @entry = Adminable::Presenters::Entry.new(entry)
       end
 
-      def set_attributes
-        @attributes = Adminable::Presenters::Attributes.new(attributes)
+      def set_fields
+        @fields = Adminable::Presenters::Fields.new(fields)
       end
 
       def resource_model_name
@@ -92,20 +92,20 @@ module Adminable
 
       def resource_params
         params.require(@resource.model.model_name.param_key).permit(
-          *attributes.map(&:strong_parameter)
+          *fields.map(&:strong_parameter)
         )
       end
 
-      def attributes
-        raise Adminable::AttributesNotDefined
+      def fields
+        raise Adminable::FieldsNotDefined
       end
 
       def includes
-        association_attributes = attributes.select do |attribute|
-          %i(belongs_to has_many).include?(attribute.type)
+        association_fields = fields.select do |field|
+          %i(belongs_to has_many).include?(field.type)
         end
 
-        association_attributes.any? ? association_attributes.map(&:name) : false
+        association_fields.any? ? association_fields.map(&:name) : false
       end
   end
 end

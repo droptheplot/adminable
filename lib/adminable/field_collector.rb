@@ -1,12 +1,12 @@
 module Adminable
-  class AttributeCollector
+  class FieldCollector
     # @return [ActiveRecord::Base] activerecord model class
     # @example
-    #   Adminable::Attributes::Collection.new(User).model
+    #   Adminable::Fields::Collection.new(User).model
     #   # => User(id: integer, email: string, password_hash: string)
     attr_reader :model
 
-    # @return [Array] attributes from activerecord model
+    # @return [Array] fields from activerecord model
     attr_reader :all
 
     # @param model [ActiveRecord::Base] activerecord model class
@@ -15,24 +15,24 @@ module Adminable
       @all ||= columns + associations
     end
 
-    # Collects attributes from model columns
+    # Collects fields from model columns
     # @return [Array]
     #
     # rubocop:disable Metrics/MethodLength
     def columns
-      @columns ||= [].tap do |attributes|
+      @columns ||= [].tap do |fields|
         @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|
-          attributes << resolve(column.type, column.name)
+          fields << resolve(column.type, column.name)
         end
       end
     end
 
-    # Collects attributes from model associations
+    # Collects fields from model associations
     # @return [Array]
     def associations
-      @associations ||= [].tap do |attributes|
+      @associations ||= [].tap do |fields|
         @model.reflect_on_all_associations.each do |association|
-          attributes << resolve(association.macro, association.name)
+          fields << resolve(association.macro, association.name)
         end
       end
     end
@@ -40,7 +40,7 @@ module Adminable
     private
 
       def resolve(type, name)
-        class_name = "adminable/attributes/types/#{type}".classify
+        class_name = "adminable/fields/#{type}".classify
         "#{class_name}.new(:#{name})"
       end
 

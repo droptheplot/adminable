@@ -1,11 +1,11 @@
-= render 'adminable/shared/label', attribute: attribute
-= hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]", nil
+= render 'adminable/shared/label', field: field
+= hidden_field_tag "#{@resource.model.model_name.param_key}[#{field.key}]", nil
 #clusterizeScrollArea.clusterize-scroll.associations
   #clusterizeContentArea.clusterize-content
-    - Adminable::Presenters::Entries.new(entry.association(attribute.name).klass.all).each do |association_entry|
+    - Adminable::Presenters::Entries.new(entry.association(field.name).klass.all).each do |association_entry|
       .association
         %label.c-input.c-radio.m-a-0
-          = radio_button_tag "#{@resource.model.model_name.param_key}[#{attribute.key}]",
-            association_entry.id, entry.send(attribute.key) == association_entry.id
+          = radio_button_tag "#{@resource.model.model_name.param_key}[#{field.key}]",
+            association_entry.id, entry.send(field.key) == association_entry.id
           %span.c-indicator
           = association_entry.link_to_self

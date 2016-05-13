@@ -1,9 +1,9 @@
 .card.bg-faded
   .card-block
     = search_form_for @q do |f|
-      - @attributes.search.each do |attribute|
+      - @fields.search.each do |field|
         %fieldset.form-group
-          = f.label attribute.ransack_name, @resource.model.human_attribute_name(attribute.name),
+          = f.label field.ransack_name, @resource.model.human_field_name(field.name),
             class: 'text-muted'
-          = f.search_field attribute.ransack_name, class: 'form-control'
+          = f.search_field field.ransack_name, class: 'form-control'
       = f.submit t('adminable.buttons.search'), class: 'btn btn-primary-outline'
