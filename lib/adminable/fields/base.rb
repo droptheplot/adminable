@@ -55,12 +55,12 @@ module Adminable
 
         def default_options
           {
-            index: %i(belongs_to has_many).exclude?(type),
-            form: %i(id created_at updated_at).exclude?(name),
-            center: %i(integer boolean float decimal).include?(type),
-            wysiwyg: %i(text).include?(type),
+            index: true,
+            form: true,
+            wysiwyg: false,
             search: false,
-            required: false
+            required: false,
+            center: %i(integer boolean float decimal).include?(type)
           }
         end
     end
