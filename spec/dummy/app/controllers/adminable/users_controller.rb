@@ -2,9 +2,10 @@ class Adminable::UsersController < Adminable::ResourcesController
   def fields
     [
       Adminable::Fields::String.new(:email),
-      Adminable::Fields::Datetime.new(:created_at),
       Adminable::Fields::HasMany.new(:blog_posts),
-      Adminable::Fields::HasMany.new(:blog_comments)
+      Adminable::Fields::HasMany.new(:blog_comments),
+      Adminable::Fields::Datetime.new(:created_at, form: false),
+      Adminable::Fields::String.new(:password, index: false)
     ]
   end
 
