@@ -3,4 +3,4 @@
   = check_box_tag "#{@resource.model.model_name.param_key}[#{field.name}]", 1,
     entry.send(field.key)
   %span.c-indicator
-  = @resource.model.human_field_name(field.name)
+  = @resource.model.human_attribute_name(field.name)

@@ -3,7 +3,7 @@
     = search_form_for @q do |f|
       - @fields.search.each do |field|
         %fieldset.form-group
-          = f.label field.ransack_name, @resource.model.human_field_name(field.name),
+          = f.label field.ransack_name, @resource.model.human_attribute_name(field.name),
             class: 'text-muted'
           = f.search_field field.ransack_name, class: 'form-control'
       = f.submit t('adminable.buttons.search'), class: 'btn btn-primary-outline'
