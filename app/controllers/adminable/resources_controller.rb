@@ -83,7 +83,7 @@ module Adminable
       end
 
       def set_fields
-        @fields = Adminable::Presenters::Fields.new(fields)
+        @fields = Adminable::Decorators::Fields.new(fields)
       end
 
       def resource_model_name

@@ -7,7 +7,8 @@ require 'adminable/resource'
 require 'adminable/presenters/base'
 require 'adminable/presenters/entry'
 require 'adminable/presenters/entries'
-require 'adminable/presenters/fields'
+
+require 'adminable/decorators/fields'
 
 require 'adminable/field_collector'
 
