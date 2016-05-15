@@ -11,7 +11,7 @@ Simple admin interface for Ruby on Rails applications.
 
 ## Features
 
-* Built with common Rails controllers with a small DSL.
+* Built with common Rails controllers and views without DSL.
 * Supports namespaced models.
 * Has simple search with [Ransack](https://github.com/activerecord-hackery/ransack).
 * Uses [Bootstrap](https://github.com/twbs/bootstrap) 4.0.
@@ -43,7 +43,7 @@ $ gem install adminable
 
 ## Getting Started
 
-First things first. Add routes and create `application_controller.rb` class using generator:
+First things first. Add routes and create `adminable/application_controller.rb` class using generator:
 
 ```bash
 rails g adminable:install
@@ -51,93 +51,80 @@ rails g adminable:install
 # => insert config/routes.rb
 ```
 
-#### Generating Resources
+### Generating Resources
 
-For example you have model `User`, then run:
+Assume you have model `User`, then run:
 
 ```bash
-rails g adminable:resource user
+rails g adminable:resource users
 # => create  app/controllers/adminable/users_controller.rb
 ```
 
 For namespaced models, like `Blog::Post`, use:
 
 ```bash
-rails g adminable:resource blog/post
+rails g adminable:resource blog/posts
 # => create  app/controllers/adminable/blog/posts_controller.rb
 ```
 
-#### Customizing Attributes
+### Customizing Fields
 
-You can update attributes with simple DSL inside `set_attributes` block:
-
-##### For existing attributes
-
-```ruby
-  set(name, options = {})
-```
-
-##### For new attributes
-
-```ruby
-  add(name, type, options = {})
-```
-
-##### Attributes Parameters
-
-* `index` - (`true` or `false`) - Shows attribute on index page.
-* `form` - (`true` or `false`) - Shows attribute on new/edit page.
-* `center` - (`true` or `false`) - Adds `text-align: center` for attribute value on index page.
-* `search` - (`true` or `false`) - Enables search for this attribute.
-
-##### Examples
+Change fields as you like inside `fields` method array:
 
 ```ruby
 class Adminable::Blog::PostsController < Adminable::ResourcesController
-  set_attributes do |attributes|
-    # Enables search for title column
-    attributes.set :title, search: true
-
-    # Hides title from new and edit pages
-    attributes.set :title, form: true
-
-    # Adds wysiwyg plugin and hides from index table
-    attributes.set :text, wysiwyg: true, index: false
-
-    # Adds new attribute `password` with type `string` and some options
-    attributes.add :password, :string, wysiwyg: true, index: false
-
-    # Adds new attribute `author`
-    attributes << Adminable::Attributes::Types::String.new(:author)
-
-    # Allows search for multiple attributes
-    attributes.set :title, :body, search: true
+  def fields
+    [
+      Adminable::Fields::String.new(:title),
+      Adminable::Fields::Text.new(:body),
+      Adminable::Fields::Float.new(:rating, form: false),
+      Adminable::Fields::Boolean.new(:published),
+      Adminable::Fields::BelongsTo.new(:user),
+      Adminable::Fields::HasMany.new(:blog_comments)
+    ]
   end
 end
 ```
 
-##### See Also
+### Fields Parameters
+
+#### index
+`true` or `false`, default: `true`.
+
+Shows field on index page.
+
+#### form
+`true` or `false`, default: `true`.
+
+Shows field on new/edit page.
+
+#### center
+`true` or `false`, default `true` for `integer`, `boolean`, `float` and `decimal` fields, `false` otherwise.
+
+Adds `text-align: center` for field value on index page.
+
+#### search
+`true` or `false`, default: `false`.
+Enables search for this field.
+
+### See Also
 
 * Configured controller for Devise model: [app/controllers/adminable/users_controller.rb](https://github.com/droptheplot/adminable/blob/master/spec/dummy/app/controllers/adminable/users_controller.rb)
 
-## Built-in Attributes
+## Built-in Fields
 
-List of attributes with default parameters.
-
-|            | index | form | center | wysiwyg |
-|------------|-------|------|--------|---------|
-| String     |   +   |   +  |        |         |
-| Text       |   +   |   +  |        |    +    |
-| Integer    |   +   |   +  |    +   |         |
-| Float      |   +   |   +  |    +   |         |
-| Decimal    |   +   |   +  |    +   |         |
-| Date       |   +   |   +  |        |         |
-| DateTime   |   +   |   +  |        |         |
-| Time       |   +   |   +  |        |         |
-| Timestamp  |   +   |   +  |        |         |
-| Boolean    |   +   |   +  |    +   |         |
-| Belongs To |       |   +  |        |         |
-| Has Many   |       |   +  |        |         |
+* String
+* Text
+* Integer
+* Float     
+* Decimal
+* Date
+* DateTime
+* Time
+* Timestamp
+* Boolean
+* Belongs To
+* Has Many
 
 ## Generating Partials
 
@@ -146,7 +133,7 @@ You can use generator to copy original partial to your application.
 `rails g adminable:partial [layout] [type] [resource]`
 
 * `layout` - `index` or `form`.
-* `type` - `string`, `text` etc. See [Built-in Attributes](#built-in-attributes).
+* `type` - `string`, `text` etc. See [Built-in Fields](#built-in-fields).
 * `resource` - Use controller name (e.g. `users`) to replace partial only for single controller or leave blank to replace partials for all controllers.
 
 ## F.A.Q
