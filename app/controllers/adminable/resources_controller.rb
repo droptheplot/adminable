@@ -9,6 +9,7 @@ module Adminable
     end
 
     before_action :set_entry, only: [:edit, :update, :destroy]
+    before_action :set_fields, only: [:index, :new, :edit, :create, :update]
 
     before_action do
       append_view_path(
@@ -23,7 +24,7 @@ module Adminable
     def index
       @q = @resource.model.ransack(params[:q])
       @entries = Adminable::Presenters::Entries.new(
-        @q.result.includes(*@resource.includes).order(id: :desc)
+        @q.result.includes(*includes).order(id: :desc)
                                               .page(params[:page]).per(25)
       )
     end
@@ -74,37 +75,15 @@ module Adminable
                   )
     end
 
-    # Calls from children controller class to manage resource attributes
-    # @example Update attributes for Adminable::Blog::PostsController
-    #   # app/controllers/adminable/blog/posts_controller.rb
-    #
-    #   set_attributes do |attributes|
-    #     # Enables search for title column
-    #     attributes.set :title, search: true
-    #
-    #     # Hides title from new and edit pages
-    #     attributes.set :title, form: true
-    #
-    #     # Adds wysiwyg plugin and hides from index table
-    #     attributes.set :text, wysiwyg: true, index: false
-    #
-    #     # Adds new attribute `password` with type `string` and some options
-    #     attributes.add :password, :string, wysiwyg: true, index: false
-    #
-    #     # Adds new attribute `author`
-    #     attributes << Adminable::Attributes::Types::String.new(:author)
-    #   end
-    def self.set_attributes
-      before_action do
-        @resource.attributes.configure { yield(@resource.attributes) }
-      end
-    end
-
     private
 
       def set_entry
         entry ||= @resource.model.find(params[:id])
         @entry = Adminable::Presenters::Entry.new(entry)
+      end
+
+      def set_fields
+        @fields = Adminable::Presenters::Fields.new(fields)
       end
 
       def resource_model_name
@@ -113,8 +92,20 @@ module Adminable
 
       def resource_params
         params.require(@resource.model.model_name.param_key).permit(
-          *@resource.attributes.form.map(&:strong_parameter)
+          *fields.map(&:strong_parameter)
         )
+      end
+
+      def fields
+        raise Adminable::FieldsNotDefined
+      end
+
+      def includes
+        association_fields = fields.select do |field|
+          %i(belongs_to has_many).include?(field.type)
+        end
+
+        association_fields.any? ? association_fields.map(&:name) : false
       end
   end
 end

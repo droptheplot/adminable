@@ -1,6 +1,6 @@
 %label.c-input.c-checkbox
-  = hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.name}]", 0
-  = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.name}]", 1,
-    entry.send(attribute.key)
+  = hidden_field_tag "#{@resource.model.model_name.param_key}[#{field.name}]", 0
+  = check_box_tag "#{@resource.model.model_name.param_key}[#{field.name}]", 1,
+    entry.send(field.key)
   %span.c-indicator
-  = @resource.model.human_attribute_name(attribute.name)
+  = @resource.model.human_attribute_name(field.name)

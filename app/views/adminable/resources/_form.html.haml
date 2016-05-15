@@ -1,7 +1,7 @@
 = form_for @entry, method: (@entry.persisted? ? :patch : :post) do |f|
-  - @resource.attributes.form.each do |attribute|
+  - @fields.form.each do |field|
     %fieldset.form-group
-      = render attribute.form_partial_path, entry: @entry, attribute: attribute
+      = render field.form_partial_path, entry: @entry, field: field
   %fieldset.form-group
     = f.submit t('adminable.buttons.submit'), class: 'btn btn-primary'
     = link_to t('adminable.buttons.back'), polymorphic_path(@resource.model),

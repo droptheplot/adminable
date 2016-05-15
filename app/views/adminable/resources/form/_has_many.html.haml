@@ -1,12 +1,12 @@
-= render 'adminable/shared/label', attribute: attribute
-= hidden_field_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]", nil
+= render 'adminable/shared/label', field: field
+= hidden_field_tag "#{@resource.model.model_name.param_key}[#{field.key}][]", nil
 #clusterizeScrollArea.clusterize-scroll.associations
   #clusterizeContentArea.clusterize-content
-    - attribute.association.entries.each do |association_entry|
+    - Adminable::Presenters::Entries.new(entry.association(field.name).klass.all).each do |association_entry|
       .association
         %label.c-input.c-checkbox.m-a-0
-          = check_box_tag "#{@resource.model.model_name.param_key}[#{attribute.key}][]",
-            association_entry.id, entry.send(attribute.key).include?(association_entry.id)
+          = check_box_tag "#{@resource.model.model_name.param_key}[#{field.key}][]",
+            association_entry.id, entry.send(field.key).include?(association_entry.id)
           %span.c-indicator
           = link_to association_entry.to_name,
             edit_polymorphic_path(association_entry),

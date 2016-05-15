@@ -1,2 +1,7 @@
-class <%= resource_class %>Controller < Adminable::ResourcesController
+class <%= resource_class_name %>Controller < Adminable::ResourcesController
+  def fields
+    [
+      <%= fields.join(",\n\t\t\t") %>
+    ]
+  end
 end

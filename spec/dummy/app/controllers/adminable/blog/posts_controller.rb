@@ -1,6 +1,12 @@
 class Adminable::Blog::PostsController < Adminable::ResourcesController
-  set_attributes do |attributes|
-    attributes.set :created_at, index: false, form: false
-    attributes.set :updated_at, index: false, form: false
+  def fields
+    [
+      Adminable::Fields::String.new(:title),
+      Adminable::Fields::Text.new(:body),
+      Adminable::Fields::Float.new(:rating),
+      Adminable::Fields::Boolean.new(:published),
+      Adminable::Fields::BelongsTo.new(:user),
+      Adminable::Fields::HasMany.new(:blog_comments)
+    ]
   end
 end
