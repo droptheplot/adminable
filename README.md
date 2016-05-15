@@ -75,6 +75,7 @@ Change fields as you like inside `fields` method array:
 class Adminable::Blog::PostsController < Adminable::ResourcesController
   def fields
     [
+      Adminable::Fields::Integer.new(:id, form: false),
       Adminable::Fields::String.new(:title),
       Adminable::Fields::Text.new(:body),
       Adminable::Fields::Float.new(:rating, form: false),
@@ -105,6 +106,7 @@ Adds `text-align: center` for field value on index page.
 
 #### search
 `true` or `false`, default: `false`.
+
 Enables search for this field.
 
 ### See Also
