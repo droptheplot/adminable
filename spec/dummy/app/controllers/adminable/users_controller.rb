@@ -1,6 +1,7 @@
 class Adminable::UsersController < Adminable::ResourcesController
   def fields
     [
+      Adminable::Fields::Integer.new(:id, form: false),
       Adminable::Fields::String.new(:email),
       Adminable::Fields::HasMany.new(:blog_posts),
       Adminable::Fields::HasMany.new(:blog_comments),
