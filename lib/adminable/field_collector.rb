@@ -17,8 +17,6 @@ module Adminable
 
     # Collects fields from model columns
     # @return [Array]
-    #
-    # rubocop:disable Metrics/MethodLength
     def columns
       @columns ||= [].tap do |fields|
         @model.columns.reject { |a| a.name.match(/_id$/) }.each do |column|

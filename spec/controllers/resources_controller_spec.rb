@@ -10,9 +10,9 @@ describe Adminable::ResourcesController do
 
     describe '#fields' do
       it 'raises error if not overridden' do
-        expect{
+        expect do
           broken_controller.instance_eval { fields }
-        }.to raise_error(Adminable::FieldsNotDefined)
+        end.to raise_error(Adminable::FieldsNotDefined)
       end
     end
   end
