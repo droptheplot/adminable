@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :blog_comments, class_name: 'Blog::Comment', foreign_key: 'user_id'
   has_many :blog_posts, class_name: 'Blog::Post', foreign_key: 'user_id'
+
+  has_one :profile
 end
