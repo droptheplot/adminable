@@ -4,7 +4,9 @@ describe Adminable::Configuration do
       resources = Adminable::Configuration.resources
 
       expect(resources).to all(be_a(Adminable::Resource))
-      expect(resources.map(&:name)).to eq(%w(blog/comments blog/posts users))
+      expect(resources.map(&:name)).to eq(
+        %w(blog/comments blog/posts profiles users)
+      )
     end
   end
 
