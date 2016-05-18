@@ -1,8 +1,10 @@
 module Adminable
   module Presenters
     class Entry < Base
-      def initialize(entry)
+      def initialize(entry, field: nil)
         @entry = entry
+        @field = field
+        @value = entry.public_send(field.name) if field
       end
 
       def to_name
@@ -55,6 +57,22 @@ module Adminable
             confirm: I18n.t('adminable.ui.confirm')
           }
         )
+      end
+
+      def has_one_value
+        association = @entry.association(@field.name).klass
+
+        if @value
+          Adminable::Presenters::Entry(@value).link_to_self
+        else
+          view.link_to(
+            I18n.t(
+              'adminable.ui.no_has_one',
+              resource: association.model_name.human
+            ),
+            polymorphic_path(association),
+          )
+        end
       end
 
       def method_missing(method_name, *args, &block)
