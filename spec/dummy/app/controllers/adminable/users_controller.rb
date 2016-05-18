@@ -6,7 +6,8 @@ class Adminable::UsersController < Adminable::ResourcesController
       Adminable::Fields::HasMany.new(:blog_posts),
       Adminable::Fields::HasMany.new(:blog_comments),
       Adminable::Fields::Datetime.new(:created_at, form: false),
-      Adminable::Fields::String.new(:password, index: false)
+      Adminable::Fields::String.new(:password, index: false),
+      Adminable::Fields::HasOne.new(:profile)
     ]
   end
 
