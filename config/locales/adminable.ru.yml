@@ -5,6 +5,7 @@ ru:
       confirm: Вы уверены?
       not_selected: Не выбрано
       and_more: и еще %{size}.
+      no_has_one: "%{resource} не выбран."
     buttons:
       submit: Сохранить
       back: Назад
