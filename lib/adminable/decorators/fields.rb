@@ -1,6 +1,6 @@
 module Adminable
   module Decorators
-    class Fields < SimpleDelegator
+    class Fields < DelegateClass(Array)
       def index
         select { |field| field.options[:index] }
       end
