@@ -5,7 +5,7 @@ module Adminable
       include Adminable::Presenters::Helpers
 
       def initialize(entry, field: nil)
-        @entry = entry
+        super(entry)
         @field = field
         @value = entry.public_send(field.name) if field
       end
@@ -13,7 +13,7 @@ module Adminable
       def to_name
         %i(name title email login id).each do |method_name|
           begin
-            return entry.public_send(method_name)
+            return __getobj__.public_send(method_name)
           rescue NoMethodError
             next
           end
@@ -25,7 +25,7 @@ module Adminable
 
         view.link_to(
           to_name,
-          edit_polymorphic_path(entry),
+          edit_polymorphic_path(__getobj__),
           target: '_blank'
         )
       end
@@ -33,7 +33,7 @@ module Adminable
       def link_to_delete
         view.link_to(
           I18n.t('adminable.buttons.delete'),
-          polymorphic_path(@entry),
+          polymorphic_path(__getobj__),
           class: 'btn btn-danger-outline pull-xs-right',
           method: :delete,
           data: {
@@ -45,7 +45,7 @@ module Adminable
       def link_to_edit_small
         view.link_to(
           I18n.t('adminable.buttons.edit'),
-          edit_polymorphic_path(entry),
+          edit_polymorphic_path(__getobj__),
           class: 'label label-primary'
         )
       end
@@ -53,7 +53,7 @@ module Adminable
       def link_to_delete_small
         view.link_to(
           I18n.t('adminable.buttons.delete'),
-          polymorphic_path(entry),
+          polymorphic_path(__getobj__),
           class: 'label label-danger',
           method: :delete,
           data: {
@@ -63,7 +63,7 @@ module Adminable
       end
 
       def has_one_value
-        association = @entry.association(@field.name).klass
+        association = __getobj__.association(@field.name).klass
 
         if @value
           Adminable::Presenters::Entry(@value).link_to_self
@@ -78,22 +78,12 @@ module Adminable
         end
       end
 
-      def method_missing(method_name, *args, &block)
-        entry.public_send(method_name, *args, &block)
-      end
-
-      def respond_to_missing?(method_name, *)
-        entry.respond_to?(method_name)
-      end
-
       private
-
-        attr_accessor :entry
 
         def resource
           Adminable::Configuration.resources.find do |resource|
             resource == Adminable::Resource.new(
-              entry.class.name.pluralize.underscore
+              __getobj__.class.name.pluralize.underscore
             )
           end
         end
