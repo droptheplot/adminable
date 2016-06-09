@@ -1,6 +1,9 @@
 module Adminable
   module Presenters
-    class Entry < Base
+    class Entry < SimpleDelegator
+      include Adminable::Engine.routes.url_helpers
+      include Adminable::Presenters::Helpers
+
       def initialize(entry, field: nil)
         @entry = entry
         @field = field

@@ -1,8 +1,10 @@
 module Adminable
   module Presenters
-    class Entries < Base
+    class Entries < DelegateClass(ActiveRecord::Relation)
       ENTRIES_LIMIT = 5
 
+      include Adminable::Engine.routes.url_helpers
+      include Adminable::Presenters::Helpers
       include Enumerable
       extend Forwardable
 

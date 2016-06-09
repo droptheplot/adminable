@@ -4,7 +4,7 @@ require 'adminable/errors'
 
 require 'adminable/resource'
 
-require 'adminable/presenters/base'
+require 'adminable/presenters/helpers'
 require 'adminable/presenters/entry'
 require 'adminable/presenters/entries'
 

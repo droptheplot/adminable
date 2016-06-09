@@ -1,8 +1,6 @@
 module Adminable
   module Presenters
-    class Base
-      include Adminable::Engine.routes.url_helpers
-
+    module Helpers
       private
 
         def view
