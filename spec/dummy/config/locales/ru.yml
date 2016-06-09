@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователи
+      blog/post:
+        one: Пост
+        other: Посты
+    attributes:
+      user:
+        profile: Профиль
+        email: Электронная почта
