@@ -65,7 +65,7 @@ module Adminable
       def has_one_value
         association = __getobj__.association(@field.name).klass
 
-        return Adminable::Presenters::Entry(@value).link_to_self if @value
+        return Adminable::Presenters::Entry.new(@value).link_to_self if @value
 
         view.link_to(
           I18n.t(
