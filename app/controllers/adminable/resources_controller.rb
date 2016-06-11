@@ -1,9 +1,7 @@
 module Adminable
   class ResourcesController < ApplicationController
     def initialize(*)
-      @resource = Adminable::Configuration.resources.find do |resource|
-        resource == Adminable::Resource.new(resource_model_name)
-      end
+      @resource = Adminable::Resource.new(resource_model)
 
       super
     end
@@ -86,8 +84,8 @@ module Adminable
         @fields = Adminable::Decorators::Fields.new(fields)
       end
 
-      def resource_model_name
-        controller_path.sub(%r{^adminable/}, '')
+      def resource_model
+        controller_path.sub(%r{^adminable/}, '').classify.constantize
       end
 
       def resource_params
