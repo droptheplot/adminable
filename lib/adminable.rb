@@ -3,6 +3,7 @@ require 'adminable/configuration'
 require 'adminable/errors'
 
 require 'adminable/resource'
+require 'adminable/resource_collector'
 
 require 'adminable/presenters/helpers'
 require 'adminable/presenters/entry'
@@ -36,4 +37,9 @@ require 'kaminari'
 require 'ransack'
 
 module Adminable
+  def self.resources
+    Adminable::ResourceCollector.new(
+      Adminable::Configuration.resources_paths
+    ).resources
+  end
 end

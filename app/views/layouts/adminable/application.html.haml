@@ -13,7 +13,7 @@
     = csrf_meta_tags
   %body
     #collapsing-nav.collapse.p-y-1
-      - Adminable::Configuration.resources.each do |resource|
+      - Adminable.resources.each do |resource|
         = link_to resource.human,
           polymorphic_path(resource.route), class: 'btn btn-link btn-block'
     .navbar.navbar-full.navbar-dark.bg-primary.m-b-3
@@ -25,7 +25,7 @@
           %li.nav-item
             = link_to main_app.root_path, class: 'nav-link' do
               %i.fa.fa-home
-          - Adminable::Configuration.resources.each do |resource|
+          - Adminable.resources.each do |resource|
             %li.nav-item{ :class => ('active' if current_page?(File.join('/adminable/', resource.name))) }
               = link_to resource.human,
                 polymorphic_path(resource.route), class: 'nav-link'

@@ -1,25 +1,13 @@
 module Adminable
   module Configuration
-    # Finds all controllers from `app/controllers/adminable` directory
-    # @return [Array] of {Adminable::Resource} objects
-    def self.resources
-      resources_paths.map do |resource_path|
-        Adminable::Resource.new(
-          resource_path.to_s.split('adminable/').last.sub(
-            /_controller\.rb$/, ''
-          )
-        )
-      end
-    end
-
     def self.resources_paths
       Dir[Rails.root.join('app/controllers/adminable/**/*_controller.rb')]
         .reject { |f| f['app/controllers/adminable/application_controller.rb'] }
     end
 
     def self.redirect_root_path
-      if resources.any?
-        resources.first.name
+      if Adminable.resources.any?
+        Adminable.resources.first.name
       else
         Rails.application.routes.url_helpers.root_path
       end

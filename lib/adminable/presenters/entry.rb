@@ -79,7 +79,7 @@ module Adminable
       private
 
         def resource
-          Adminable::Configuration.resources.find do |resource|
+          Adminable.resources.find do |resource|
             resource == Adminable::Resource.new(
               __getobj__.class.name.pluralize.underscore
             )
